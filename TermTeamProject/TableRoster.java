@@ -6,8 +6,8 @@ import java.sql.*;
 import java.util.UUID;
 
 
-public class CreateTableRoster extends TeamPlayer{
-    public CreateTableRoster() {
+public class TableRoster extends TeamPlayer{
+    public TableRoster() {
         super();
     }
 
@@ -18,6 +18,7 @@ public class CreateTableRoster extends TeamPlayer{
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+
 
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/MoravianWomenBasketball", 
         "project", "project");

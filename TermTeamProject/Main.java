@@ -4,5 +4,7 @@ public class Main
    {
       TeamDatabase teamDatabase = new TeamDatabase();
       teamDatabase.loadDatabase();
+      TableRoster tableRoster = new TableRoster();
+      tableRoster.createTableRoster();      
    }
 }
