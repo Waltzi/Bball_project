@@ -2,6 +2,7 @@ public class Main
 {
    public static void main(String[] args)
    {
-      new GUI();
+      TeamDatabase teamDatabase = new TeamDatabase();
+      teamDatabase.loadDatabase();
    }
 }
