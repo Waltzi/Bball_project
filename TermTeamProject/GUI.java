@@ -16,6 +16,6 @@ public class GUI extends JFrame {
         setLayout(new BorderLayout());
         setResizable(false);
         setLocationRelativeTo(null);
-
+        
     }
 }

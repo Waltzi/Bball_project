@@ -1,12 +1,3 @@
-import java.io.IOException;
-import java.io.PrintStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.sql.*;
-import java.util.UUID;
-
-
-
 public class TeamPlayer {
 
     private int studentID;
