@@ -53,8 +53,12 @@ public class TableRoster extends TeamPlayer{
                 "studentID INT NOT NULL AUTO_INCREMENT, " +
                 "firstName VARCHAR(100) NOT NULL, " +
                 "lastName VARCHAR(100) NOT NULL, " +
+                "position VARCHAR(100) NOT NULL," +
+                "number INT NOT NULL, " +
                 "classYear INT NOT NULL, " +
-                "PRIMARY KEY (studentID, classYear))";
+                "height INT NOT NULL, " +
+                "weight INT NOT NULL, " +
+                "PRIMARY KEY (studentID))";
             stmt.executeUpdate(sql);
             System.out.println("Table created successfully");
         } catch (SQLException e) {
@@ -80,8 +84,7 @@ public class TableRoster extends TeamPlayer{
         "project", "project");
             Statement stmt = conn.createStatement();
         ) {
-            String sql = "INSERT INTO Roster (firstName, lastName, classYear) VALUES ('" 
-            + getFirstName() + "', '" + getLastName() + "', " + getClassYear() + ")";
+            String sql = "INSERT INTO Roster (firstName, lastName, position, number, classYear, height, weight) VALUES ('" + getFirstName() + "', '" + getLastName() + "', '" + getPosition() + "', " + getNumber() + ", " + getClassYear() + ", " + getHeight() + ", " + getWeight() + ")";
             stmt.executeUpdate(sql);
             System.out.println("Record inserted successfully");
         } catch (SQLException e) {
