@@ -23,7 +23,7 @@
          // Set up the main frame
          setTitle("Women's Basketball");
          setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-         setSize(800, 600);
+         setSize(2000, 1000);
          setLocationRelativeTo(null);
  
          // Create a tabbed pane
@@ -40,8 +40,15 @@
          // Add components to the main frame
          setLayout(new BorderLayout());
          add(tabbedPane, BorderLayout.NORTH);
+
+         // Add a window resize listener
+         addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                adjustTableSize(rosterPanel);
+            }
+        });
      }
- 
+     
      private JPanel createRosterPanel() {
          JPanel rosterPanel = new JPanel(new BorderLayout());
  
@@ -85,5 +92,16 @@
              e.printStackTrace();
          }
      }
+
+     private void adjustTableSize(JPanel rosterPanel) {
+        JTable rosterTable = ((JTable) ((JScrollPane) rosterPanel.getComponent(0)).getViewport().getView());
+        int width = rosterPanel.getWidth();
+        int height = rosterPanel.getHeight();
+
+        // Set the preferred size of the table based on the window size
+        rosterTable.setPreferredScrollableViewportSize(new Dimension(width, height));
+        rosterTable.setSize(new Dimension(width, height));
+        rosterTable.revalidate();
+    }
  }
  
