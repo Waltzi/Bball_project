@@ -18,13 +18,13 @@ import java.sql.*;
 import java.util.UUID;
 
 
-public class TableRoster extends TeamPlayer{
+public class DatabaseTables extends TeamPlayer{
 
     /**
      * Default constructor for TableRoster class.
      * Initializes all fields to default values.
      */
-    public TableRoster() {
+    public DatabaseTables() {
         super();
     }
 
@@ -35,7 +35,12 @@ public class TableRoster extends TeamPlayer{
      * - firstName
      * - lastName
      * - classYear
+     * - position
+     * - number
+     * - height
+     * - weight
      */
+
     public void createTableRoster() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -72,6 +77,10 @@ public class TableRoster extends TeamPlayer{
      * - firstName
      * - lastName
      * - classYear
+     * - position
+     * - number
+     * - height
+     * - weight
      */
     public void insertIntoRoster() {
         try {
