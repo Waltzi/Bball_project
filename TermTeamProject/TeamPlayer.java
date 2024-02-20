@@ -13,7 +13,7 @@ public class TeamPlayer {
     private String position;
     private int number;
     private int classYear;
-    private int height;
+    private String height;
     private int weight;
 
     /**
@@ -27,7 +27,7 @@ public class TeamPlayer {
         this.position = "";
         this.number = 0;
         this.classYear = 0;
-        this.height = 0;
+        this.height = "";
         this.weight = 0;
     }
 
@@ -44,7 +44,7 @@ public class TeamPlayer {
      * @param weight
      */
     public TeamPlayer(int studentID, String firstName, String lastName, String position, int number, 
-    int classYear, int height, int weight) {
+    int classYear, String height, int weight) {
         this.studentID = studentID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -107,7 +107,7 @@ public class TeamPlayer {
      * Getter method for height field.
      * @return height
      */
-    public int getHeight() {
+    public String getHeight() {
         return height;
     }
 
@@ -165,7 +165,7 @@ public class TeamPlayer {
      * Setter method for height field.
      * @param height
      */
-    public void setHeight(int height) {
+    public void setHeight(String height) {
         this.height = height;
     }
 

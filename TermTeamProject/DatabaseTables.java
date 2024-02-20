@@ -61,7 +61,7 @@ public class DatabaseTables extends TeamPlayer{
                 "position VARCHAR(100) NOT NULL," +
                 "number INT NOT NULL, " +
                 "classYear INT NOT NULL, " +
-                "height INT NOT NULL, " +
+                "height VARCHAR(100) NOT NULL, " +
                 "weight INT NOT NULL, " +
                 "PRIMARY KEY (studentID))";
             stmt.executeUpdate(sql);
