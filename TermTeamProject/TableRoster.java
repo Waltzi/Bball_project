@@ -17,6 +17,7 @@ public class TableRoster extends TeamPlayer{
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            System.out.println("Driver not found!!");
         }
 
 
