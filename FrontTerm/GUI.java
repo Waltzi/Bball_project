@@ -21,7 +21,7 @@
  
      public GUI() {
          // Set up the main frame
-         setTitle("Women's Basketball");
+         setTitle("Moravian Women's Basketball");
          setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
          setSize(2000, 1000);
          setLocationRelativeTo(null);
@@ -57,8 +57,13 @@
          JTable rosterTable = new JTable(tableModel);
  
          // Add columns to the table model
-         tableModel.addColumn("Name");
+         tableModel.addColumn("First Name");
+         tableModel.addColumn("Last Name");
+         tableModel.addColumn("Position");
+         tableModel.addColumn("Number");
          tableModel.addColumn("Class Year");
+         tableModel.addColumn("Height");
+         tableModel.addColumn("Weight");
  
          // Fetch and populate data from the database
          fetchDataFromDatabase(tableModel);
@@ -73,7 +78,7 @@
      private void fetchDataFromDatabase(DefaultTableModel tableModel) {
          // Database connection details
          String url = "jdbc:mysql://localhost:3306/MoravianWomenBasketball"; // Replace with your database URL
-         String sql = "SELECT studentID, classYear FROM roster";
+         String sql = "SELECT firstName, lastName, position, number, classYear, height, weight FROM roster";
  
          try (Connection connection = DriverManager.getConnection(url, "project", "project");
               PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -81,11 +86,16 @@
  
              // Iterate through the result set and populate the table model
              while (resultSet.next()) {
-                 int studentID = resultSet.getInt("Name");
-                 String classYear = resultSet.getString("Year");
+                 String firstName = resultSet.getString("First Name");
+                 String lastName = resultSet.getString("Last Name");
+                 String position = resultSet.getString("Position");
+                 int number = resultSet.getInt("Number");
+                 int classYear = resultSet.getInt("Class Year");
+                 int height = resultSet.getInt("Height");
+                 int weight = resultSet.getInt("Weight");
  
                  // Add a new row to the table model
-                 tableModel.addRow(new Object[]{studentID, classYear});
+                 tableModel.addRow(new Object[]{firstName, lastName, position, number, classYear, height, weight});
              }
  
          } catch (SQLException e) {
