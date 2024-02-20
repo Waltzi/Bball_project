@@ -1,0 +1,107 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+nav {
+    background-color: #ADD8E6;
+    color: white;
+    padding: 10px;
+    text-align: right;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-left: 20px;
+}
+
+.left-align {
+    color: black;
+    float: left; /* Use float: left to move the element to the left */
+    margin-left: 20px; /* Remove the margin for this specific element */
+    margin-top: 0;
+}
+
+.brz{
+    border-radius: 25px;
+    width: 50%;
+    height: auto;
+}
+
+.car img {
+    border-radius: 25px;
+    width: 50%;
+    height: auto;
+    max-width: 100%;
+}
+
+.Blue{
+    border-radius: 25px;
+    width: 50%;
+    height: auto;
+}
+
+.Ef{
+    border-radius: 25px;
+    width: 50%;
+    height: auto;
+}
+
+.R32{
+    border-radius: 25px;
+    width: 50%;
+    height: auto;
+}
+
+.R33{
+    border-radius: 25px;
+    width: 50%;
+    height: auto;
+}
+
+.TypeR{
+    border-radius: 25px;
+    width: 50%;
+    height: auto;
+}
+
+.CR32{
+    border-radius: 25px;
+    width: 50%;
+    height: auto;
+}
+
+section {
+    padding: 50px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+input, textarea {
+    margin-bottom: 15px;
+    padding: 8px;
+}
+
+button {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+}
