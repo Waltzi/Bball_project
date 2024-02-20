@@ -1,3 +1,26 @@
+/**
+ * This class is used to create a database for the team project.
+ * The database will be used to store the information of the players and the games.
+ * The database will be created in the local machine.
+ * The database will be created using MySQL.
+ * The database will be created using the JDBC driver.
+ * The database will be created using the following information:
+ * - URL: jdbc:mysql://localhost:3306/
+ * - Username: project
+ * - Password: project
+ * The database will be created using the following tables:
+ * - Players
+ * - Games
+ * The Players table will have the following columns:
+ * - ID
+ * - Name
+ * - Position
+ * - Height
+ * - Weight
+ * - Age
+ * - College
+ */
+
 import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.file.Files;
@@ -12,6 +35,13 @@ public class TeamDatabase {
     public TeamDatabase() {
     }
 
+    /**
+     * This method is used to create the database for the team project.
+     * The database will be created in the local machine.
+     * The database will be created using MySQL.
+     * The database will be created using the JDBC driver.
+     * The database will be created using the following information:
+     */
     public void loadDatabase() {
         
         try {

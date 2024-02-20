@@ -1,3 +1,15 @@
+/*
+ * TableRoster.java
+ * This class is used to create the Roster table in the MoravianWomenBasketball database.
+ * The Roster table will have the following columns:
+ * - studentID
+ * - firstName
+ * - lastName
+ * - classYear
+ * The class contains a default constructor, a method to create the table, and a method to insert records into the table.
+ * The class extends the TeamPlayer class.
+ */
+
 import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.file.Files;
@@ -7,11 +19,23 @@ import java.util.UUID;
 
 
 public class TableRoster extends TeamPlayer{
+
+    /**
+     * Default constructor for TableRoster class.
+     * Initializes all fields to default values.
+     */
     public TableRoster() {
         super();
     }
 
-    
+    /**
+     * This method is used to create the Roster table in the MoravianWomenBasketball database.
+     * The Roster table will have the following columns:
+     * - studentID
+     * - firstName
+     * - lastName
+     * - classYear
+     */
     public void createTableRoster() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -38,7 +62,13 @@ public class TableRoster extends TeamPlayer{
         }
     }
     
-
+    /**
+     * This method is used to insert records into the Roster table.
+     * The records will be inserted into the table using the following information:
+     * - firstName
+     * - lastName
+     * - classYear
+     */
     public void insertIntoRoster() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
