@@ -1,3 +1,5 @@
+import javax.swing.SwingUtilities;
+
 public class Main
 {
    public static void main(String[] args)
@@ -5,6 +7,7 @@ public class Main
       TeamDatabase teamDatabase = new TeamDatabase();
       teamDatabase.loadDatabase();
       TableRoster tableRoster = new TableRoster();
-      tableRoster.createTableRoster();      
+      tableRoster.createTableRoster(); 
+      SwingUtilities.invokeLater(() -> new GUI().setVisible(true));    
    }
 }
