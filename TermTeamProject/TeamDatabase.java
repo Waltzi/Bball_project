@@ -48,6 +48,7 @@ public class TeamDatabase {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            System.out.println("Driver not found!!");
         }
         try(Connection conn = DriverManager.getConnection(URL_DB, USERNAME, PASSWORD);
             Statement stmt = conn.createStatement();
