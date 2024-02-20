@@ -25,8 +25,8 @@ public class GUI extends JFrame {
         tabbedPane.addTab("Roster", rosterPanel);
 
         JPanel panel2 = new JPanel();
-        panel2.add(new JLabel("Content of Tab 2"));
-        tabbedPane.addTab("Tab 2", panel2);
+        panel2.add(new JLabel("What are you looking at?"));
+        tabbedPane.addTab("Stats", panel2);
 
         // Add components to the main frame
         setLayout(new BorderLayout());
