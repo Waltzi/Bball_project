@@ -1,12 +1,3 @@
-/**
- * GUI.java
- * This class is used to create the graphical user interface for the Roster.
- * The class extends JFrame and contains a JTabbedPane with two tabs: Roster and Stats.
- * The Roster tab contains a table with the roster data.
- * The Stats tab contains a label with the text "What are you looking at?".
- * The class contains a constructor to create the main frame and a method to create the Roster tab.
- */
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -24,13 +15,24 @@ public class GUI extends JFrame {
     private JTextField classYearField;
     private JTextField heightField;
     private JTextField weightField;
+    private TeamDatabase teamDatabase;
+    private DatabaseTables databaseTables;
 
     public GUI() {
         // Set up the main frame
         setTitle("Moravian Women's Basketball");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1500, 800);
+        setSize(2000, 1500);
         setLocationRelativeTo(null);
+
+        // Create a TeamDatabase instance
+        teamDatabase = new TeamDatabase();
+
+        // Load the database and create the Roster table
+        teamDatabase.loadDatabase();
+
+        // Create a DatabaseTables instance
+        databaseTables = new DatabaseTables();
 
         // Create a tabbed pane
         tabbedPane = new JTabbedPane();
@@ -127,41 +129,12 @@ public class GUI extends JFrame {
     }
 
     private void fetchDataFromDatabase(DefaultTableModel tableModel) {
-        
-        // Load the JDBC driver
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            // Handle the exception or inform the user about the missing driver
-            return;
-        }
-        
-        // Database connection details
-        String url = "jdbc:mysql://localhost:3306/MoravianWomenBasketball";
-        String sql = "SELECT firstName, lastName, position, number, classYear, height, weight FROM Roster";
-
-        try (Connection connection = DriverManager.getConnection(url, "project", "project");
-             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-             ResultSet resultSet = preparedStatement.executeQuery()) {
-
-            // Iterate through the result set and populate the table model
-            while (resultSet.next()) {
-                String firstName = resultSet.getString("firstName");
-                String lastName = resultSet.getString("lastName");
-                String position = resultSet.getString("position");
-                int number = resultSet.getInt("number");
-                int classYear = resultSet.getInt("classYear");
-                String height = resultSet.getString("height");
-                int weight = resultSet.getInt("weight");
-
-                // Add a new row to the table model
-                tableModel.addRow(new Object[]{firstName, lastName, position, number, classYear, height, weight});
-            }
-
+            // Fetch and populate data from the database
+            teamDatabase.fetchDataFromDatabase(tableModel);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Error accessing the database: " + e.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();  // Print the stack trace for debugging purposes
+            e.printStackTrace();
         }
     }
 
@@ -190,7 +163,7 @@ public class GUI extends JFrame {
             tableModel.addRow(new Object[]{firstName, lastName, position, number, classYear, height, weight});
 
             // Add to the database
-            addToDatabase(firstName, lastName, position, number, classYear, height, weight);
+            teamDatabase.addToDatabase(firstName, lastName, position, number, classYear, height, weight);
 
             // Clear the input fields
             firstNameField.setText("");
@@ -202,42 +175,6 @@ public class GUI extends JFrame {
             weightField.setText("");
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Invalid input format. Please enter valid values.");
-        }
-    }
-
-    private void addToDatabase(String firstName, String lastName, String position,
-                               int number, int classYear, String height, int weight) {
-        
-        // Load the JDBC driver
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            // Handle the exception or inform the user about the missing driver
-            return;
-        }
-
-        // Database connection details
-        String url = "jdbc:mysql://localhost:3306/MoravianWomenBasketball"; 
-        String sql = "INSERT INTO roster (firstName, lastName, position, number, classYear, height, weight) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-
-        try (Connection connection = DriverManager.getConnection(url, "project", "project");
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-
-            preparedStatement.setString(1, firstName);
-            preparedStatement.setString(2, lastName);
-            preparedStatement.setString(3, position);
-            preparedStatement.setInt(4, number);
-            preparedStatement.setInt(5, classYear);
-            preparedStatement.setString(6, height);
-            preparedStatement.setInt(7, weight);
-
-            // Execute the update
-            preparedStatement.executeUpdate();
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Error accessing the database: " + e.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();  // Print the stack trace for debugging purposes
         }
     }
 }
