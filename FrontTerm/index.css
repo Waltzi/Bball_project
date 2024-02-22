@@ -3,12 +3,13 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background-color: aliceblue;
 }
 
 nav {
-    background-color: #ADD8E6;
+    background-color: #00008B;
     color: white;
-    padding: 10px;
+    padding: 20px;
     text-align: right;
 }
 
@@ -21,18 +22,20 @@ nav ul {
 nav ul li {
     display: inline;
     margin-left: 20px;
+    font-weight: bold;
+    text-decoration: none;
 }
 
 .left-align {
-    color: black;
+    color: white;
     float: left; /* Use float: left to move the element to the left */
     margin-left: 20px; /* Remove the margin for this specific element */
-    margin-top: 0;
+    margin-top: -4px;
 }
 
-.brz{
-    border-radius: 25px;
-    width: 50%;
+.img{
+    border-radius: 20px;
+    width: 10%;
     height: auto;
 }
 
