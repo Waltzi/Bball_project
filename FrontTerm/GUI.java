@@ -40,8 +40,12 @@ public class GUI extends JFrame {
         tabbedPane.addTab("Roster", rosterPanel);
 
         JPanel panel2 = new JPanel();
-        panel2.add(new JLabel("Content of Tab 2"));
+        panel2.add(new JLabel("What do you want?"));
         tabbedPane.addTab("Tab 2", panel2);
+
+        JPanel panel3 = new JPanel();
+        panel3.add(new JLabel("Ah Hello"));
+        tabbedPane.addTab("Tab 3", panel3);
 
         // Add components to the main frame
         setLayout(new BorderLayout());
@@ -89,12 +93,12 @@ public class GUI extends JFrame {
         JPanel inputPanel = new JPanel();
         firstNameField = new JTextField(8);
         lastNameField = new JTextField(10);
-        positionField = new JTextField(5);
+        positionField = new JTextField(7);
         numberField = new JTextField(3);
         classYearField = new JTextField(5);
         heightField = new JTextField(5);
         weightField = new JTextField(5);
-        JButton addButton = new JButton("Add to Table and Database");
+        JButton addButton = new JButton("Add Info To Table");
 
         addButton.addActionListener(new ActionListener() {
             @Override
@@ -125,7 +129,7 @@ public class GUI extends JFrame {
     private void fetchDataFromDatabase(DefaultTableModel tableModel) {
         // Database connection details
         String url = "jdbc:mysql://localhost:3306/MoravianWomenBasketball";
-        String sql = "SELECT firstName, lastName, position, number, classYear, height, weight FROM roster";
+        String sql = "SELECT firstName, lastName, position, number, classYear, height, weight FROM Roster";
 
         try (Connection connection = DriverManager.getConnection(url, "project", "project");
              PreparedStatement preparedStatement = connection.prepareStatement(sql);
