@@ -29,7 +29,7 @@ public class GUI extends JFrame {
         // Set up the main frame
         setTitle("Moravian Women's Basketball");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(2000, 1500);
+        setSize(1500, 800);
         setLocationRelativeTo(null);
 
         // Create a tabbed pane
@@ -127,6 +127,16 @@ public class GUI extends JFrame {
     }
 
     private void fetchDataFromDatabase(DefaultTableModel tableModel) {
+        
+        // Load the JDBC driver
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            // Handle the exception or inform the user about the missing driver
+            return;
+        }
+        
         // Database connection details
         String url = "jdbc:mysql://localhost:3306/MoravianWomenBasketball";
         String sql = "SELECT firstName, lastName, position, number, classYear, height, weight FROM Roster";
@@ -150,7 +160,8 @@ public class GUI extends JFrame {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error accessing the database: " + e.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();  // Print the stack trace for debugging purposes
         }
     }
 
@@ -196,6 +207,16 @@ public class GUI extends JFrame {
 
     private void addToDatabase(String firstName, String lastName, String position,
                                int number, int classYear, String height, int weight) {
+        
+        // Load the JDBC driver
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            // Handle the exception or inform the user about the missing driver
+            return;
+        }
+
         // Database connection details
         String url = "jdbc:mysql://localhost:3306/MoravianWomenBasketball"; 
         String sql = "INSERT INTO roster (firstName, lastName, position, number, classYear, height, weight) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -215,7 +236,8 @@ public class GUI extends JFrame {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error accessing the database: " + e.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();  // Print the stack trace for debugging purposes
         }
     }
 }
