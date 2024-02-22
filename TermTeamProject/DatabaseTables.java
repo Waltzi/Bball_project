@@ -18,7 +18,7 @@ import java.sql.*;
 import java.util.UUID;
 
 
-public class DatabaseTables extends TeamPlayer{
+public class DatabaseTables extends TeamPlayer {
 
     /**
      * Default constructor for TableRoster class.
