@@ -16,7 +16,6 @@ public class GUI extends JFrame {
     private JTextField heightField;
     private JTextField weightField;
     private TeamDatabase teamDatabase;
-    private DatabaseTables databaseTables;
 
     public GUI() {
         // Set up the main frame
@@ -31,8 +30,6 @@ public class GUI extends JFrame {
         // Load the database and create the Roster table
         teamDatabase.loadDatabase();
 
-        // Create a DatabaseTables instance
-        databaseTables = new DatabaseTables();
 
         // Create a tabbed pane
         tabbedPane = new JTabbedPane();
