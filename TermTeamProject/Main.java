@@ -8,7 +8,10 @@ public class Main
       teamDatabase.loadDatabase();
       TableRoster tableRoster = new TableRoster();
       tableRoster.createTableRoster(); 
-      SwingUtilities.invokeLater(() -> new GUI().setVisible(true));    
+      SwingUtilities.invokeLater(() -> {
+         GUI gui = new GUI();
+         gui.setVisible(true);
+      });    
    }
 
 }
