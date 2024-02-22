@@ -125,7 +125,7 @@ public class GUI extends JFrame {
     private void fetchDataFromDatabase(DefaultTableModel tableModel) {
         // Database connection details
         String url = "jdbc:mysql://localhost:3306/MoravianWomenBasketball";
-        String sql = "SELECT firstName, lastName, position, number, classYear, height, weight FROM roster";
+        String sql = "SELECT firstName, lastName, position, number, classYear, height, weight FROM Roster";
 
         try (Connection connection = DriverManager.getConnection(url, "project", "project");
              PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -194,7 +194,7 @@ public class GUI extends JFrame {
                                int number, int classYear, String height, int weight) {
         // Database connection details
         String url = "jdbc:mysql://localhost:3306/MoravianWomenBasketball"; 
-        String sql = "INSERT INTO roster (firstName, lastName, position, number, classYear, height, weight) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Roster (firstName, lastName, position, number, classYear, height, weight) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = DriverManager.getConnection(url, "project", "project");
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
