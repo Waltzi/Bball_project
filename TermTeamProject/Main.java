@@ -6,7 +6,7 @@ public class Main
    {
       TeamDatabase teamDatabase = new TeamDatabase();
       teamDatabase.loadDatabase();
-      DatabaseTables tableRoster = new DatabaseTables();
+      TableRoster tableRoster = new TableRoster();
       tableRoster.createTableRoster(); 
       SwingUtilities.invokeLater(() -> new GUI().setVisible(true));    
    }
