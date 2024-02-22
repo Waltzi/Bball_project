@@ -20,6 +20,7 @@ nav ul {
 }
 
 nav ul li {
+    color: white;
     display: inline;
     margin-left: 20px;
     font-weight: bold;
