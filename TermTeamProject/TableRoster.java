@@ -18,13 +18,13 @@ import java.sql.*;
 import java.util.UUID;
 
 
-public class DatabaseTables extends TeamPlayer {
+public class TableRoster extends TeamPlayer {
 
     /**
      * Default constructor for TableRoster class.
      * Initializes all fields to default values.
      */
-    public DatabaseTables() {
+    public TableRoster() {
         super();
     }
 
@@ -63,7 +63,7 @@ public class DatabaseTables extends TeamPlayer {
                 "classYear INT NOT NULL, " +
                 "height VARCHAR(100) NOT NULL, " +
                 "weight INT NOT NULL, " +
-                "PRIMARY KEY (studentID))";
+                "PRIMARY KEY (studentID, number))";
             stmt.executeUpdate(sql);
             System.out.println("Table created successfully");
         } catch (SQLException e) {
@@ -82,7 +82,7 @@ public class DatabaseTables extends TeamPlayer {
      * - height
      * - weight
      */
-    public void insertIntoRoster() {
+    public void insertIntoRoster(String firstName, String lastName, String position, int number, int classYear, String height, int weight) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
@@ -93,7 +93,7 @@ public class DatabaseTables extends TeamPlayer {
         "project", "project");
             Statement stmt = conn.createStatement();
         ) {
-            String sql = "INSERT INTO Roster (firstName, lastName, position, number, classYear, height, weight) VALUES ('" + getFirstName() + "', '" + getLastName() + "', '" + getPosition() + "', " + getNumber() + ", " + getClassYear() + ", " + getHeight() + ", " + getWeight() + ")";
+            String sql = "INSERT INTO Roster (firstName, lastName, position, number, classYear, height, weight) VALUES ('" + firstName + "', '" + lastName + "', '" + position + "', " + number + ", " + classYear + ", '" + height + "', " + weight + ")";
             stmt.executeUpdate(sql);
             System.out.println("Record inserted successfully");
         } catch (SQLException e) {
