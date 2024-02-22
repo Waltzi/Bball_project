@@ -40,8 +40,12 @@ public class GUI extends JFrame {
         tabbedPane.addTab("Roster", rosterPanel);
 
         JPanel panel2 = new JPanel();
-        panel2.add(new JLabel("Content of Tab 2"));
+        panel2.add(new JLabel("What do you want?"));
         tabbedPane.addTab("Tab 2", panel2);
+
+        JPanel panel3 = new JPanel();
+        panel3.add(new JLabel("Ah Hello"));
+        tabbedPane.addTab("Tab 3", panel3);
 
         // Add components to the main frame
         setLayout(new BorderLayout());
@@ -87,14 +91,14 @@ public class GUI extends JFrame {
 
     private JPanel createInputPanel() {
         JPanel inputPanel = new JPanel();
-        firstNameField = new JTextField(10);
+        firstNameField = new JTextField(8);
         lastNameField = new JTextField(10);
-        positionField = new JTextField(10);
+        positionField = new JTextField(7);
         numberField = new JTextField(3);
         classYearField = new JTextField(5);
         heightField = new JTextField(5);
         weightField = new JTextField(5);
-        JButton addButton = new JButton("Add to Table and Database");
+        JButton addButton = new JButton("Add Info To Table");
 
         addButton.addActionListener(new ActionListener() {
             @Override
@@ -103,19 +107,19 @@ public class GUI extends JFrame {
             }
         });
 
-        inputPanel.add(new JLabel("First Name: "));
+        inputPanel.add(new JLabel("First Name:"));
         inputPanel.add(firstNameField);
-        inputPanel.add(new JLabel("Last Name: "));
+        inputPanel.add(new JLabel("Last Name:"));
         inputPanel.add(lastNameField);
-        inputPanel.add(new JLabel("Position: "));
+        inputPanel.add(new JLabel("Position:"));
         inputPanel.add(positionField);
-        inputPanel.add(new JLabel("Number: "));
+        inputPanel.add(new JLabel("Number:"));
         inputPanel.add(numberField);
-        inputPanel.add(new JLabel("Class Year: "));
+        inputPanel.add(new JLabel("Class Year:"));
         inputPanel.add(classYearField);
-        inputPanel.add(new JLabel("Height: "));
+        inputPanel.add(new JLabel("Height:"));
         inputPanel.add(heightField);
-        inputPanel.add(new JLabel("Weight: "));
+        inputPanel.add(new JLabel("Weight:"));
         inputPanel.add(weightField);
         inputPanel.add(addButton);
 
