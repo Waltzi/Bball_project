@@ -29,7 +29,7 @@ public class GUI extends JFrame {
         // Set up the main frame
         setTitle("Moravian Women's Basketball");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(2000, 1500);
+        setSize(1500, 800);
         setLocationRelativeTo(null);
 
         // Create a tabbed pane
@@ -40,8 +40,12 @@ public class GUI extends JFrame {
         tabbedPane.addTab("Roster", rosterPanel);
 
         JPanel panel2 = new JPanel();
-        panel2.add(new JLabel("Content of Tab 2"));
+        panel2.add(new JLabel("What do you want?"));
         tabbedPane.addTab("Tab 2", panel2);
+
+        JPanel panel3 = new JPanel();
+        panel3.add(new JLabel("Ah Hello"));
+        tabbedPane.addTab("Tab 3", panel3);
 
         // Add components to the main frame
         setLayout(new BorderLayout());
@@ -89,12 +93,12 @@ public class GUI extends JFrame {
         JPanel inputPanel = new JPanel();
         firstNameField = new JTextField(8);
         lastNameField = new JTextField(10);
-        positionField = new JTextField(5);
+        positionField = new JTextField(7);
         numberField = new JTextField(3);
         classYearField = new JTextField(5);
         heightField = new JTextField(5);
         weightField = new JTextField(5);
-        JButton addButton = new JButton("Add to Table and Database");
+        JButton addButton = new JButton("Add Info To Table");
 
         addButton.addActionListener(new ActionListener() {
             @Override
@@ -123,9 +127,19 @@ public class GUI extends JFrame {
     }
 
     private void fetchDataFromDatabase(DefaultTableModel tableModel) {
+        
+        // Load the JDBC driver
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            // Handle the exception or inform the user about the missing driver
+            return;
+        }
+        
         // Database connection details
         String url = "jdbc:mysql://localhost:3306/MoravianWomenBasketball";
-        String sql = "SELECT firstName, lastName, position, number, classYear, height, weight FROM roster";
+        String sql = "SELECT firstName, lastName, position, number, classYear, height, weight FROM Roster";
 
         try (Connection connection = DriverManager.getConnection(url, "project", "project");
              PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -146,7 +160,8 @@ public class GUI extends JFrame {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error accessing the database: " + e.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();  // Print the stack trace for debugging purposes
         }
     }
 
@@ -192,6 +207,16 @@ public class GUI extends JFrame {
 
     private void addToDatabase(String firstName, String lastName, String position,
                                int number, int classYear, String height, int weight) {
+        
+        // Load the JDBC driver
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            // Handle the exception or inform the user about the missing driver
+            return;
+        }
+
         // Database connection details
         String url = "jdbc:mysql://localhost:3306/MoravianWomenBasketball"; 
         String sql = "INSERT INTO roster (firstName, lastName, position, number, classYear, height, weight) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -211,7 +236,8 @@ public class GUI extends JFrame {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error accessing the database: " + e.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();  // Print the stack trace for debugging purposes
         }
     }
 }
