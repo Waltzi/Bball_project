@@ -16,6 +16,9 @@ public class GUI extends JFrame {
     private JTextField heightField;
     private JTextField weightField;
     private TeamDatabase teamDatabase;
+    private TableFreeThrows tableFreeThrows;
+    private TableThreePointers tableThreePointers;
+    private TableRoster tableRoster;
 
     public GUI() {
         // Set up the main frame
@@ -29,6 +32,18 @@ public class GUI extends JFrame {
 
         // Load the database and create the Roster table
         teamDatabase.loadDatabase();
+
+        // Create the Roster table
+        tableRoster = new TableRoster();
+
+        // Load the database and create the roster table
+        tableRoster.createTableRoster();
+
+        // Create the FreeThrows table
+        tableFreeThrows = new TableFreeThrows();
+
+        // Create the ThreePointers table
+        tableThreePointers = new TableThreePointers();
 
 
         // Create a tabbed pane
@@ -160,7 +175,7 @@ public class GUI extends JFrame {
             tableModel.addRow(new Object[]{firstName, lastName, position, number, classYear, height, weight});
 
             // Add to the database
-            teamDatabase.addToDatabase(firstName, lastName, position, number, classYear, height, weight);
+            tableRoster.insertIntoRoster(firstName, lastName, position, number, classYear, height, weight);
 
             // Clear the input fields
             firstNameField.setText("");
@@ -174,43 +189,8 @@ public class GUI extends JFrame {
             JOptionPane.showMessageDialog(this, "Invalid input format. Please enter valid values.");
         }
     }
-<<<<<<< HEAD
 
-    private void addToDatabase(String firstName, String lastName, String position,
-                               int number, int classYear, String height, int weight) {
-        
-        // Load the JDBC driver
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            // Handle the exception or inform the user about the missing driver
-            return;
-        }
-
-        // Database connection details
-        String url = "jdbc:mysql://localhost:3306/MoravianWomenBasketball"; 
-        String sql = "INSERT INTO Roster (firstName, lastName, position, number, classYear, height, weight) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-
-        try (Connection connection = DriverManager.getConnection(url, "project", "project");
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-
-            preparedStatement.setString(1, firstName);
-            preparedStatement.setString(2, lastName);
-            preparedStatement.setString(3, position);
-            preparedStatement.setInt(4, number);
-            preparedStatement.setInt(5, classYear);
-            preparedStatement.setString(6, height);
-            preparedStatement.setInt(7, weight);
-
-            // Execute the update
-            preparedStatement.executeUpdate();
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Error accessing the database: " + e.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();  // Print the stack trace for debugging purposes
-        }
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new GUI().setVisible(true));
     }
-=======
->>>>>>> 0cb8e5ccae38d43f570580f1dda1d230014cd67e
 }
