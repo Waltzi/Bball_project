@@ -10,7 +10,6 @@
     <!-- Navigation Bar -->
     <nav>
         <h1 class="left-align">Moravian Womens Basketball</h1>
-        <button id="roster_button"> Roster Button </button>
         <ul class="right-align">
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
@@ -21,6 +20,12 @@
     <!-- Home Section -->
     <section id="home">
         <h1>Moravian Womens Basketball</h1>
+        <button id="roster_button"> Roster</button>
+         <script>
+            document.getElementById("roster_button").onclick = function () {
+            window.location.href = 'https://www.moraviansports.com/sports/wbkb/2022-23/roster';
+            };
+        </script>
         <div class="img">
             <img src="/Bball_project/FrontTerm/images/moravianlogo.jpeg"/>
         </div>
