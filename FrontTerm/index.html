@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,9 +24,10 @@
         <h1>Moravian Womens Basketball</h1>
         <button id="roster_button"> Roster</button>
          <script>
-            document.getElementById("roster_button").onclick = function () {
-            window.location.href = 'https://www.moraviansports.com/sports/wbkb/2022-23/roster';
-            };
+            var button = document.getElementById("roster_button");
+            button.addEventListener("click", function() {
+                window.location.href = 'https://www.moraviansports.com/sports/wbkb/2022-23/roster';
+            });
         </script>
         <div class="img">
             <img src="/Bball_project/FrontTerm/images/moravianlogo.jpeg"/>
