@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-//Roster Button
 
 // Contact Form
 document.getElementById("contactForm").addEventListener("submit", function(event) {
