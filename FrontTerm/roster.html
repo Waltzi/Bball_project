@@ -9,67 +9,45 @@
     <link rel="stylesheet" href="index.css">   
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav>
-        <h1 class="left-align">Moravian Womens Basketball</h1>
-        <ul class="right-align">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
-
-    <!-- Home Section -->
-    <section id="home">
-        <h1>Moravian Womens Basketball</h1>
-        <button id="roster_button"> Roster</button>
-         <script>
-            var button = document.getElementById("roster_button");
-            button.addEventListener("click", function() {
-                window.location.href = 'https://www.moraviansports.com/sports/wbkb/2023-24/roster';
-            });
-        </script>
-        <div class="img">
-            <img src="/Bball_project/FrontTerm/images/moravianlogo.jpeg"/>
-        </div>
-    </section>
-
-    <!-- Car Section -->
-    <section id="cars">
-        <h2>Our Cars</h2>
-        <div class="car-container">
-            <div class="car">
-                <h3>Cool</h3>
-                <p>Blue</p>
-                <img src="/Bball_project/FrontTerm/images/greyR32.jpeg" class="Blue">
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about">
-        <h2>weewpoo</h2>
-        <p>We are a car group looking to grow bigger and support others</p>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-        <h2>Contact Us</h2>
-        <form id="contactForm">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
-
-            <button type="submit">Submit</button>
-        </form>
-    </section>
-
-    <!-- JavaScript Connection -->
-    <script src="app.js"></script>
+    <div class="container">
+        <h1>Moravian Womens Basketball Roster</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Number</th>
+                    <th>Height</th>
+                    <th>Year</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Replace the following rows with actual roster data -->
+                <tr>
+                    <td>Player 1</td>
+                    <td>Forward</td>
+                    <td>24</td>
+                    <td>6'0"</td>
+                    <td>Senior</td>
+                </tr>
+                <tr>
+                    <td>Player 2</td>
+                    <td>Guard</td>
+                    <td>10</td>
+                    <td>5'8"</td>
+                    <td>Junior</td>
+                </tr>
+                <tr>
+                    <td>Player 3</td>
+                    <td>Center</td>
+                    <td>33</td>
+                    <td>6'2"</td>
+                    <td>Sophomore</td>
+                </tr>
+                <!-- Add more rows as needed -->
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
+```
