@@ -46,6 +46,7 @@ nav ul li {
 /* Start of Home Section */
 section h1{
     text-align: center;
+    height: -10;
 }
 
 .img{
@@ -64,49 +65,6 @@ button{
     cursor: pointer;
 }
 /* End of Home Section */
-
-.car img {
-    border-radius: 25px;
-    width: 50%;
-    height: auto;
-    max-width: 100%;
-}
-
-.Blue{
-    border-radius: 25px;
-    width: 50%;
-    height: auto;
-}
-
-.Ef{
-    border-radius: 25px;
-    width: 50%;
-    height: auto;
-}
-
-.R32{
-    border-radius: 25px;
-    width: 50%;
-    height: auto;
-}
-
-.R33{
-    border-radius: 25px;
-    width: 50%;
-    height: auto;
-}
-
-.TypeR{
-    border-radius: 25px;
-    width: 50%;
-    height: auto;
-}
-
-.CR32{
-    border-radius: 25px;
-    width: 50%;
-    height: auto;
-}
 
 section {
     padding: 50px;
