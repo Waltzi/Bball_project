@@ -17,3 +17,14 @@ document.getElementById("contactForm").addEventListener("submit", function(event
     // Clear the form
     document.getElementById("contactForm").reset();
 });
+
+// Fetch data from the Java backend
+fetch('/data')
+  .then(response => response.json())
+  .then(data => {
+    // Process the data received from the Java backend
+    console.log(data);
+  })
+  .catch(error => {
+    console.error('Error fetching data:', error);
+});
