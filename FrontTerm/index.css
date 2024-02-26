@@ -28,6 +28,12 @@ nav ul li {
     text-decoration: none;
 }
 
+.right-align li a{
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+}
+
 .left-align { /* changes Moravian University at the top */
     color: white;
     float: left; /* Use float: left to move the element to the left */
