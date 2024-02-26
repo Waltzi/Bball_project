@@ -5,6 +5,19 @@ body {
     padding: 0;
     box-sizing: border-box;
     background-color: aliceblue;
+    background-image: url('/Bball_project/FrontTerm/images/moravianlogo.jpeg');
+    background-size: cover; /* Cover the entire body */
+    background-position: center; /* Center the image */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    height: 100vh; /* Adjust as needed */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white; /* Set text color */
+    font-size: 24px; /* Set font size */
+    text-align: center; /* Center text */
 }
 
 nav {
@@ -44,18 +57,36 @@ nav ul li {
 /* End of Nav bar */
 
 /* Start of Home Section */
+
 section h1{
     text-align: center;
     height: -10;
 }
 
-.img{
-    border-radius: 20px;
-    width: 10%;
-    height: auto;
+#home {
+    background-color: rgba(0, 0, 0, 0.5); /* Add semi-transparent background color to section */
+    padding: 20px; /* Add padding to section */
+    border-radius: 10px; /* Add border-radius for rounded corners */
 }
 
-button{
+#home h1 {
+    margin-bottom: 20px; /* Add spacing below the heading */
+}
+
+#roster_button {
+    background-color: #ffffff; /* Button background color */
+    color: #000000; /* Button text color */
+    padding: 10px 20px; /* Button padding */
+    border: none; /* Remove button border */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    border-radius: 5px; /* Add border-radius for rounded corners */
+}
+
+#roster_button:hover {
+    background-color: #cccccc; /* Change button background color on hover */
+}
+
+/* button{
     background-color: #00008B;
     color: white;
     padding: 10px;
@@ -63,7 +94,7 @@ button{
     border-radius: 10px;
     margin-left: 0px;
     cursor: pointer;
-}
+} */
 /* End of Home Section */
 
 section {
