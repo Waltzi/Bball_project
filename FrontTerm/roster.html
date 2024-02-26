@@ -9,8 +9,16 @@
     <link rel="stylesheet" href="index.css">   
 </head>
 <body>
+    <!-- Back Button -->
+    <h1>Moravian Womens Basketball Roster</h1>
+    <button id="back_button"> Back</button>
+    <script>
+        var button = document.getElementById("back_button");
+        button.addEventListener("click", function() {
+            window.location.href = 'index.html';
+        });
+    </script>
     <div class="container">
-        <h1>Moravian Womens Basketball Roster</h1>
         <table>
             <thead>
                 <tr>
@@ -24,25 +32,32 @@
             <tbody>
                 <!-- Replace the following rows with actual roster data -->
                 <tr>
-                    <td>Player 1</td>
+                    <td>Brandon</td>
                     <td>Forward</td>
                     <td>24</td>
                     <td>6'0"</td>
                     <td>Senior</td>
                 </tr>
                 <tr>
-                    <td>Player 2</td>
+                    <td>Saul</td>
                     <td>Guard</td>
                     <td>10</td>
                     <td>5'8"</td>
                     <td>Junior</td>
                 </tr>
                 <tr>
-                    <td>Player 3</td>
+                    <td>Austin</td>
                     <td>Center</td>
                     <td>33</td>
                     <td>6'2"</td>
                     <td>Sophomore</td>
+                </tr>
+                <tr>
+                    <td>Nathan</td>
+                    <td>Guard</td>
+                    <td>3</td>
+                    <td>5'10"</td>
+                    <td>Freshman</td>
                 </tr>
                 <!-- Add more rows as needed -->
             </tbody>
@@ -50,4 +65,3 @@
     </div>
 </body>
 </html>
-```
