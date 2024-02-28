@@ -28,3 +28,21 @@ fetch('/data')
   .catch(error => {
     console.error('Error fetching data:', error);
 });
+
+
+function calculatePercentage() {
+  // Get input values
+  var made = parseInt(document.getElementById("made").value);
+  var attempted = parseInt(document.getElementById("attempted").value);
+
+  // Calculate percentage
+  var percentage = (made / attempted) * 100;
+
+  // Display result
+  var resultElement = document.getElementById("result");
+  if (isNaN(percentage)) {
+      resultElement.textContent = "Please enter valid numbers.";
+  } else {
+      resultElement.textContent = "3-Point Shot Percentage: " + percentage.toFixed(2) + "%";
+  }
+}
