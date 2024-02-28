@@ -15,7 +15,15 @@
     <br>
     <button onclick="calculatePercentage()">Calculate Percentage</button>
     <div id="result"></div>
-
-    <script src="script.js"></script>
+    <button id="back_button"> Back</button>
+    <script>
+        var button = document.getElementById("back_button");
+        button.addEventListener("click", function() {
+            window.location.href = 'index.html';
+        });
+    </script>
+    <script src="app.js">
+        
+    </script>
 </body>
 </html>
