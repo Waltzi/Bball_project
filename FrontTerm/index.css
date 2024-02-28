@@ -59,8 +59,8 @@ section h1{
     height: auto;
 }
 
-button{
-    background-color: #00008B;
+#roster_button{
+    background-color: black;
     color: white;
     padding: 10px;
     cursor: pointer;
@@ -69,7 +69,28 @@ button{
     cursor: pointer;
 }
 
-button:hover{
+#roster_button:hover{
+    background-color: #0000FF;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-left: 0px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+#threepoint_button{
+    background-color: black;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-left: 0px;
+    cursor: pointer;
+}
+
+#threepoint_button:hover{
     background-color: #0000FF;
     color: white;
     padding: 10px;
