@@ -1,4 +1,4 @@
-/*
+ /*
  * TableThreePointers.java
  * This class is used to create the ThreePointers table in the MoravianWomenBasketball database.
  * The ThreePointers table will have the following columns:
