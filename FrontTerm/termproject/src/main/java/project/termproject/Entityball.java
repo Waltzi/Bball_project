@@ -1,3 +1,5 @@
+package project.termproject;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,6 +35,7 @@ public class Entityball {
     // Getters and setters
     public Long getId() {
         return id;
+
     }
 
     public void setId(Long id) {
