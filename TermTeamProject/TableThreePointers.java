@@ -8,6 +8,7 @@
  * - number
  * - threePointersMade
  * - threePointersAttempted
+ * - threePointersPercentage
  */
 
 import java.io.IOException;
@@ -36,6 +37,7 @@ public class TableThreePointers extends ThreePointers{
      * - number
      * - threePointersMade
      * - threePointersAttempted
+     * - threePointersPercentage
      */
     public void createTableThreePointers() {
         try {
@@ -50,12 +52,13 @@ public class TableThreePointers extends ThreePointers{
             Statement stmt = conn.createStatement();
         ) {
             String sql = "CREATE TABLE ThreePointers (" +
-                "studentID INT NOT NULL AUTO_INCREMENT, " + 
+                "studentID INT NOT NULL, " + 
                 "firstName VARCHAR(100) NOT NULL, " +
                 "lastName VARCHAR(100) NOT NULL, " +
                 "number INT NOT NULL, " +
-                "threePointersMade INT NOT NULL, " +
-                "threePointersAttempted INT NOT NULL, " +
+                "threePointersMade INT, " +
+                "threePointersAttempted INT, " +
+                "threePointersPercentage DOUBLE," +
                 "PRIMARY KEY (studentID, number))";
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
@@ -78,21 +81,29 @@ public class TableThreePointers extends ThreePointers{
      * @param number
      * @param threePointersMade
      * @param threePointersAttempted
+     * @param threePointersPercentage
      */
-    public void insertThreePointers(int studentID, String firstName, String lastName, int number, int threePointersMade, int threePointersAttempted) {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            System.out.println("Driver not found!!");
-        }
-
+    public void insertThreePointers() {
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/MoravianWomenBasketball", 
         "project", "project");
             Statement stmt = conn.createStatement();
         ) {
-            String sql = "INSERT INTO ThreePointers (studentID, firstName, lastName, number, threePointersMade, threePointersAttempted) VALUES (" + studentID + ", '" + firstName + "', '" + lastName + "', " + number + ", " + threePointersMade + ", " + threePointersAttempted + ")";
+            String sql = "INSERT INTO FreeThrows (studentID, firstName, lastName, number) SELECT studentID, firstName, lastName, number FROM Rosters" + ";";
             stmt.executeUpdate(sql);
+            System.out.println("Data transferred successfully");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateIntoTableThreePointersFromTableRosters(int number, int threePointersMade, int threePointersAttempted) {
+        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/MoravianWomenBasketball", 
+        "project", "project");
+            Statement stmt = conn.createStatement();
+        ) {
+            String sql = "UPDATE ThreePointers SET threePointersMade = " + threePointersMade + ", threePointersAttempted = " + threePointersAttempted + ", threePointersPercentage = " + super.getShootingPercentage() + " WHERE number = " + number + ";";
+            stmt.executeUpdate(sql);
+            System.out.println("Data transferred successfully");
         } catch (SQLException e) {
             e.printStackTrace();
         }
