@@ -14,7 +14,12 @@ public class GUI extends JFrame {
     private JTextField numberField;
     private JTextField classYearField;
     private JTextField heightField;
-    private JTextField weightField;
+    private JTextField freeThrowsMadeField;
+    private JTextField freeThrowsAttemptedField;
+    private JTextField freeThrowPercentageField;
+    private JTextField threePointersMadeField;
+    private JTextField threePointersAttemptedField;
+    private JTextField threePointPercentageField;
     private TeamDatabase teamDatabase;
     private TableFreeThrows tableFreeThrows;
     private TableThreePointers tableThreePointers;
@@ -42,8 +47,14 @@ public class GUI extends JFrame {
         // Create the FreeThrows table
         tableFreeThrows = new TableFreeThrows();
 
+        // Load the database and create the free throws table
+        tableFreeThrows.createTableFreeThrows();
+
         // Create the ThreePointers table
         tableThreePointers = new TableThreePointers();
+
+        // Load the database and create the three pointers table
+        tableThreePointers.createTableThreePointers();
 
 
         // Create a tabbed pane
@@ -53,13 +64,11 @@ public class GUI extends JFrame {
         JPanel rosterPanel = createRosterPanel();
         tabbedPane.addTab("Roster", rosterPanel);
 
-        JPanel panel2 = new JPanel();
-        panel2.add(new JLabel("What do you want?"));
-        tabbedPane.addTab("Tab 2", panel2);
+        JPanel freeThrowPanel = createFreeThrowPanel();
+        tabbedPane.addTab("Free Throws", freeThrowPanel);
 
-        JPanel panel3 = new JPanel();
-        panel3.add(new JLabel("Ah Hello"));
-        tabbedPane.addTab("Tab 3", panel3);
+        JPanel threePointerPanel = createThreePointPanel();
+        tabbedPane.addTab("Three Pointers", threePointerPanel);
 
         // Add components to the main frame
         setLayout(new BorderLayout());
@@ -69,6 +78,8 @@ public class GUI extends JFrame {
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 adjustTableSize(rosterPanel);
+                adjustTableSize(freeThrowPanel);
+                adjustTableSize(threePointerPanel);
             }
         });
     }
@@ -87,7 +98,6 @@ public class GUI extends JFrame {
         tableModel.addColumn("Number");
         tableModel.addColumn("Class Year");
         tableModel.addColumn("Height");
-        tableModel.addColumn("Weight");
 
         // Fetch and populate data from the database
         fetchDataFromDatabase(tableModel);
@@ -97,13 +107,13 @@ public class GUI extends JFrame {
         rosterPanel.add(scrollPane, BorderLayout.CENTER);
 
         // Add input fields and button for adding new data
-        JPanel inputPanel = createInputPanel();
+        JPanel inputPanel = createInputPanelRoster();
         rosterPanel.add(inputPanel, BorderLayout.SOUTH);
 
         return rosterPanel;
     }
 
-    private JPanel createInputPanel() {
+    private JPanel createInputPanelRoster() {
         JPanel inputPanel = new JPanel();
         firstNameField = new JTextField(8);
         lastNameField = new JTextField(10);
@@ -111,7 +121,6 @@ public class GUI extends JFrame {
         numberField = new JTextField(3);
         classYearField = new JTextField(5);
         heightField = new JTextField(5);
-        weightField = new JTextField(5);
         JButton addButton = new JButton("Add Info To Table");
 
         addButton.addActionListener(new ActionListener() {
@@ -133,8 +142,116 @@ public class GUI extends JFrame {
         inputPanel.add(classYearField);
         inputPanel.add(new JLabel("Height:"));
         inputPanel.add(heightField);
-        inputPanel.add(new JLabel("Weight:"));
-        inputPanel.add(weightField);
+        inputPanel.add(addButton);
+
+        return inputPanel;
+    }
+
+    private JPanel createFreeThrowPanel() {
+        JPanel freeThrowPanel = new JPanel(new BorderLayout());
+
+        // Create a table model to hold the free throw data
+        tableModel = new DefaultTableModel();
+        JTable freeThrowTable = new JTable(tableModel);
+
+        // Add columns to the table model
+        tableModel.addColumn("First Name");
+        tableModel.addColumn("Last Name");
+        tableModel.addColumn("Number");
+        tableModel.addColumn("Free Throws Made");
+        tableModel.addColumn("Free Throws Attempted");
+        tableModel.addColumn("Free Throw Percentage");
+        
+
+        // Fetch and populate data from the database
+        fetchDataFromDatabase(tableModel);
+
+        // Add the table to a scroll pane
+        JScrollPane scrollPane = new JScrollPane(freeThrowTable);
+        freeThrowPanel.add(scrollPane, BorderLayout.CENTER);
+
+        // Add input fields and button for adding new data
+        JPanel inputPanel = createInputPanelFreeThrows();
+        freeThrowPanel.add(inputPanel, BorderLayout.SOUTH);
+
+        return freeThrowPanel;
+    }
+
+    private JPanel createInputPanelFreeThrows() {
+        
+        JPanel inputPanel = new JPanel();
+        numberField = new JTextField(3);
+        freeThrowsMadeField = new JTextField(3);
+        freeThrowsAttemptedField = new JTextField(3);
+        JButton addButton = new JButton("Add Info To Table");
+
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addToFreeThrowsTableAndDatabase();
+            }
+        });
+
+        inputPanel.add(new JLabel("Number:"));
+        inputPanel.add(numberField);
+        inputPanel.add(new JLabel("Free Throws Made:"));
+        inputPanel.add(freeThrowsMadeField);
+        inputPanel.add(new JLabel("Free Throws Attempted:"));
+        inputPanel.add(freeThrowsAttemptedField);
+        inputPanel.add(addButton);
+
+        return inputPanel;
+    }
+
+    private JPanel createThreePointPanel() {
+        JPanel threePointPanel = new JPanel(new BorderLayout());
+
+        // Create a table model to hold the three point data
+        tableModel = new DefaultTableModel();
+        JTable threePointTable = new JTable(tableModel);
+
+        // Add columns to the table model
+        tableModel.addColumn("First Name");
+        tableModel.addColumn("Last Name");
+        tableModel.addColumn("Number");
+        tableModel.addColumn("Three Pointers Made");
+        tableModel.addColumn("Three Pointers Attempted");
+        tableModel.addColumn("Three Point Percentage");
+
+        // Fetch and populate data from the database
+        fetchDataFromDatabase(tableModel);
+
+        // Add the table to a scroll pane
+        JScrollPane scrollPane = new JScrollPane(threePointTable);
+        threePointPanel.add(scrollPane, BorderLayout.CENTER);
+
+        // Add input fields and button for adding new data
+        JPanel inputPanel = createInputPanelThreePointers();
+        threePointPanel.add(inputPanel, BorderLayout.SOUTH);
+
+        return threePointPanel;
+    }
+
+    private JPanel createInputPanelThreePointers() {
+        JPanel inputPanel = new JPanel();
+        numberField = new JTextField(3);
+        threePointersMadeField = new JTextField(3);
+        threePointersAttemptedField = new JTextField(3);
+        JButton addButton = new JButton("Add Info To Table");
+
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addToThreePointersTableAndDatabase();
+            }
+        });
+
+        inputPanel.add(new JLabel("Number:"));
+        inputPanel.add(numberField);
+        inputPanel.add(new JLabel("Three Pointers Made:"));
+        inputPanel.add(threePointersMadeField);
+        inputPanel.add(new JLabel("Three Pointers Attempted:"));
+        inputPanel.add(threePointersAttemptedField);
         inputPanel.add(addButton);
 
         return inputPanel;
@@ -169,13 +286,12 @@ public class GUI extends JFrame {
             int number = Integer.parseInt(numberField.getText());
             int classYear = Integer.parseInt(classYearField.getText());
             String height = heightField.getText();
-            int weight = Integer.parseInt(weightField.getText());
 
             // Add to the table
-            tableModel.addRow(new Object[]{firstName, lastName, position, number, classYear, height, weight});
+            tableModel.addRow(new Object[]{firstName, lastName, position, number, classYear, height});
 
             // Add to the database
-            tableRoster.insertIntoRoster(firstName, lastName, position, number, classYear, height, weight);
+            tableRoster.insertIntoRoster(firstName, lastName, position, number, classYear, height);
 
             // Clear the input fields
             firstNameField.setText("");
@@ -184,11 +300,71 @@ public class GUI extends JFrame {
             numberField.setText("");
             classYearField.setText("");
             heightField.setText("");
-            weightField.setText("");
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Invalid input format. Please enter valid values.");
         }
     }
+
+    private void addToFreeThrowsTableAndDatabase() {
+        try {
+            String firstName = firstNameField.getText();
+            String lastName = lastNameField.getText();
+            int number = Integer.parseInt(numberField.getText());
+            int freeThrowsMade = Integer.parseInt(freeThrowsMadeField.getText());
+            int freeThrowsAttempted = Integer.parseInt(freeThrowsAttemptedField.getText());
+            double freeThrowPercentage = Double.parseDouble(freeThrowPercentageField.getText());
+
+            // Add to the table
+            tableModel.addRow(new Object[]{firstName, lastName, number, freeThrowsMade, freeThrowsAttempted, freeThrowPercentage});
+
+            // Add to the database
+            tableFreeThrows.insertIntoTableFreeThrowsFromTableRosters();
+
+            tableFreeThrows.updateIntoTableFreeThrowsFromTableRosters(number, freeThrowsMade, freeThrowsMade);
+
+
+            // Clear the input fields
+            firstNameField.setText("");
+            lastNameField.setText("");
+            numberField.setText("");
+            freeThrowsMadeField.setText("");
+            freeThrowsAttemptedField.setText("");
+            freeThrowPercentageField.setText("");
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid input format. Please enter valid values.");
+        }
+    }
+
+    private void addToThreePointersTableAndDatabase() {
+        try {
+            String firstName = firstNameField.getText();
+            String lastName = lastNameField.getText();
+            int number = Integer.parseInt(numberField.getText());
+            int threePointersMade = Integer.parseInt(threePointersMadeField.getText());
+            int threePointersAttempted = Integer.parseInt(threePointersAttemptedField.getText());
+            double threePointPercentage = Double.parseDouble(threePointPercentageField.getText());
+
+            // Add to the table
+            tableModel.addRow(new Object[]{firstName, lastName, number, threePointersMade, threePointersAttempted, threePointPercentage});
+
+            // Add to the database
+            tableThreePointers.insertThreePointers();
+
+            tableThreePointers.updateIntoTableThreePointersFromTableRosters(number, threePointersMade, threePointersAttempted);
+
+            // Clear the input fields
+            firstNameField.setText("");
+            lastNameField.setText("");
+            numberField.setText("");
+            threePointersMadeField.setText("");
+            threePointersAttemptedField.setText("");
+            threePointPercentageField.setText("");
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid input format. Please enter valid values.");
+        }
+    }
+
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new GUI().setVisible(true));

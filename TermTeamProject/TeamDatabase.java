@@ -63,8 +63,8 @@ public class TeamDatabase {
     }
 
     public void addToDatabase(String firstName, String lastName, String position,
-                              int number, int classYear, String height, int weight) {
-        String sql = "INSERT INTO roster (firstName, lastName, position, number, classYear, height, weight) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                              int number, int classYear, String height) {
+        String sql = "INSERT INTO roster (firstName, lastName, position, number, classYear, height) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = DriverManager.getConnection(URL_DB, USERNAME, PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -75,7 +75,6 @@ public class TeamDatabase {
             preparedStatement.setInt(4, number);
             preparedStatement.setInt(5, classYear);
             preparedStatement.setString(6, height);
-            preparedStatement.setInt(7, weight);
 
             // Execute the update
             preparedStatement.executeUpdate();
@@ -100,10 +99,9 @@ public class TeamDatabase {
                 int number = resultSet.getInt("number");
                 int classYear = resultSet.getInt("classYear");
                 String height = resultSet.getString("height");
-                int weight = resultSet.getInt("weight");
 
                 // Add a new row to the table model
-                tableModel.addRow(new Object[]{firstName, lastName, position, number, classYear, height, weight});
+                tableModel.addRow(new Object[]{firstName, lastName, position, number, classYear, height});
             }
         }
     }

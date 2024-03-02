@@ -62,7 +62,6 @@ public class TableRoster extends TeamPlayer {
                 "number INT NOT NULL, " +
                 "classYear INT NOT NULL, " +
                 "height VARCHAR(100) NOT NULL, " +
-                "weight INT NOT NULL, " +
                 "PRIMARY KEY (studentID, number))";
             stmt.executeUpdate(sql);
             System.out.println("Table created successfully");
@@ -80,9 +79,8 @@ public class TableRoster extends TeamPlayer {
      * - position
      * - number
      * - height
-     * - weight
      */
-    public void insertIntoRoster(String firstName, String lastName, String position, int number, int classYear, String height, int weight) {
+    public void insertIntoRoster(String firstName, String lastName, String position, int number, int classYear, String height) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
@@ -93,7 +91,7 @@ public class TableRoster extends TeamPlayer {
         "project", "project");
             Statement stmt = conn.createStatement();
         ) {
-            String sql = "INSERT INTO Roster (firstName, lastName, position, number, classYear, height, weight) VALUES ('" + firstName + "', '" + lastName + "', '" + position + "', " + number + ", " + classYear + ", '" + height + "', " + weight + ")";
+            String sql = "INSERT INTO Roster (firstName, lastName, position, number, classYear, height) VALUES ('" + firstName + "', '" + lastName + "', '" + position + "', " + number + ", " + classYear + ", '" + height + "')";
             stmt.executeUpdate(sql);
             System.out.println("Record inserted successfully");
         } catch (SQLException e) {
