@@ -35,6 +35,7 @@ public class Entityball {
     // Getters and setters
     public Long getId() {
         return id;
+
     }
 
     public void setId(Long id) {
