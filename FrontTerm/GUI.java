@@ -78,10 +78,21 @@ public class GUI extends JFrame {
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 adjustTableSize(rosterPanel);
+            }
+        });
+
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
                 adjustTableSize(freeThrowPanel);
+            }
+        });
+
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
                 adjustTableSize(threePointerPanel);
             }
         });
+
     }
 
     private JPanel createRosterPanel() {
@@ -309,7 +320,10 @@ public class GUI extends JFrame {
         try {
             String firstName = firstNameField.getText();
             String lastName = lastNameField.getText();
+            String position = positionField.getText();
             int number = Integer.parseInt(numberField.getText());
+            int classYear = Integer.parseInt(classYearField.getText());
+            String height = heightField.getText();
             int freeThrowsMade = Integer.parseInt(freeThrowsMadeField.getText());
             int freeThrowsAttempted = Integer.parseInt(freeThrowsAttemptedField.getText());
             double freeThrowPercentage = Double.parseDouble(freeThrowPercentageField.getText());
