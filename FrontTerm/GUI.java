@@ -294,6 +294,9 @@ public class GUI extends JFrame {
         threePointersAttemptedField.setText("");
     }
 
+    
+        
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new GUI().setVisible(true));
     }
