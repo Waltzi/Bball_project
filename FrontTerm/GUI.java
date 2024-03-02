@@ -4,10 +4,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import java.sql.SQLException;
 
 public class GUI extends JFrame {
     private JTabbedPane tabbedPane;
-    private DefaultTableModel tableModel;
+    private DefaultTableModel rosterTableModel;
+    private DefaultTableModel freeThrowsTableModel;
+    private DefaultTableModel threePointersTableModel;
     private JTextField firstNameField;
     private JTextField lastNameField;
     private JTextField positionField;
@@ -20,42 +23,30 @@ public class GUI extends JFrame {
     private JTextField threePointersMadeField;
     private JTextField threePointersAttemptedField;
     private JTextField threePointPercentageField;
-    private TeamDatabase teamDatabase;
+    private FetchCreateTeamDatabase teamDatabase;
+    private TableRoster tableRoster;
     private TableFreeThrows tableFreeThrows;
     private TableThreePointers tableThreePointers;
-    private TableRoster tableRoster;
 
     public GUI() {
         // Set up the main frame
         setTitle("Moravian Women's Basketball");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(2000, 1500);
+        setSize(800, 600);
         setLocationRelativeTo(null);
 
-        // Create a TeamDatabase instance
-        teamDatabase = new TeamDatabase();
-
-        // Load the database and create the Roster table
+        // Initialize database and tables
+        teamDatabase = new FetchCreateTeamDatabase();
         teamDatabase.loadDatabase();
 
-        // Create the Roster table
         tableRoster = new TableRoster();
-
-        // Load the database and create the roster table
         tableRoster.createTableRoster();
 
-        // Create the FreeThrows table
         tableFreeThrows = new TableFreeThrows();
-
-        // Load the database and create the free throws table
         tableFreeThrows.createTableFreeThrows();
 
-        // Create the ThreePointers table
         tableThreePointers = new TableThreePointers();
-
-        // Load the database and create the three pointers table
         tableThreePointers.createTableThreePointers();
-
 
         // Create a tabbed pane
         tabbedPane = new JTabbedPane();
@@ -71,60 +62,28 @@ public class GUI extends JFrame {
         tabbedPane.addTab("Three Pointers", threePointerPanel);
 
         // Add components to the main frame
-        setLayout(new BorderLayout());
-        add(tabbedPane, BorderLayout.CENTER);
+        add(tabbedPane);
 
         // Add a window resize listener
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 adjustTableSize(rosterPanel);
-            }
-        });
-
-        addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentResized(java.awt.event.ComponentEvent evt) {
                 adjustTableSize(freeThrowPanel);
-            }
-        });
-
-        addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentResized(java.awt.event.ComponentEvent evt) {
                 adjustTableSize(threePointerPanel);
             }
         });
-
     }
 
     private JPanel createRosterPanel() {
         JPanel rosterPanel = new JPanel(new BorderLayout());
 
         // Create a table model to hold the roster data
-        tableModel = new DefaultTableModel();
-        JTable rosterTable = new JTable(tableModel);
-
-        // Add columns to the table model
-        tableModel.addColumn("First Name");
-        tableModel.addColumn("Last Name");
-        tableModel.addColumn("Position");
-        tableModel.addColumn("Number");
-        tableModel.addColumn("Class Year");
-        tableModel.addColumn("Height");
-
-        // Fetch and populate data from the database
-        fetchDataFromDatabase(tableModel);
-
-        // Add the table to a scroll pane
+        rosterTableModel = new DefaultTableModel();
+        JTable rosterTable = new JTable(rosterTableModel);
         JScrollPane scrollPane = new JScrollPane(rosterTable);
         rosterPanel.add(scrollPane, BorderLayout.CENTER);
 
-        // Add input fields and button for adding new data
-        JPanel inputPanel = createInputPanelRoster();
-        rosterPanel.add(inputPanel, BorderLayout.SOUTH);
-
-        return rosterPanel;
-    }
-
-    private JPanel createInputPanelRoster() {
+        // Create input panel for roster
         JPanel inputPanel = new JPanel();
         firstNameField = new JTextField(8);
         lastNameField = new JTextField(10);
@@ -132,12 +91,12 @@ public class GUI extends JFrame {
         numberField = new JTextField(3);
         classYearField = new JTextField(5);
         heightField = new JTextField(5);
-        JButton addButton = new JButton("Add Info To Table");
+        JButton addButton = new JButton("Add Player");
 
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                addToTableAndDatabase();
+                addToRosterAndDatabase();
             }
         });
 
@@ -155,51 +114,31 @@ public class GUI extends JFrame {
         inputPanel.add(heightField);
         inputPanel.add(addButton);
 
-        return inputPanel;
+        rosterPanel.add(inputPanel, BorderLayout.SOUTH);
+
+        return rosterPanel;
     }
 
     private JPanel createFreeThrowPanel() {
         JPanel freeThrowPanel = new JPanel(new BorderLayout());
 
         // Create a table model to hold the free throw data
-        tableModel = new DefaultTableModel();
-        JTable freeThrowTable = new JTable(tableModel);
-
-        // Add columns to the table model
-        tableModel.addColumn("First Name");
-        tableModel.addColumn("Last Name");
-        tableModel.addColumn("Number");
-        tableModel.addColumn("Free Throws Made");
-        tableModel.addColumn("Free Throws Attempted");
-        tableModel.addColumn("Free Throw Percentage");
-        
-
-        // Fetch and populate data from the database
-        fetchDataFromDatabase(tableModel);
-
-        // Add the table to a scroll pane
+        freeThrowsTableModel = new DefaultTableModel();
+        JTable freeThrowTable = new JTable(freeThrowsTableModel);
         JScrollPane scrollPane = new JScrollPane(freeThrowTable);
         freeThrowPanel.add(scrollPane, BorderLayout.CENTER);
 
-        // Add input fields and button for adding new data
-        JPanel inputPanel = createInputPanelFreeThrows();
-        freeThrowPanel.add(inputPanel, BorderLayout.SOUTH);
-
-        return freeThrowPanel;
-    }
-
-    private JPanel createInputPanelFreeThrows() {
-        
+        // Create input panel for free throws
         JPanel inputPanel = new JPanel();
         numberField = new JTextField(3);
         freeThrowsMadeField = new JTextField(3);
         freeThrowsAttemptedField = new JTextField(3);
-        JButton addButton = new JButton("Add Info To Table");
+        JButton addButton = new JButton("Add Free Throw");
 
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                addToFreeThrowsTableAndDatabase();
+                addToFreeThrowsAndDatabase();
             }
         });
 
@@ -211,49 +150,31 @@ public class GUI extends JFrame {
         inputPanel.add(freeThrowsAttemptedField);
         inputPanel.add(addButton);
 
-        return inputPanel;
+        freeThrowPanel.add(inputPanel, BorderLayout.SOUTH);
+
+        return freeThrowPanel;
     }
 
     private JPanel createThreePointPanel() {
         JPanel threePointPanel = new JPanel(new BorderLayout());
 
         // Create a table model to hold the three point data
-        tableModel = new DefaultTableModel();
-        JTable threePointTable = new JTable(tableModel);
-
-        // Add columns to the table model
-        tableModel.addColumn("First Name");
-        tableModel.addColumn("Last Name");
-        tableModel.addColumn("Number");
-        tableModel.addColumn("Three Pointers Made");
-        tableModel.addColumn("Three Pointers Attempted");
-        tableModel.addColumn("Three Point Percentage");
-
-        // Fetch and populate data from the database
-        fetchDataFromDatabase(tableModel);
-
-        // Add the table to a scroll pane
+        threePointersTableModel = new DefaultTableModel();
+        JTable threePointTable = new JTable(threePointersTableModel);
         JScrollPane scrollPane = new JScrollPane(threePointTable);
         threePointPanel.add(scrollPane, BorderLayout.CENTER);
 
-        // Add input fields and button for adding new data
-        JPanel inputPanel = createInputPanelThreePointers();
-        threePointPanel.add(inputPanel, BorderLayout.SOUTH);
-
-        return threePointPanel;
-    }
-
-    private JPanel createInputPanelThreePointers() {
+        // Create input panel for three pointers
         JPanel inputPanel = new JPanel();
         numberField = new JTextField(3);
         threePointersMadeField = new JTextField(3);
         threePointersAttemptedField = new JTextField(3);
-        JButton addButton = new JButton("Add Info To Table");
+        JButton addButton = new JButton("Add Three Pointer");
 
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                addToThreePointersTableAndDatabase();
+                addToThreePointersAndDatabase();
             }
         });
 
@@ -265,32 +186,14 @@ public class GUI extends JFrame {
         inputPanel.add(threePointersAttemptedField);
         inputPanel.add(addButton);
 
-        return inputPanel;
+        threePointPanel.add(inputPanel, BorderLayout.SOUTH);
+
+        return threePointPanel;
     }
 
-    private void fetchDataFromDatabase(DefaultTableModel tableModel) {
+    private void addToRosterAndDatabase() {
         try {
-            // Fetch and populate data from the database
-            teamDatabase.fetchDataFromDatabase(tableModel);
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Error accessing the database: " + e.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
-        }
-    }
-
-    private void adjustTableSize(JPanel rosterPanel) {
-        JTable rosterTable = ((JTable) ((JScrollPane) rosterPanel.getComponent(0)).getViewport().getView());
-        int width = rosterPanel.getWidth();
-        int height = rosterPanel.getHeight();
-
-        // Set the preferred size of the table based on the window size
-        rosterTable.setPreferredScrollableViewportSize(new Dimension(width, height));
-        rosterTable.setSize(new Dimension(width, height));
-        rosterTable.revalidate();
-    }
-
-    private void addToTableAndDatabase() {
-        try {
+            // Get data from input fields
             String firstName = firstNameField.getText();
             String lastName = lastNameField.getText();
             String position = positionField.getText();
@@ -298,87 +201,107 @@ public class GUI extends JFrame {
             int classYear = Integer.parseInt(classYearField.getText());
             String height = heightField.getText();
 
-            // Add to the table
-            tableModel.addRow(new Object[]{firstName, lastName, position, number, classYear, height});
+            // Add data to the table model
+            rosterTableModel.addRow(new Object[]{firstName, lastName, position, number, classYear, height});
 
-            // Add to the database
+            // Add data to the database
             tableRoster.insertIntoRoster(firstName, lastName, position, number, classYear, height);
 
-            // Clear the input fields
-            firstNameField.setText("");
-            lastNameField.setText("");
-            positionField.setText("");
-            numberField.setText("");
-            classYearField.setText("");
-            heightField.setText("");
+            // Clear input fields
+            clearRosterInputFields();
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Invalid input format. Please enter valid values.");
         }
     }
 
-    private void addToFreeThrowsTableAndDatabase() {
+    private void addToFreeThrowsAndDatabase() {
         try {
             String firstName = firstNameField.getText();
             String lastName = lastNameField.getText();
-            String position = positionField.getText();
             int number = Integer.parseInt(numberField.getText());
             int classYear = Integer.parseInt(classYearField.getText());
             String height = heightField.getText();
             int freeThrowsMade = Integer.parseInt(freeThrowsMadeField.getText());
             int freeThrowsAttempted = Integer.parseInt(freeThrowsAttemptedField.getText());
-            double freeThrowPercentage = Double.parseDouble(freeThrowPercentageField.getText());
 
-            // Add to the table
-            tableModel.addRow(new Object[]{firstName, lastName, number, freeThrowsMade, freeThrowsAttempted, freeThrowPercentage});
+            // Add data to the table model
+            freeThrowsTableModel.addRow(new Object[]{number, freeThrowsMade, freeThrowsAttempted});
 
-            // Add to the database
+            // Add data to the database
             tableFreeThrows.insertIntoTableFreeThrowsFromTableRosters();
-
             tableFreeThrows.updateIntoTableFreeThrowsFromTableRosters(number, freeThrowsMade, freeThrowsMade);
 
-
-            // Clear the input fields
-            firstNameField.setText("");
-            lastNameField.setText("");
-            numberField.setText("");
-            freeThrowsMadeField.setText("");
-            freeThrowsAttemptedField.setText("");
-            freeThrowPercentageField.setText("");
+            // Clear input fields
+            clearFreeThrowsInputFields();
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Invalid input format. Please enter valid values.");
         }
     }
 
-    private void addToThreePointersTableAndDatabase() {
+    private void addToThreePointersAndDatabase() {
         try {
-            String firstName = firstNameField.getText();
-            String lastName = lastNameField.getText();
+            // Get data from input fields
             int number = Integer.parseInt(numberField.getText());
             int threePointersMade = Integer.parseInt(threePointersMadeField.getText());
             int threePointersAttempted = Integer.parseInt(threePointersAttemptedField.getText());
-            double threePointPercentage = Double.parseDouble(threePointPercentageField.getText());
 
-            // Add to the table
-            tableModel.addRow(new Object[]{firstName, lastName, number, threePointersMade, threePointersAttempted, threePointPercentage});
+            // Add data to the table model
+            threePointersTableModel.addRow(new Object[]{number, threePointersMade, threePointersAttempted});
 
-            // Add to the database
+            // Add data to the database
             tableThreePointers.insertThreePointers();
-
             tableThreePointers.updateIntoTableThreePointersFromTableRosters(number, threePointersMade, threePointersAttempted);
 
-            // Clear the input fields
-            firstNameField.setText("");
-            lastNameField.setText("");
-            numberField.setText("");
-            threePointersMadeField.setText("");
-            threePointersAttemptedField.setText("");
-            threePointPercentageField.setText("");
+            // Clear input fields
+            clearThreePointersInputFields();
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Invalid input format. Please enter valid values.");
         }
     }
 
+    private void fetchDataForAllPanels() {
+        fetchRosterData();
+        fetchFreeThrowsData();
+        fetchThreePointersData();
+    }
 
+    private void fetchRosterData() {
+            // Fetch data from the database and populate the table model
+            teamDatabase.fetchRosterData(rosterTableModel);
+        
+    }
+
+    private void fetchFreeThrowsData() {
+        // Fetch data from the database and populate the table model
+        teamDatabase.fetchFreeThrowsData(freeThrowsTableModel);
+        
+    }
+
+    private void fetchThreePointersData() {
+        teamDatabase.fetchThreePointersData(threePointersTableModel);
+        
+    }
+
+    private void clearRosterInputFields() {
+        firstNameField.setText("");
+        lastNameField.setText("");
+        positionField.setText("");
+        numberField.setText("");
+        classYearField.setText("");
+        heightField.setText("");
+    }
+
+    private void clearFreeThrowsInputFields() {
+        numberField.setText("");
+        freeThrowsMadeField.setText("");
+        freeThrowsAttemptedField.setText("");
+    }
+
+    private void clearThreePointersInputFields() {
+        numberField.setText("");
+        threePointersMadeField.setText("");
+        threePointersAttemptedField.setText("");
+    }
 
     
         
