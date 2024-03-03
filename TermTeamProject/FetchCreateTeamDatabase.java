@@ -32,7 +32,7 @@ import javax.swing.table.DefaultTableModel;
      */
 
 public class FetchCreateTeamDatabase {
-    final String URL_DB = "jdbc:mysql://localhost:3306/MoravianWomenBasketball";
+    final String URL_DB = "jdbc:mysql://localhost:3306/";
     final String USERNAME = "project";
     final String PASSWORD = "project";
 
@@ -57,7 +57,7 @@ public class FetchCreateTeamDatabase {
     }
 
     public void fetchDataFromDatabase(DefaultTableModel tableModel) throws SQLException {
-        String sql = "SELECT firstName, lastName, position, number, classYear, height, weight FROM roster";
+        String sql = "SELECT firstName, lastName, position, number, classYear, height, weight FROM Roster";
 
         try (Connection connection = DriverManager.getConnection(URL_DB, USERNAME, PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(sql);

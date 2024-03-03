@@ -57,7 +57,7 @@ public class TableFreeThrows extends FreeThrows{
                 "freeThrowsMade INT, " +
                 "freeThrowsAttempted INT, " +
                 "threePointersPercentage DOUBLE," +
-                "PRIMARY KEY (studentID, number))";
+                "PRIMARY KEY (number))";
             stmt.executeUpdate(sql);
             System.out.println("Table FreeThrows created successfully");
         } catch (SQLException e) {

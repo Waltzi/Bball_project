@@ -59,7 +59,7 @@ public class TableThreePointers extends ThreePointers{
                 "threePointersMade INT, " +
                 "threePointersAttempted INT, " +
                 "threePointersPercentage DOUBLE," +
-                "PRIMARY KEY (studentID, number))";
+                "PRIMARY KEY (number))";
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
             e.printStackTrace();
