@@ -57,7 +57,7 @@ public class TableFreeThrows extends FreeThrows{
                 "freeThrowsMade INT, " +
                 "freeThrowsAttempted INT, " +
                 "threePointersPercentage DOUBLE," +
-                "PRIMARY KEY (number))";
+                "PRIMARY KEY (studentID, number))";
             stmt.executeUpdate(sql);
             System.out.println("Table FreeThrows created successfully");
         } catch (SQLException e) {
@@ -75,28 +75,14 @@ public class TableFreeThrows extends FreeThrows{
      * @param freeThrowAttempted
      * @param freeThrowPercentage
      */
-    public void insertIntoTableFreeThrowsFromTableRosters() {
+    public void insertIntoTableFreeThrowsFromTableRosters(int number, int freeThrowsMade, int freeThrowAttempted, double freeThrowPercentage) {
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/MoravianWomenBasketball", 
         "project", "project");
             Statement stmt = conn.createStatement();
         ) {
-            String sql = "INSERT INTO FreeThrows (studentID, firstName, lastName, number) SELECT studentID, firstName, lastName, number FROM Rosters;";
+            String sql = "INSERT INTO FreeThrows (number) SELECT number FROM Roster;";
+            String sql2 = "UPDATE FreeThrows SET freeThrowsMade = " + freeThrowsMade + ", freeThrowsAttempted = " + freeThrowAttempted + ", freeThrowPercentage = " + freeThrowPercentage + " WHERE number = " + number + ";";
             stmt.executeUpdate(sql);
-            System.out.println("Data transferred successfully");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    
-    
-
-    public void updateIntoTableFreeThrowsFromTableRosters(int number, int freeThrowsMade, int freeThrowAttempted) {
-        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/MoravianWomenBasketball", 
-        "project", "project");
-            Statement stmt = conn.createStatement();
-        ) {
-            String sql2 = "UPDATE FreeThrows SET freeThrowsMade = " + freeThrowsMade + ", freeThrowsAttempted = " + freeThrowAttempted + ", freeThrowPercentage = " + super.getShootingPercentage() + " WHERE number = " + number + ";";
             stmt.executeUpdate(sql2);
             System.out.println("Data inserted successfully");
         } catch (SQLException e) {

@@ -7,40 +7,33 @@ import java.sql.*;
 
 
 public class GUI extends JFrame {
-   private JTabbedPane tabbedPane;
-   private DefaultTableModel tableModel;
-   private DefaultTableModel tableModel2;
-   private DefaultTableModel tableModel3;
-   private JTextField firstNameField;
-   private JTextField firstNameField2;
-   private JTextField firstNameField3;
-   private JTextField lastNameField;
-   private JTextField lastNameField2;
-   private JTextField lastNameField3;
-   private JTextField positionField;
-   private JTextField numberField;
-   private JTextField numberField2;
-   private JTextField numberField3;
-   private JTextField classYearField;
-   private JTextField heightField;
-   private JTextField freeThrowsMadeField;
-   private JTextField freeThrowsAttemptedField;
-   private JTextField freeThrowPercentageField;
-   private JTextField threePointersMadeField;
-   private JTextField threePointersAttemptedField;
-   private JTextField threePointPercentageField;
-   private FetchCreateTeamDatabase teamDatabase;
-   private TableFreeThrows tableFreeThrows;
-   private TableThreePointers tableThreePointers;
-   private TableRoster tableRoster;
+    private JTabbedPane tabbedPane;
+    private DefaultTableModel rosterTableModel;
+    private DefaultTableModel freeThrowsTableModel;
+    private DefaultTableModel threePointersTableModel;
+    private JTextField firstNameField;
+    private JTextField lastNameField;
+    private JTextField positionField;
+    private JTextField numberField;
+    private JTextField classYearField;
+    private JTextField heightField;
+    private JTextField freeThrowsMadeField;
+    private JTextField freeThrowsAttemptedField;
+    private JTextField freeThrowPercentageField;
+    private JTextField threePointersMadeField;
+    private JTextField threePointersAttemptedField;
+    private JTextField threePointPercentageField;
+    private FetchCreateTeamDatabase teamDatabase;
+    private TableRoster tableRoster;
+    private TableFreeThrows tableFreeThrows;
+    private TableThreePointers tableThreePointers;
 
-
-   public GUI() {
-       // Set up the main frame
-       setTitle("Moravian Women's Basketball");
-       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-       setSize(2000, 1500);
-       setLocationRelativeTo(null);
+    public GUI() {
+        // Set up the main frame
+        setTitle("Moravian Women's Basketball");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(800, 600);
+        setLocationRelativeTo(null);
 
 
        // Create a TeamDatabase instance
@@ -188,28 +181,11 @@ public class GUI extends JFrame {
        JPanel freeThrowPanel = new JPanel(new BorderLayout());
 
 
-       // Create a table model to hold the free throw data
-       tableModel2 = new DefaultTableModel();
-       JTable freeThrowTable = new JTable(tableModel2);
-
-
-       // Add columns to the table model
-       tableModel2.addColumn("First Name");
-       tableModel2.addColumn("Last Name");
-       tableModel2.addColumn("Number");
-       tableModel2.addColumn("Free Throws Made");
-       tableModel2.addColumn("Free Throws Attempted");
-       tableModel2.addColumn("Free Throw Percentage");
-      
-
-
-       // Fetch and populate data from the database
-       teamDatabase.fetchFreeThrowsData(tableModel2);
-
-
-       // Add the table to a scroll pane
-       JScrollPane scrollPane = new JScrollPane(freeThrowTable);
-       freeThrowPanel.add(scrollPane, BorderLayout.CENTER);
+        // Create a table model to hold the free throw data
+        freeThrowsTableModel = new DefaultTableModel();
+        JTable freeThrowTable = new JTable(freeThrowsTableModel);
+        JScrollPane scrollPane = new JScrollPane(freeThrowTable);
+        freeThrowPanel.add(scrollPane, BorderLayout.CENTER);
 
 
        // Add input fields and button for adding new data
@@ -255,27 +231,11 @@ public class GUI extends JFrame {
        JPanel threePointPanel = new JPanel(new BorderLayout());
 
 
-       // Create a table model to hold the three point data
-       tableModel3 = new DefaultTableModel();
-       JTable threePointTable = new JTable(tableModel);
-
-
-       // Add columns to the table model
-       tableModel3.addColumn("First Name");
-       tableModel3.addColumn("Last Name");
-       tableModel3.addColumn("Number");
-       tableModel3.addColumn("Three Pointers Made");
-       tableModel3.addColumn("Three Pointers Attempted");
-       tableModel3.addColumn("Three Point Percentage");
-
-
-       // Fetch and populate data from the database
-       teamDatabase.fetchThreePointersData(tableModel3);
-
-
-       // Add the table to a scroll pane
-       JScrollPane scrollPane = new JScrollPane(threePointTable);
-       threePointPanel.add(scrollPane, BorderLayout.CENTER);
+        // Create a table model to hold the three point data
+        threePointersTableModel = new DefaultTableModel();
+        JTable threePointTable = new JTable(threePointersTableModel);
+        JScrollPane scrollPane = new JScrollPane(threePointTable);
+        threePointPanel.add(scrollPane, BorderLayout.CENTER);
 
 
        // Add input fields and button for adding new data
@@ -358,75 +318,47 @@ public class GUI extends JFrame {
        }
    }
 
+    private void addToFreeThrowsAndDatabase() {
+        try {
+            // Get data from input fields
+            int number = Integer.parseInt(numberField.getText());
+            int freeThrowsMade = Integer.parseInt(freeThrowsMadeField.getText());
+            int freeThrowsAttempted = Integer.parseInt(freeThrowsAttemptedField.getText());
 
-   private void addToFreeThrowsTableAndDatabase() {
-       try {
-           String firstName = firstNameField2.getText();
-           String lastName = lastNameField2.getText();
-           int number = Integer.parseInt(numberField2.getText());
-           int freeThrowsMade = Integer.parseInt(freeThrowsMadeField.getText());
-           int freeThrowsAttempted = Integer.parseInt(freeThrowsAttemptedField.getText());
-           double freeThrowPercentage = Double.parseDouble(freeThrowPercentageField.getText());
+            // Add data to the table model
+            freeThrowsTableModel.addRow(new Object[]{number, freeThrowsMade, freeThrowsAttempted});
 
+            // Add data to the database
+            tableFreeThrows.insertIntoTableFreeThrowsFromTableRosters();
+            tableFreeThrows.updateIntoTableFreeThrowsFromTableRosters(number, freeThrowsMade, freeThrowsMade);
 
-           // Add to the table
-           tableModel.addRow(new Object[]{firstName, lastName, number, freeThrowsMade, freeThrowsAttempted, freeThrowPercentage});
+            // Clear input fields
+            clearFreeThrowsInputFields();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid input format. Please enter valid values.");
+        }
+    }
 
+    private void addToThreePointersAndDatabase() {
+        try {
+            // Get data from input fields
+            int number = Integer.parseInt(numberField.getText());
+            int threePointersMade = Integer.parseInt(threePointersMadeField.getText());
+            int threePointersAttempted = Integer.parseInt(threePointersAttemptedField.getText());
 
-           // Add to the database
-           tableFreeThrows.insertIntoTableFreeThrowsFromTableRosters();
+            // Add data to the table model
+            threePointersTableModel.addRow(new Object[]{number, threePointersMade, threePointersAttempted});
 
+            // Add data to the database
+            tableThreePointers.insertThreePointers();
+            tableThreePointers.updateIntoTableThreePointersFromTableRosters(number, threePointersMade, threePointersAttempted);
 
-           tableFreeThrows.updateIntoTableFreeThrowsFromTableRosters(number, freeThrowsMade, freeThrowsMade);
-
-
-
-
-           // Clear the input fields
-           firstNameField2.setText("");
-           lastNameField2.setText("");
-           numberField2.setText("");
-           freeThrowsMadeField.setText("");
-           freeThrowsAttemptedField.setText("");
-           freeThrowPercentageField.setText("");
-       } catch (NumberFormatException e) {
-           JOptionPane.showMessageDialog(this, "Invalid input format. Please enter valid values.");
-       }
-   }
-
-
-   private void addToThreePointersTableAndDatabase() {
-       try {
-           String firstName = firstNameField3.getText();
-           String lastName = lastNameField3.getText();
-           int number = Integer.parseInt(numberField3.getText());
-           int threePointersMade = Integer.parseInt(threePointersMadeField.getText());
-           int threePointersAttempted = Integer.parseInt(threePointersAttemptedField.getText());
-           double threePointPercentage = Double.parseDouble(threePointPercentageField.getText());
-
-
-           // Add to the table
-           tableModel.addRow(new Object[]{firstName, lastName, number, threePointersMade, threePointersAttempted, threePointPercentage});
-
-
-           // Add to the database
-           tableThreePointers.insertThreePointers();
-
-
-           tableThreePointers.updateIntoTableThreePointersFromTableRosters(number, threePointersMade, threePointersAttempted);
-
-
-           // Clear the input fields
-           firstNameField3.setText("");
-           lastNameField3.setText("");
-           numberField3.setText("");
-           threePointersMadeField.setText("");
-           threePointersAttemptedField.setText("");
-           threePointPercentageField.setText("");
-       } catch (NumberFormatException e) {
-           JOptionPane.showMessageDialog(this, "Invalid input format. Please enter valid values.");
-       }
-   }
+            // Clear input fields
+            clearThreePointersInputFields();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid input format. Please enter valid values.");
+        }
+    }
 
 
 
