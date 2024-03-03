@@ -52,14 +52,11 @@ public class TableThreePointers extends ThreePointers{
             Statement stmt = conn.createStatement();
         ) {
             String sql = "CREATE TABLE ThreePointers (" +
-                "studentID INT NOT NULL, " + 
-                "firstName VARCHAR(100) NOT NULL, " +
-                "lastName VARCHAR(100) NOT NULL, " +
-                "number INT NOT NULL, " +
-                "threePointersMade INT, " +
-                "threePointersAttempted INT, " +
-                "threePointersPercentage DOUBLE," +
-                "PRIMARY KEY (studentID, number))";
+                "number INT PRIMARY KEY," +
+                "threePointersMade INT," +
+                "threePointersAttempted INT," +
+                "threePointersPercentage DECIMAL(5,2)," +
+                "FOREIGN KEY (number) REFERENCES Roster(number));";
             stmt.executeUpdate(sql);
             System.out.println("Table ThreePointers created successfully");
         } catch (SQLException e) {

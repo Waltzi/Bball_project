@@ -50,14 +50,11 @@ public class TableFreeThrows extends FreeThrows{
             Statement stmt = conn.createStatement();
         ) {
             String sql = "CREATE TABLE FreeThrows (" +
-                "studentID INT NOT NULL, " + 
-                "firstName VARCHAR(100) NOT NULL, " +
-                "lastName VARCHAR(100) NOT NULL, " +
-                "number INT NOT NULL, " +
-                "freeThrowsMade INT, " +
-                "freeThrowsAttempted INT, " +
-                "threePointersPercentage DOUBLE," +
-                "PRIMARY KEY (studentID, number))";
+                "number INT PRIMARY KEY," +
+                "freeThrowsMade INT," +
+                "freeThrowsAttempted INT," +
+                "freeThrowPercentage DECIMAL(5,2)," +
+                "FOREIGN KEY (number) REFERENCES Roster(number));";
             stmt.executeUpdate(sql);
             System.out.println("Table FreeThrows created successfully");
         } catch (SQLException e) {
