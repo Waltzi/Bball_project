@@ -52,15 +52,13 @@ public class TableThreePointers extends ThreePointers{
             Statement stmt = conn.createStatement();
         ) {
             String sql = "CREATE TABLE ThreePointers (" +
-                "studentID INT NOT NULL, " + 
-                "firstName VARCHAR(100) NOT NULL, " +
-                "lastName VARCHAR(100) NOT NULL, " +
-                "number INT NOT NULL, " +
-                "threePointersMade INT, " +
-                "threePointersAttempted INT, " +
-                "threePointersPercentage DOUBLE," +
-                "PRIMARY KEY (studentID, number))";
+                "number INT PRIMARY KEY," +
+                "threePointersMade INT," +
+                "threePointersAttempted INT," +
+                "threePointersPercentage DECIMAL(5,2)," +
+                "FOREIGN KEY (number) REFERENCES Roster(number));";
             stmt.executeUpdate(sql);
+            System.out.println("Table ThreePointers created successfully");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -83,26 +81,15 @@ public class TableThreePointers extends ThreePointers{
      * @param threePointersAttempted
      * @param threePointersPercentage
      */
-    public void insertThreePointers() {
+    public void insertThreePointers(int number, int threePointersMade, int threePointersAttempted, double threePointersPercentage) {
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/MoravianWomenBasketball", 
         "project", "project");
             Statement stmt = conn.createStatement();
         ) {
-            String sql = "INSERT INTO FreeThrows (studentID, firstName, lastName, number) SELECT studentID, firstName, lastName, number FROM Rosters" + ";";
+            String sql = "INSERT INTO ThreePointers (number) SELECT number FROM Roster;";
+            String sql2 = "UPDATE ThreePointers SET threePointersMade = " + threePointersMade + ", threePointersAttempted = " + threePointersAttempted + ", threePointersPercentage = " + threePointersPercentage + " WHERE number = " + number + ";";
             stmt.executeUpdate(sql);
-            System.out.println("Data transferred successfully");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void updateIntoTableThreePointersFromTableRosters(int number, int threePointersMade, int threePointersAttempted) {
-        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/MoravianWomenBasketball", 
-        "project", "project");
-            Statement stmt = conn.createStatement();
-        ) {
-            String sql = "UPDATE ThreePointers SET threePointersMade = " + threePointersMade + ", threePointersAttempted = " + threePointersAttempted + ", threePointersPercentage = " + super.getShootingPercentage() + " WHERE number = " + number + ";";
-            stmt.executeUpdate(sql);
+            stmt.executeUpdate(sql2);
             System.out.println("Data transferred successfully");
         } catch (SQLException e) {
             e.printStackTrace();

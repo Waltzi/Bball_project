@@ -31,7 +31,7 @@ public class TableRoster extends TeamPlayer {
     /**
      * This method is used to create the Roster table in the MoravianWomenBasketball database.
      * The Roster table will have the following columns:
-     * - studentID
+     * - ID
      * - firstName
      * - lastName
      * - classYear
@@ -55,14 +55,15 @@ public class TableRoster extends TeamPlayer {
             Statement stmt = conn.createStatement();
         ) {
             String sql = "CREATE TABLE Roster (" +
-                "studentID INT NOT NULL AUTO_INCREMENT, " +
+                "ID INT NOT NULL AUTO_INCREMENT, " +
                 "firstName VARCHAR(100) NOT NULL, " +
                 "lastName VARCHAR(100) NOT NULL, " +
                 "position VARCHAR(100) NOT NULL," +
                 "number INT NOT NULL, " +
                 "classYear INT NOT NULL, " +
                 "height VARCHAR(100) NOT NULL, " +
-                "PRIMARY KEY (studentID, number))";
+                "INDEX (number)," +
+                "PRIMARY KEY (ID, number))";
             stmt.executeUpdate(sql);
             System.out.println("Table created successfully");
         } catch (SQLException e) {

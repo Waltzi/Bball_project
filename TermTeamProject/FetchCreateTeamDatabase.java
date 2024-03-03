@@ -32,7 +32,7 @@ import javax.swing.table.DefaultTableModel;
      */
 
 public class FetchCreateTeamDatabase {
-    final String URL_DB = "jdbc:mysql://localhost:3306/MoravianWomenBasketball";
+    final String URL_DB = "jdbc:mysql://localhost:3306/";
     final String USERNAME = "project";
     final String PASSWORD = "project";
 
@@ -56,33 +56,8 @@ public class FetchCreateTeamDatabase {
         }
     }
 
-    public void fetchDataFromDatabase(DefaultTableModel tableModel) throws SQLException {
-        String sql = "SELECT firstName, lastName, position, number, classYear, height, weight FROM roster";
-
-        try (Connection connection = DriverManager.getConnection(URL_DB, USERNAME, PASSWORD);
-             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-             ResultSet resultSet = preparedStatement.executeQuery()) {
-
-            // Iterate through the result set and populate the table model
-            while (resultSet.next()) {
-                String firstName = resultSet.getString("firstName");
-                String lastName = resultSet.getString("lastName");
-                String position = resultSet.getString("position");
-                int number = resultSet.getInt("number");
-                int classYear = resultSet.getInt("classYear");
-                String height = resultSet.getString("height");
-
-                // Add a new row to the table model
-                tableModel.addRow(new Object[]{firstName, lastName, position, number, classYear, height});
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-    }
-
     public void fetchRosterData(DefaultTableModel rosterTableModel) {
-        String sql = "SELECT firstName, lastName, position, number, classYear, height FROM roster";
+        String sql = "SELECT firstName, lastName, position, number, classYear, height FROM Roster";
 
         try (Connection connection = DriverManager.getConnection(URL_DB, USERNAME, PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(sql);
