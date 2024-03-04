@@ -366,7 +366,7 @@ public class GUI extends JFrame {
 
 
             // Add to the database
-            tableFreeThrows.insertIntoTableFreeThrowsFromTableRosters(number, freeThrowsMade, freeThrowsMade, freeThrowPercentage);
+            tableFreeThrows.insertIntoTableFreeThrowsFromTableRosters(number, freeThrowsMade, freeThrowsAttempted, freeThrowPercentage);
 
 
             // Clear the input fields
