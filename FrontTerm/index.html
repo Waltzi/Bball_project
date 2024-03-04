@@ -20,15 +20,24 @@
     <section id="home">
         <h1>Moravian Womens Basketball</h1>
         <button id="roster_button"> Roster</button>
-        <button id = "threepoint_button"> 
-            <a href="threepoint.html">3-Point Shot Percentage Calculator</a>
-        </button>
-        <button id = "free_throw_button"> 
-            <a href="freethrow.html">Free Throw</a>
+        <button id = "threepoint_button"> 3-Point Shot Percentage Calculator</button>
+        <button id = "free_throw_button"> Free Throw List</button>
          <script>
             var button = document.getElementById("roster_button");
             button.addEventListener("click", function() {
                 window.location.href = 'roster.html';
+            });
+        </script>
+        <script>
+            var button = document.getElementById("threepoint_button");
+            button.addEventListener("click", function() {
+                window.location.href = 'threepoint.html';
+            });
+        </script>
+        <script>
+            var button = document.getElementById("free_throw_button");
+            button.addEventListener("click", function() {
+                window.location.href = 'freethrow.html';
             });
         </script>
         <div class="img">
