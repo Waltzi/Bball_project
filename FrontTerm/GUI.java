@@ -31,13 +31,14 @@ public class GUI extends JFrame {
    private TableFreeThrows tableFreeThrows;
    private TableThreePointers tableThreePointers;
    private TableRoster tableRoster;
+   private JTextField deleteField;
 
 
    public GUI() {
        // Set up the main frame
        setTitle("Moravian Women's Basketball");
        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-       setSize(1200, 1100);
+       setSize(1900, 1500);
        setLocationRelativeTo(null);
 
 
@@ -151,7 +152,9 @@ public class GUI extends JFrame {
        numberField = new JTextField(3);
        classYearField = new JTextField(5);
        heightField = new JTextField(5);
-       JButton addButton = new JButton("Add Info To Table");
+       JButton addButton = new JButton("Add Player");
+       deleteField = new JTextField(3);
+       JButton deleteButton = new JButton("Delete Player");
 
 
        addButton.addActionListener(new ActionListener() {
@@ -161,7 +164,14 @@ public class GUI extends JFrame {
            }
        });
 
+         deleteButton.addActionListener(new ActionListener() {
+              @Override
+              public void actionPerformed(ActionEvent e) {
+                deleteFromTableRosterAndDatabase();
+              }
+         });
 
+      
        inputPanel.add(new JLabel("First Name:"));
        inputPanel.add(firstNameField);
        inputPanel.add(new JLabel("Last Name:"));
@@ -175,6 +185,9 @@ public class GUI extends JFrame {
        inputPanel.add(new JLabel("Height:"));
        inputPanel.add(heightField);
        inputPanel.add(addButton);
+       inputPanel.add(new JLabel("Delete #:"));
+       inputPanel.add(deleteField);
+       inputPanel.add(deleteButton);
 
 
        return inputPanel;
@@ -223,8 +236,7 @@ public class GUI extends JFrame {
        freeThrowsMadeField = new JTextField(3);
        freeThrowsAttemptedField = new JTextField(3);
        JButton addButton = new JButton("Add Info To Table");
-
-
+       
        addButton.addActionListener(new ActionListener() {
            @Override
            public void actionPerformed(ActionEvent e) {
@@ -351,6 +363,33 @@ public class GUI extends JFrame {
        }
    }
 
+   private void deleteFromTableRosterAndDatabase(){
+        try {
+            // find the row with the number and delete it
+            int number = Integer.parseInt(deleteField.getText());
+            tableRoster.deleteFromTableRoster(number);
+            for (int i = 0; i < tableModel.getRowCount(); i++) {
+                if (tableModel.getValueAt(i, 3).equals(number)) {
+                    tableModel.removeRow(i);
+                }
+            }
+            for (int i = 0; i < tableModel2.getRowCount(); i++) {
+                if (tableModel2.getValueAt(i, 0).equals(number)) {
+                    tableModel2.removeRow(i);
+                }
+            }
+            for (int i = 0; i < tableModel3.getRowCount(); i++) {
+                if (tableModel3.getValueAt(i, 0).equals(number)) {
+                    tableModel3.removeRow(i);
+                }
+            }
+            deleteField.setText("");
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid input format. Please enter valid values.");
+        }
+   }
+
 
    private void addToFreeThrowsTableAndDatabase() {
        try {
@@ -369,8 +408,6 @@ public class GUI extends JFrame {
 
 
             // Clear the input fields
-            firstNameField2.setText("");
-            lastNameField2.setText("");
             numberField2.setText("");
             freeThrowsMadeField.setText("");
             freeThrowsAttemptedField.setText("");
@@ -396,8 +433,6 @@ public class GUI extends JFrame {
            tableThreePointers.insertThreePointers(number, threePointersMade, threePointersAttempted, threePointPercentage);
 
            // Clear the input fields
-           firstNameField3.setText("");
-           lastNameField3.setText("");
            numberField3.setText("");
            threePointersMadeField.setText("");
            threePointersAttemptedField.setText("");
