@@ -103,5 +103,26 @@ public class TableRoster extends TeamPlayer {
             e.printStackTrace();
         }
     }
+
+    public void deleteFromTableRoster(int number) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/MoravianWomenBasketball", 
+        "project", "project");
+            Statement stmt = conn.createStatement();
+        ) {
+            String sql = "DELETE FROM Roster WHERE number = " + number + ";" +
+                "DELETE FROM FreeThrows WHERE number = " + number + ";" +
+                "DELETE FROM ThreePointers WHERE number = " + number + ";";
+            stmt.executeUpdate(sql);
+            System.out.println("Record deleted successfully");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     
 }
