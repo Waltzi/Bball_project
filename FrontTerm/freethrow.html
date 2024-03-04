@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Throw Tracker</title>
+</head>
+<body>
+    <h2>Free Throw Tracker</h2>
+    <input type="text" id="freeThrowInput" placeholder="Enter free throw result">
+    <button onclick="addFreeThrow()">Add</button>
+    <ul id="freeThrowList"></ul>
+
+    <script>
+        document.getElementById("freeThrowInput").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                addFreeThrow();
+            }
+        });
+        function addFreeThrow() {
+            var freeThrowInput = document.getElementById("freeThrowInput");
+            var throwResult = freeThrowInput.value.trim();
+            if (throwResult !== "") {
+                var freeThrowList = document.getElementById("freeThrowList");
+                var listItem = document.createElement("li");
+                listItem.textContent = throwResult;
+                freeThrowList.appendChild(listItem);
+                freeThrowInput.value = "";
+            }
+        }
+    </script>
+</body>
+</html>
