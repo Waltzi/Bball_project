@@ -93,8 +93,36 @@ public class TableRoster extends TeamPlayer {
             Statement stmt = conn.createStatement();
         ) {
             String sql = "INSERT INTO Roster (firstName, lastName, position, number, classYear, height) VALUES ('" + firstName + "', '" + lastName + "', '" + position + "', " + number + ", " + classYear + ", '" + height + "')";
+            String sql2 = "INSERT INTO FreeThrows (number) SELECT number FROM Roster WHERE Roster.number = " + number + ";";
+            String sql3 = "INSERT INTO ThreePointers (number) SELECT number FROM Roster WHERE Roster.number = " + number + ";";
             stmt.executeUpdate(sql);
+            stmt.executeUpdate(sql2);
+            stmt.executeUpdate(sql3);
             System.out.println("Record inserted successfully");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteFromTableRoster(int number) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/MoravianWomenBasketball", 
+        "project", "project");
+            Statement stmt = conn.createStatement();
+        ) {
+            String sql = "DELETE FROM Roster WHERE number = " + number + ";";
+            String sql2 = "DELETE FROM FreeThrows WHERE number = " + number + ";";
+            String sql3 = "DELETE FROM ThreePointers WHERE number = " + number + ";";
+            stmt.executeUpdate(sql3);
+            stmt.executeUpdate(sql2);
+            stmt.executeUpdate(sql);
+            
+            System.out.println("Record deleted successfully");
         } catch (SQLException e) {
             e.printStackTrace();
         }

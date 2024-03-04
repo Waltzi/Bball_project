@@ -86,10 +86,8 @@ public class TableThreePointers extends ThreePointers{
         "project", "project");
             Statement stmt = conn.createStatement();
         ) {
-            String sql = "INSERT INTO ThreePointers (number) SELECT number FROM Roster;";
-            String sql2 = "UPDATE ThreePointers SET threePointersMade = " + threePointersMade + ", threePointersAttempted = " + threePointersAttempted + ", threePointersPercentage = " + threePointersPercentage + " WHERE number = " + number + ";";
+            String sql = "UPDATE ThreePointers SET threePointersMade = " + threePointersMade + ", threePointersAttempted = " + threePointersAttempted + ", threePointersPercentage = " + threePointersPercentage + " WHERE number = " + number + ";";
             stmt.executeUpdate(sql);
-            stmt.executeUpdate(sql2);
             System.out.println("Data transferred successfully");
         } catch (SQLException e) {
             e.printStackTrace();

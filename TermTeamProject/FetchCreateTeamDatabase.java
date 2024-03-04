@@ -35,6 +35,7 @@ public class FetchCreateTeamDatabase {
     final String URL_DB = "jdbc:mysql://localhost:3306/";
     final String USERNAME = "project";
     final String PASSWORD = "project";
+    final String DB_NAME = "jdbc:mysql://localhost:3306/MoravianWomenBasketball";
 
     public FetchCreateTeamDatabase() {
         // Load the JDBC driver during the construction of the TeamDatabase instance
@@ -57,9 +58,9 @@ public class FetchCreateTeamDatabase {
     }
 
     public void fetchRosterData(DefaultTableModel rosterTableModel) {
-        String sql = "SELECT firstName, lastName, position, number, classYear, height FROM Roster";
+        String sql = "SELECT firstName, lastName, classYear, position, number, height FROM Roster;";
 
-        try (Connection connection = DriverManager.getConnection(URL_DB, USERNAME, PASSWORD);
+        try (Connection connection = DriverManager.getConnection(DB_NAME, USERNAME, PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(sql);
              ResultSet resultSet = preparedStatement.executeQuery()) {
 
@@ -67,37 +68,38 @@ public class FetchCreateTeamDatabase {
             while (resultSet.next()) {
                 String firstName = resultSet.getString("firstName");
                 String lastName = resultSet.getString("lastName");
+                int classYear = resultSet.getInt("classYear");
                 String position = resultSet.getString("position");
                 int number = resultSet.getInt("number");
-                int classYear = resultSet.getInt("classYear");
                 String height = resultSet.getString("height");
+            
 
                 // Add a new row to the table model
-                rosterTableModel.addRow(new Object[]{firstName, lastName, position, number, classYear, height});
+                rosterTableModel.addRow(new Object[]{firstName, lastName, classYear, position, number, height});
             }
-        } catch (SQLException e) {
+
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     public void fetchFreeThrowsData(DefaultTableModel freeThrowsTableModel) {
-        String sql = "SELECT firstName, lastName, number, freeThrowsMade, freeThrowsAttempted, freeThrowsPercentage FROM FreeThrows";
+        String sql = "SELECT number, freeThrowsMade, freeThrowsAttempted, freeThrowPercentage FROM FreeThrows;";
 
-        try (Connection connection = DriverManager.getConnection(URL_DB, USERNAME, PASSWORD);
+        try (Connection connection = DriverManager.getConnection(DB_NAME, USERNAME, PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(sql);
              ResultSet resultSet = preparedStatement.executeQuery()) {
 
             // Iterate through the result set and populate the table model
             while (resultSet.next()) {
-                String firstName = resultSet.getString("firstName");
-                String lastName = resultSet.getString("lastName");
                 int number = resultSet.getInt("number");
                 int freeThrowsMade = resultSet.getInt("freeThrowsMade");
                 int freeThrowsAttempted = resultSet.getInt("freeThrowsAttempted");
-                double freeThrowsPercentage = resultSet.getDouble("freeThrowsPercentage");
+                double freeThrowPercentage = resultSet.getDouble("freeThrowPercentage");
 
                 // Add a new row to the table model
-                freeThrowsTableModel.addRow(new Object[]{firstName, lastName, number, freeThrowsMade, freeThrowsAttempted, freeThrowsPercentage});
+                freeThrowsTableModel.addRow(new Object[]{number, freeThrowsMade, freeThrowsAttempted, freeThrowPercentage});
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -105,23 +107,21 @@ public class FetchCreateTeamDatabase {
     }
 
     public void fetchThreePointersData(DefaultTableModel threePointersTableModel) {
-        String sql = "SELECT firstName, lastName, number, threePointersMade, threePointersAttempted, threePointersPercentage FROM ThreePointers";
+        String sql = "SELECT number, threePointersMade, threePointersAttempted, threePointersPercentage FROM ThreePointers";
 
-        try (Connection connection = DriverManager.getConnection(URL_DB, USERNAME, PASSWORD);
+        try (Connection connection = DriverManager.getConnection(DB_NAME, USERNAME, PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(sql);
              ResultSet resultSet = preparedStatement.executeQuery()) {
 
             // Iterate through the result set and populate the table model
             while (resultSet.next()) {
-                String firstName = resultSet.getString("firstName");
-                String lastName = resultSet.getString("lastName");
                 int number = resultSet.getInt("number");
                 int threePointersMade = resultSet.getInt("threePointersMade");
                 int threePointersAttempted = resultSet.getInt("threePointersAttempted");
                 double threePointersPercentage = resultSet.getDouble("threePointersPercentage");
 
                 // Add a new row to the table model
-                threePointersTableModel.addRow(new Object[]{firstName, lastName, number, threePointersMade, threePointersAttempted, threePointersPercentage});
+                threePointersTableModel.addRow(new Object[]{number, threePointersMade, threePointersAttempted, threePointersPercentage});
             }
         } catch (SQLException e) {
             e.printStackTrace();

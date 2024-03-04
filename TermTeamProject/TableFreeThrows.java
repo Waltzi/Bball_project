@@ -77,10 +77,8 @@ public class TableFreeThrows extends FreeThrows{
         "project", "project");
             Statement stmt = conn.createStatement();
         ) {
-            String sql = "INSERT INTO FreeThrows (number) SELECT number FROM Roster;";
-            String sql2 = "UPDATE FreeThrows SET freeThrowsMade = " + freeThrowsMade + ", freeThrowsAttempted = " + freeThrowAttempted + ", freeThrowPercentage = " + freeThrowPercentage + " WHERE number = " + number + ";";
+            String sql = "UPDATE FreeThrows SET freeThrowsMade = " + freeThrowsMade + ", freeThrowsAttempted = " + freeThrowAttempted + ", freeThrowPercentage = " + freeThrowPercentage + " WHERE number = " + number + ";";
             stmt.executeUpdate(sql);
-            stmt.executeUpdate(sql2);
             System.out.println("Data inserted successfully");
         } catch (SQLException e) {
             e.printStackTrace();
