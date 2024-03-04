@@ -91,7 +91,6 @@ public class GUI extends JFrame {
        JPanel threePointerPanel = createThreePointPanel();
        tabbedPane.addTab("Three Pointers", threePointerPanel);
 
-
        // Add components to the main frame
        setLayout(new BorderLayout());
        add(tabbedPane, BorderLayout.CENTER);
@@ -127,9 +126,9 @@ public class GUI extends JFrame {
 
 
        // Fetch and populate data from the database
+       
        teamDatabase.fetchRosterData(tableModel);
-
-
+       
        // Add the table to a scroll pane
        JScrollPane scrollPane = new JScrollPane(rosterTable);
        rosterPanel.add(scrollPane, BorderLayout.CENTER);
