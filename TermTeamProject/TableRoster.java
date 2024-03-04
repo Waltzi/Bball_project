@@ -93,7 +93,11 @@ public class TableRoster extends TeamPlayer {
             Statement stmt = conn.createStatement();
         ) {
             String sql = "INSERT INTO Roster (firstName, lastName, position, number, classYear, height) VALUES ('" + firstName + "', '" + lastName + "', '" + position + "', " + number + ", " + classYear + ", '" + height + "')";
+            String sql2 = "INSERT INTO FreeThrows (number) SELECT number FROM Roster;";
+            String sql3 = "INSERT INTO ThreePointers (number) SELECT number FROM Roster;";
             stmt.executeUpdate(sql);
+            stmt.executeUpdate(sql2);
+            stmt.executeUpdate(sql3);
             System.out.println("Record inserted successfully");
         } catch (SQLException e) {
             e.printStackTrace();
