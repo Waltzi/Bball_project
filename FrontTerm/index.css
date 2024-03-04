@@ -100,6 +100,25 @@ section h1{
     cursor: pointer;
     transition: 0.5s;
 }
+
+#free_throw_button{
+    background-color: black;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-left: 0px;
+}
+
+#free_throw_button:hover{
+    background-color: #0000FF;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-left: 0px;
+    transition: 0.5s;
+}
 /* End of Home Section */
 
 section {
