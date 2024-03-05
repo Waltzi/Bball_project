@@ -1,6 +1,6 @@
 /**
  * TeamPlayer class is used to create TeamPlayer objects.
- * Each TeamPlayer object has a studentID, firstName, lastName, position, number, classYear, height, and weight.
+ * Each TeamPlayer object has a studentID, firstName, lastName, position, number, classYear, and height.
  * The class contains a default constructor, a constructor with parameters, and getter and setter methods for each field.
  * The class also contains a toString method to return the fields of the object as a string.
  */
@@ -14,7 +14,6 @@ public class TeamPlayer {
     private int number;
     private int classYear;
     private String height;
-    private int weight;
 
     /**
      * Default constructor for TeamPlayer class.
@@ -28,7 +27,6 @@ public class TeamPlayer {
         this.number = 0;
         this.classYear = 0;
         this.height = "";
-        this.weight = 0;
     }
 
     /**
@@ -41,10 +39,9 @@ public class TeamPlayer {
      * @param number
      * @param classYear
      * @param height
-     * @param weight
      */
     public TeamPlayer(int studentID, String firstName, String lastName, String position, int number, 
-    int classYear, String height, int weight) {
+    int classYear, String height) {
         this.studentID = studentID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -52,7 +49,6 @@ public class TeamPlayer {
         this.number = number;
         this.classYear = classYear;
         this.height = height;
-        this.weight = weight;
     }
 
     /**
@@ -112,14 +108,6 @@ public class TeamPlayer {
     }
 
     /**
-     * Getter method for weight field.
-     * @return weight
-     */
-    public int getWeight() {
-        return weight;
-    }
-
-    /**
      * Setter method for studentID field.
      * @param studentID
      */
@@ -170,14 +158,6 @@ public class TeamPlayer {
     }
 
     /**
-     * Setter method for weight field.
-     * @param weight
-     */
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
-
-    /**
      * toString method to return the fields of the object as a string.
      * @return studentID, firstName, lastName, position, number, classYear, height, weight
      */
@@ -190,7 +170,6 @@ public class TeamPlayer {
                 ", " + number +
                 ", " + classYear +
                 ", " + height +
-                ", " + weight +
                 "\n";
     }
     
