@@ -3,28 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
     <title>Free Throw Tracker</title>
 </head>
 <body>
     <h2>Free Throw Tracker</h2>
+    <input type="text" id="playerName" placeholder="Enter Player Name:">
     <input type="text" id="freeThrowInput" placeholder="Enter free throw result">
-    <button onclick="addFreeThrow()">Add</button>
-    <ul id="freeThrowList"></ul>
+    <button onclick="addItem()">Add</button>
+    <button id="back_button"> Back</button>
+    
+    <ul id="itemList"></ul>
 
     <script>
-        document.getElementById("freeThrowInput").addEventListener("keypress", function(event) {
+        var button = document.getElementById("back_button");
+        button.addEventListener("click", function() {
+            window.location.href = 'index.html';
+        });
+
+        function addItem(){
+            addPlayerAndFreeThrow();
+        }
+        document.getElementById("playerName").addEventListener("keypress", function(event) {
             if (event.key === "Enter") {
-                addFreeThrow();
+                addItem();
             }
         });
-        function addFreeThrow() {
+        document.getElementById("freeThrowInput").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                addItem();
+            }
+        });
+        function addPlayerAndFreeThrow() {
+            var playerNameInput = document.getElementById("playerName");
             var freeThrowInput = document.getElementById("freeThrowInput");
+
+            var playerName = playerNameInput.value.trim();
             var throwResult = freeThrowInput.value.trim();
-            if (throwResult !== "") {
-                var freeThrowList = document.getElementById("freeThrowList");
+
+            if (playerName !== "" && throwResult !== "") {
+                var itemList = document.getElementById("itemList");
                 var listItem = document.createElement("li");
-                listItem.textContent = throwResult;
-                freeThrowList.appendChild(listItem);
+                listItem.textContent = playerName + ": " + throwResult;
+                itemList.appendChild(listItem);
+                playerNameInput.value = "";
                 freeThrowInput.value = "";
             }
         }

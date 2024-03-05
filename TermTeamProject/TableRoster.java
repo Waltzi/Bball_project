@@ -93,8 +93,8 @@ public class TableRoster extends TeamPlayer {
             Statement stmt = conn.createStatement();
         ) {
             String sql = "INSERT INTO Roster (firstName, lastName, position, number, classYear, height) VALUES ('" + firstName + "', '" + lastName + "', '" + position + "', " + number + ", " + classYear + ", '" + height + "')";
-            String sql2 = "INSERT INTO FreeThrows (number) SELECT number FROM Roster;";
-            String sql3 = "INSERT INTO ThreePointers (number) SELECT number FROM Roster;";
+            String sql2 = "INSERT INTO FreeThrows (number) SELECT number FROM Roster WHERE Roster.number = " + number + ";";
+            String sql3 = "INSERT INTO ThreePointers (number) SELECT number FROM Roster WHERE Roster.number = " + number + ";";
             stmt.executeUpdate(sql);
             stmt.executeUpdate(sql2);
             stmt.executeUpdate(sql3);
@@ -115,10 +115,13 @@ public class TableRoster extends TeamPlayer {
         "project", "project");
             Statement stmt = conn.createStatement();
         ) {
-            String sql = "DELETE FROM Roster WHERE number = " + number + ";" +
-                "DELETE FROM FreeThrows WHERE number = " + number + ";" +
-                "DELETE FROM ThreePointers WHERE number = " + number + ";";
+            String sql = "DELETE FROM Roster WHERE number = " + number + ";";
+            String sql2 = "DELETE FROM FreeThrows WHERE number = " + number + ";";
+            String sql3 = "DELETE FROM ThreePointers WHERE number = " + number + ";";
+            stmt.executeUpdate(sql3);
+            stmt.executeUpdate(sql2);
             stmt.executeUpdate(sql);
+            
             System.out.println("Record deleted successfully");
         } catch (SQLException e) {
             e.printStackTrace();
