@@ -73,8 +73,6 @@ public class GUI extends JFrame {
        tableThreePointers.createTableThreePointers();
 
 
-
-
        // Create a tabbed pane
        tabbedPane = new JTabbedPane();
 
@@ -406,12 +404,4 @@ public class GUI extends JFrame {
        }
    }
 
-
-
-
-
-
-   public static void main(String[] args) {
-       SwingUtilities.invokeLater(() -> new GUI().setVisible(true));
-   }
 }
