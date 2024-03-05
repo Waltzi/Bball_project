@@ -1,9 +1,16 @@
+/**
+ * This class creates the GUI for the Moravian Women's Basketball team.
+ * The GUI will be used to display the roster, free throws, and three pointers.
+ * The GUI will take user input to add and delete players from the roster.
+ * The GUI will be used to add free throws and three pointers to the database.
+ * The GUI will be used to display the informaation in each table in the database.
+ */
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.*;
 
 
 public class GUI extends JFrame {
@@ -12,11 +19,7 @@ public class GUI extends JFrame {
    private DefaultTableModel tableModel2;
    private DefaultTableModel tableModel3;
    private JTextField firstNameField;
-   private JTextField firstNameField2;
-   private JTextField firstNameField3;
    private JTextField lastNameField;
-   private JTextField lastNameField2;
-   private JTextField lastNameField3;
    private JTextField positionField;
    private JTextField numberField;
    private JTextField numberField2;
@@ -33,7 +36,24 @@ public class GUI extends JFrame {
    private TableRoster tableRoster;
    private JTextField deleteField;
 
-
+   /**
+    * Default constructor for the GUI class.
+    * Initializes all fields to default values.
+    * Creates the main frame for the GUI.
+    * Sets the title, size, and location of the main frame.
+    * Creates a TeamDatabase instance.
+    * Loads the database and creates the Roster table.
+    * Creates the Roster table.
+    * Loads the database and creates the roster table.
+    * Creates the FreeThrows table.
+    * Loads the database and creates the free throws table.
+    * Creates the ThreePointers table.
+    * Loads the database and creates the three pointers table.
+    * Creates a tabbed pane.
+    * Creates tabs with panels.
+    * Adds components to the main frame.
+    * Adds a window resize listener.
+    */
    public GUI() {
        // Set up the main frame
        setTitle("Moravian Women's Basketball");
@@ -107,7 +127,17 @@ public class GUI extends JFrame {
        });
    }
 
-
+   /**
+    * This method is used to create the roster panel.
+    * The roster panel will be used to display the roster table.
+    * The roster panel will be used to add new players to the roster table.
+    * The roster panel will be used to delete players from the roster table.
+    * The roster panel will be used to display the first name, last name, position, number, class year, 
+    * and height of each player.
+    * The roster panel will be used to add input fields and a button for adding new data.
+    * The roster panel will be used to add input fields and a button for deleting data.
+    * @return rosterPanel
+    */
    private JPanel createRosterPanel() {
        JPanel rosterPanel = new JPanel(new BorderLayout());
 
@@ -143,7 +173,16 @@ public class GUI extends JFrame {
        return rosterPanel;
    }
 
-
+   /**
+    * This method is used to create the input panel for the roster panel.
+    * The input panel will be used to add input fields and a button for adding new data.
+    * The input panel will be used to add input fields and a button for deleting data.
+    * The input panel will be used to add input fields for the first name, last name, position, number, 
+    * class year, and height of each player.
+    * The input panel will be used to add a button for adding a new player to the roster table.
+    * The input panel will be used to add a button for deleting a player from the roster table.
+    * @return inputPanel
+    */
    private JPanel createInputPanelRoster() {
        JPanel inputPanel = new JPanel();
        firstNameField = new JTextField(8);
@@ -193,7 +232,15 @@ public class GUI extends JFrame {
        return inputPanel;
    }
 
-
+   /**
+    * This method is used to create the free throw panel.
+    * The free throw panel will be used to display the free throw table.
+    * The free throw panel will be used to add new free throws to the free throw table.
+    * The free throw panel will be used to display the number, free throws made, free throws attempted, 
+    * and free throw percentage of each player.
+    * The free throw panel will be used to add input fields and a button for adding new data.
+    * @return freeThrowPanel
+    */
    private JPanel createFreeThrowPanel() {
        JPanel freeThrowPanel = new JPanel(new BorderLayout());
 
@@ -228,7 +275,14 @@ public class GUI extends JFrame {
        return freeThrowPanel;
    }
 
-
+   /**
+    * This method is used to create the input panel for the free throw panel.
+    * The input panel will be used to add input fields and a button for adding new data.
+    * The input panel will be used to add input fields for the number, free throws made, and free throws 
+    * attempted of each player.
+    * The input panel will be used to add a button for adding new free throws to the free throw table.
+    * @return inputPanel
+    */
    private JPanel createInputPanelFreeThrows() {
       
        JPanel inputPanel = new JPanel();
@@ -256,8 +310,16 @@ public class GUI extends JFrame {
 
        return inputPanel;
    }
-
-
+   
+   /**
+    * This method is used to create the three point panel.
+    * The three point panel will be used to display the three point table.
+    * The three point panel will be used to add new three pointers to the three point table.
+    * The three point panel will be used to display the number, three pointers made, three pointers 
+    * attempted, and three point percentage of each player.
+    * The three point panel will be used to add input fields and a button for adding new data.
+    * @return threePointPanel
+    */
    private JPanel createThreePointPanel() {
        JPanel threePointPanel = new JPanel(new BorderLayout());
 
@@ -291,7 +353,14 @@ public class GUI extends JFrame {
        return threePointPanel;
    }
 
-
+    /**
+     * This method is used to create the input panel for the three point panel.
+     * The input panel will be used to add input fields and a button for adding new data.
+     * The input panel will be used to add input fields for the number, three pointers made, and three 
+     * pointers attempted of each player.
+     * The input panel will be used to add a button for adding new three pointers to the three point table.
+     * @return inputPanel
+     */
    private JPanel createInputPanelThreePointers() {
        JPanel inputPanel = new JPanel();
        numberField3 = new JTextField(3);
@@ -320,6 +389,13 @@ public class GUI extends JFrame {
        return inputPanel;
    }
 
+    /**
+     * This method is used to adjust the size of the table based on the window size.
+     * The method will be used to set the preferred size of the table based on the window size.
+     * The method will be used to set the size of the table based on the window size.
+     * The method will be used to revalidate the table.
+     * @param rosterPanel The panel that contains the roster table
+     */
    private void adjustTableSize(JPanel rosterPanel) {
        JTable rosterTable = ((JTable) ((JScrollPane) rosterPanel.getComponent(0)).getViewport().getView());
        int width = rosterPanel.getWidth();
@@ -332,7 +408,19 @@ public class GUI extends JFrame {
        rosterTable.revalidate();
    }
 
-
+   /**
+    * This method is used to add a new player to the roster table and the database.
+    * The method will be used to add a new player to the roster table.
+    * The method will be used to add a new player to the database.
+    * The method will be used to add a new player to the roster table and the database using the following 
+    * information:
+    * - first name
+    * - last name
+    * - position
+    * - number
+    * - class year
+    * - height
+    */
    private void addToTableAndDatabase() {
        try {
            String firstName = firstNameField.getText();
@@ -363,6 +451,14 @@ public class GUI extends JFrame {
        }
    }
 
+    /**
+     * This method is used to delete a player from the roster table and the database.
+     * The method will be used to delete a player from the roster table.
+     * The method will be used to delete a player from the database.
+     * The method will be used to delete a player from the roster table and the database using the following 
+     * information:
+     * - number
+     */
    private void deleteFromTableRosterAndDatabase(){
         try {
             // find the row with the number and delete it
@@ -390,7 +486,16 @@ public class GUI extends JFrame {
         }
    }
 
-
+    /**
+     * This method is used to add new free throws to the free throw table and the database.
+     * The method will be used to add new free throws to the free throw table.
+     * The method will be used to add new free throws to the database.
+     * The method will be used to add new free throws to the free throw table and the database using the 
+     * following information:
+     * - number
+     * - free throws made
+     * - free throws attempted
+     */
    private void addToFreeThrowsTableAndDatabase() {
        try {
             int number = Integer.parseInt(numberField2.getText());
@@ -416,7 +521,16 @@ public class GUI extends JFrame {
         }
     }
 
-
+    /**
+     * This method is used to add new three pointers to the three point table and the database.
+     * The method will be used to add new three pointers to the three point table.
+     * The method will be used to add new three pointers to the database.
+     * The method will be used to add new three pointers to the three point table and the database using the 
+     * following information:
+     * - number
+     * - three pointers made
+     * - three pointers attempted
+     */
    private void addToThreePointersTableAndDatabase() {
        try {
            int number = Integer.parseInt(numberField3.getText());
@@ -440,11 +554,6 @@ public class GUI extends JFrame {
            JOptionPane.showMessageDialog(this, "Invalid input format. Please enter valid values.");
        }
    }
-
-
-
-
-
 
    public static void main(String[] args) {
        SwingUtilities.invokeLater(() -> new GUI().setVisible(true));
