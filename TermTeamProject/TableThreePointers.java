@@ -2,21 +2,13 @@
  * TableThreePointers.java
  * This class is used to create the ThreePointers table in the MoravianWomenBasketball database.
  * The ThreePointers table will have the following columns:
- * - studentID
- * - firstName
- * - lastName
  * - number
  * - threePointersMade
  * - threePointersAttempted
  * - threePointersPercentage
  */
 
-import java.io.IOException;
-import java.io.PrintStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.*;
-import java.util.UUID;
 
 public class TableThreePointers extends ThreePointers{
 
@@ -31,9 +23,6 @@ public class TableThreePointers extends ThreePointers{
     /**
      * This method is used to create the ThreePointers table in the MoravianWomenBasketball database.
      * The ThreePointers table will have the following columns:
-     * - studentID
-     * - firstName
-     * - lastName
      * - number
      * - threePointersMade
      * - threePointersAttempted
@@ -65,17 +54,15 @@ public class TableThreePointers extends ThreePointers{
     }
 
     /**
-     * This method is used to insert a new row into the ThreePointers table in the MoravianWomenBasketball database.
-     * The new row will contain the following values:
-     * - studentID
-     * - firstName
-     * - lastName
-     * - number
-     * - threePointersMade
-     * - threePointersAttempted
-     * @param studentID
-     * @param firstName
-     * @param lastName
+     * This method is used to insert data into the ThreePointers table.
+     * The data will be inserted into the ThreePointers table in the MoravianWomenBasketball database.
+     * The data will be inserted using MySQL.
+     * The data will be inserted using the JDBC driver.
+     * The data will be inserted using the following information:
+     * number
+     * threePointersMade
+     * threePointersAttempted
+     * threePointersPercentage
      * @param number
      * @param threePointersMade
      * @param threePointersAttempted

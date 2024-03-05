@@ -1,22 +1,18 @@
-/*
- * TableRoster.java
+/**
  * This class is used to create the Roster table in the MoravianWomenBasketball database.
- * The Roster table will have the following columns:
- * - studentID
+ * The Roster table will be used to store the roster for the Moravian Women Basketball team.
+ * The Roster table will be used to store the following information:
+ * - ID
  * - firstName
  * - lastName
  * - classYear
- * The class contains a default constructor, a method to create the table, and a method to insert records into the table.
- * The class extends the TeamPlayer class.
+ * - position
+ * - number
+ * - height
  */
 
-import java.io.IOException;
-import java.io.PrintStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.sql.*;
-import java.util.UUID;
 
+import java.sql.*;
 
 public class TableRoster extends TeamPlayer {
 
@@ -30,17 +26,8 @@ public class TableRoster extends TeamPlayer {
 
     /**
      * This method is used to create the Roster table in the MoravianWomenBasketball database.
-     * The Roster table will have the following columns:
-     * - ID
-     * - firstName
-     * - lastName
-     * - classYear
-     * - position
-     * - number
-     * - height
-     * - weight
-     */
-
+     * It creates all necessary fields for the Roster table.
+    */
     public void createTableRoster() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -72,14 +59,20 @@ public class TableRoster extends TeamPlayer {
     }
     
     /**
-     * This method is used to insert records into the Roster table.
-     * The records will be inserted into the table using the following information:
+     * This method is used to insert a new record into every table in the database.
+     * The record will contain the following information in the roster table:
      * - firstName
      * - lastName
-     * - classYear
      * - position
      * - number
+     * - classYear
      * - height
+     * @param firstName The first name of the player
+     * @param lastName The last name of the player
+     * @param position The position of the player
+     * @param number The number of the player
+     * @param classYear The class year of the player
+     * @param height The height of the player
      */
     public void insertIntoRoster(String firstName, String lastName, String position, int number, int classYear, String height) {
         try {
@@ -104,6 +97,11 @@ public class TableRoster extends TeamPlayer {
         }
     }
 
+    /**
+     * This method is used to delete a record from every table in the database.
+     * The record will be deleted based on the number of the player.
+     * @param number
+     */
     public void deleteFromTableRoster(int number) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

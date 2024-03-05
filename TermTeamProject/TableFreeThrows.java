@@ -1,21 +1,11 @@
-/*
- * TableFreeThrows.java
+/**
  * This class is used to create the FreeThrows table in the MoravianWomenBasketball database.
- * The FreeThrows table will have the following columns:
- * - studentID
- * - firstName
- * - lastName
- * - number
- * - freeThrowsMade
- * - freeThrowsAttempted
+ * The FreeThrows table will be used to store the free throws made, free throws attempted, and 
+ * free throw percentage for each player.
  */
 
-import java.io.IOException;
-import java.io.PrintStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+
 import java.sql.*;
-import java.util.UUID;
 
 public class TableFreeThrows extends FreeThrows{
 
@@ -29,13 +19,8 @@ public class TableFreeThrows extends FreeThrows{
 
     /**
      * This method is used to create the FreeThrows table in the MoravianWomenBasketball database.
-     * The FreeThrows table will have the following columns:
-     * - studentID
-     * - firstName
-     * - lastName
-     * - number
-     * - freeThrowsMade
-     * - freeThrowsAttempted
+     * The FreeThrows table will be used to store the free throws made, free throws attempted, and 
+     * free throw percentage for each player.
      */
     public void createTableFreeThrows() {
         try {
@@ -63,10 +48,15 @@ public class TableFreeThrows extends FreeThrows{
     }
 
     /**
-     * This method is used to insert data into the FreeThrows table in the MoravianWomenBasketball database.
-     * The method takes the following parameters:
-     * @param firstName
-     * @param lastName
+     * This method is used to insert data into the FreeThrows table.
+     * The data will be inserted into the FreeThrows table in the MoravianWomenBasketball database.
+     * The data will be inserted using MySQL.
+     * The data will be inserted using the JDBC driver.
+     * The data will be inserted using the following information:
+     * number
+     * freeThrowsMade
+     * freeThrowsAttempted
+     * freeThrowPercentage
      * @param number
      * @param freeThrowsMade
      * @param freeThrowAttempted
