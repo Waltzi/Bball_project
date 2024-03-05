@@ -94,8 +94,6 @@ public class GUI extends JFrame {
        tableThreePointers.createTableThreePointers();
 
 
-
-
        // Create a tabbed pane
        tabbedPane = new JTabbedPane();
 
@@ -554,6 +552,11 @@ public class GUI extends JFrame {
            JOptionPane.showMessageDialog(this, "Invalid input format. Please enter valid values.");
        }
    }
+
+
+
+
+
 
    public static void main(String[] args) {
        SwingUtilities.invokeLater(() -> new GUI().setVisible(true));
