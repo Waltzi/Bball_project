@@ -183,7 +183,7 @@ public class GUI extends JFrame {
        inputPanel.add(new JLabel("Height:"));
        inputPanel.add(heightField);
        inputPanel.add(addButton);
-       inputPanel.add(new JLabel("Delete #:"));
+       inputPanel.add(new JLabel("Delete Player#:"));
        inputPanel.add(deleteField);
        inputPanel.add(deleteButton);
 
@@ -234,6 +234,7 @@ public class GUI extends JFrame {
        freeThrowsMadeField = new JTextField(3);
        freeThrowsAttemptedField = new JTextField(3);
        JButton addButton = new JButton("Add Info To Table");
+
        
        addButton.addActionListener(new ActionListener() {
            @Override
@@ -241,6 +242,7 @@ public class GUI extends JFrame {
                addToFreeThrowsTableAndDatabase();
            }
        });
+
 
 
        inputPanel.add(new JLabel("Number:"));
@@ -304,6 +306,7 @@ public class GUI extends JFrame {
                addToThreePointersTableAndDatabase();
            }
        });
+       
 
 
        inputPanel.add(new JLabel("Number:"));
