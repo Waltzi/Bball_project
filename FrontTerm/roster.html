@@ -17,7 +17,6 @@
                     <th>Name</th>
                     <th>Position</th>
                     <th>Number</th>
-                    <th>Height</th>
                     <th>Year</th>
                     <th>Action</th>
                 </tr>
@@ -33,8 +32,6 @@
             <input type="text" id="position" name="position" required>
             <label for="number">Number:</label>
             <input type="number" id="number" name="number" required>
-            <label for="height">Height:</label>
-            <input type="text" id="height" name="height" required>
             <label for="year">Year:</label>
             <input type="text" id="year" name="year" required>
             <button type="submit">Add Player</button>
@@ -68,13 +65,12 @@
             var name = form.elements['name'].value;
             var position = form.elements['position'].value;
             var number = form.elements['number'].value;
-            var height = form.elements['height'].value;
             var year = form.elements['year'].value;
 
             // Create a new row and append it to the table body
             var tableBody = document.getElementById('roster_body');
             var newRow = document.createElement('tr');
-            newRow.innerHTML = `<td>${name}</td><td>${position}</td><td>${number}</td><td>${height}</td><td>${year}</td><td><button class="delete-button">Delete</button></td>`;
+            newRow.innerHTML = `<td>${name}</td><td>${position}</td><td>${number}</td><td>${year}</td><td><button class="delete-button">Delete</button></td>`;
             tableBody.appendChild(newRow);
 
             // Save the roster to localStorage
