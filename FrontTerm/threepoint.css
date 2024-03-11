@@ -39,7 +39,7 @@ button:hover {
 
 #back_button {
     padding: 10px 20px;
-    background-color: #dc3545; /* Red */
+    background-color: gray; 
     border: none;
     color: white;
     text-align: center;
