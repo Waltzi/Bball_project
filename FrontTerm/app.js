@@ -19,15 +19,15 @@ document.getElementById("contactForm").addEventListener("submit", function(event
 });
 
 // Fetch data from the Java backend
-// fetch('/data')
-//   .then(response => response.json())
-//   .then(data => {
-//     // Process the data received from the Java backend
-//     console.log(data);
-//   })
-//   .catch(error => {
-//     console.error('Error fetching data:', error);
-// });
+fetch('/data')
+  .then(response => response.json())
+  .then(data => {
+    // Process the data received from the Java backend
+    console.log(data);
+  })
+  .catch(error => {
+    console.error('Error fetching data:', error);
+});
 
 //three point percentage calculator
 function calculatePercentage() {
