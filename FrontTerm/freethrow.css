@@ -58,7 +58,7 @@ ul li {
 /* Back button styles */
 #back_button {
     float: right;
-    background-color: #dc3545; /* Red color for back button */
+    background-color: grey; /* color for back button */
     color: #fff;
     border: none;
     border-radius: 5px;
