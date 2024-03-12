@@ -3,43 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Womens Basketball</title>
-    <link rel="stylesheet" href="index.css">   
+    <title>Women's Basketball</title>
+    <link rel="stylesheet" th:href="@{/index.css}">
 </head>
 <body>
     <!-- Navigation Bar -->
     <nav class="NavBar">
-        <h1 class="left-align">Moravian Womens Basketball</h1>
+        <h1 class="left-align">Moravian Women's Basketball</h1>
         <ul class="right-align">
         </ul>
     </nav>
 
     <!-- Home Section -->
     <section id="home">
-        <h1>Moravian Womens Basketball</h1>
-        <button id="roster_button"> Roster</button>
-        <button id = "threepoint_button"> 3-Point Shot Percentage Calculator</button>
-        <button id = "free_throw_button"> Free Throw List</button>
-         <script>
-            var button = document.getElementById("roster_button");
-            button.addEventListener("click", function() {
-                window.location.href = 'roster.html';
-            });
-        </script>
-        <script>
-            var button = document.getElementById("threepoint_button");
-            button.addEventListener("click", function() {
-                window.location.href = 'threepoint.html';
-            });
-        </script>
-        <script>
-            var button = document.getElementById("free_throw_button");
-            button.addEventListener("click", function() {
-                window.location.href = 'freethrow.html';
-            });
-        </script>
+        <h1>Moravian Women's Basketball</h1>
+        <button id="roster_button" onclick="location.href='roster.html'"> Roster</button> <!-- Direct URL -->
+        <button id="threepoint_button" onclick="location.href='threepoint.html'"> 3-Point Shot Percentage Calculator</button> <!-- Direct URL -->
+        <button id="free_throw_button" onclick="location.href='freethrow.html'"> Free Throw List</button> <!-- Direct URL -->
         <div class="img">
-            <img src="/FrontTerm/images/moravianlogo.jpeg"/>
+            <img th:src="@{/images/moravianlogo.jpeg}"/> <!-- Thymeleaf URL resolution -->
         </div>
     </section>
 
