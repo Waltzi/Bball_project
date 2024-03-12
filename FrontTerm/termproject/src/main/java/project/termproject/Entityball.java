@@ -1,115 +1,56 @@
-package project.termproject;
-
-import jakarta.persistence.Entity;
+// SpringBootBasketballApplication.java
+import org.springframework.boot.SpringApplication
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
-@jakarta.persistence.Entity
-public class Entityball {
+@SpringBootApplication
+public class SpringBootBasketballApplication {
 
+    public static void main(String[] args) {
+        SpringApplication.run(SpringBootBasketballApplication.class, args);
+    }
+}
+
+// Player.java
+@Entity
+public class Player {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     private String firstName;
     private String lastName;
-    private String position;
-    private int number;
-    private int classYear;
-    private String height;
-    private int weight;
-
+    // Add other fields as needed
+    
     // Getters and setters
+}
 
-    public Entityball() {
+// PlayerRepository.java
+public interface PlayerRepository extends JpaRepository<Player, Long> {
+    // You can add custom query methods here if needed
+}
+
+// BasketballController.java
+@Controller
+public class BasketballController {
+    
+    @Autowired
+    private PlayerRepository playerRepository;
+    
+    @GetMapping("/")
+    public String index(Model model) {
+        model.addAttribute("players", playerRepository.findAll());
+        return "index";
     }
-
-    public Entityball(String firstName, String lastName, String position, int number, int classYear, String height, int weight) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.position = position;
-        this.number = number;
-        this.classYear = classYear;
-        this.height = height;
-        this.weight = weight;
-    }
-
-    // Getters and setters
-    public Long getId() {
-        return id;
-
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
-    public int getClassYear() {
-        return classYear;
-    }
-
-    public void setClassYear(int classYear) {
-        this.classYear = classYear;
-    }
-
-    public String getHeight() {
-        return height;
-    }
-
-    public void setHeight(String height) {
-        this.height = height;
-    }
-
-    public int getWeight() {
-        return weight;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
-
-    // toString method
-    @Override
-    public String toString() {
-        return "Player{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", position='" + position + '\'' +
-                ", number=" + number +
-                ", classYear=" + classYear +
-                ", height='" + height + '\'' +
-                ", weight=" + weight +
-                '}';
-    }
+    
+    // Add other controller methods as needed
 }
