@@ -8,58 +8,57 @@ body {
 
 /* Navigation bar styles */
 .NavBar {
-    background-color: #333; /* Dark background color */
-    color: #fff; /* Light text color */
-    padding: 10px; /* Add some padding */
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
     display: flex;
-    justify-content: space-between; /* Align items to the left and right */
+    justify-content: space-between;
 }
 
 .NavBar h1 {
-    margin: 0; /* Remove default margin */
+    margin: 0;
 }
 
 .NavBar ul {
-    list-style-type: none; /* Remove default bullet points */
+    list-style-type: none;
     padding: 0;
     margin: 0;
 }
 
 .NavBar ul li {
-    display: inline-block; /* Display list items horizontally */
-    margin-right: 10px; /* Add some spacing between items */
+    display: inline-block;
+    margin-right: 10px;
 }
 
 /* Home section styles */
 #home {
-    text-align: center; /* Center-align the content */
-    padding: 20px; /* Add some padding */
+    text-align: center;
+    padding: 20px;
 }
 
 #home h1 {
-    margin-top: 20px; /* Add space at the top */
+    margin-top: 20px;
 }
 
 #home button {
-    margin-top: 10px; /* Add space between buttons */
-    padding: 10px 20px; /* Add some padding */
-    background-color: #007bff; /* Blue color */
-    color: #fff; /* Light text color */
-    border: none; /* Remove border */
-    border-radius: 5px; /* Add some rounded corners */
-    cursor: pointer; /* Change cursor to pointer on hover */
-    transition: background-color 0.3s; /* Smooth background color transition */
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 #home button:hover {
-    background-color: #0056b3; /* Darker blue color on hover */
+    background-color: #0056b3;
 }
 
 /* Image styles */
 .img {
-    margin-top: 20px; /* Add space between the buttons and the image */
+    margin-top: 20px;
 }
 
 .img img {
-    max-width: 100%; /* Ensure the image does not exceed its container width */
+    max-width: 100%;
 }
