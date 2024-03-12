@@ -9,3 +9,6 @@ The TermTeamProject repo holds everything for the backend properties of the proj
 
 - Sprint 1 Goal:
   Create a simple GUI that takes user input to add and delete players from the roster, freethrow, and threepoint tables in the MoravianWomenBasketball database. Also create web app prerequisites we have within the group for the next sprint. 
+
+- Sprint 2 Goal:
+  Complete our SpringBoot Web App and get it running correctly. Implement an archiving method for the roster and allow practices to be separrated by dates.
