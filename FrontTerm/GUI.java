@@ -7,7 +7,6 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
@@ -336,10 +335,9 @@ public class GUI extends JFrame {
             String position = positionField.getText();
             int number = Integer.parseInt(numberField.getText());
             int classYear = Integer.parseInt(classYearField.getText());
-            String height = heightField.getText();
 
-            rosterTableModel.addRow(new Object[]{firstName, lastName, position, number, classYear, height});
-            tableRoster.insertIntoRoster(firstName, lastName, position, number, classYear, height);
+            rosterTableModel.addRow(new Object[]{firstName, lastName, position, number, classYear});
+            tableRoster.insertIntoRoster(firstName, lastName, position, number, classYear);
 
             clearRosterInputFields();
         } catch (NumberFormatException e) {
