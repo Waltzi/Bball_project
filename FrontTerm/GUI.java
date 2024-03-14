@@ -19,7 +19,7 @@ public class GUI extends JFrame {
 
     // Fields for various input components
     private JTextField firstNameField, lastNameField, positionField, numberField, numberField2, numberField3,
-            classYearField, heightField, freeThrowsMadeField, freeThrowsAttemptedField,
+            classYearField, freeThrowsMadeField, freeThrowsAttemptedField,
             threePointersMadeField, threePointersAttemptedField, deleteField;
 
     // Table models for roster, free throws, and three-pointers
@@ -142,7 +142,7 @@ public class GUI extends JFrame {
         JPanel rosterPanel = new JPanel(new BorderLayout());
         rosterTableModel = new DefaultTableModel();
         JTable rosterTable = new JTable(rosterTableModel);
-        configureTableModel(rosterTableModel, "First Name", "Last Name", "Position", "Number", "Class Year", "Height");
+        configureTableModel(rosterTableModel, "First Name", "Last Name", "Position", "Number", "Class Year");
         teamDatabase.fetchRosterData(rosterTableModel);
 
         JScrollPane scrollPane = new JScrollPane(rosterTable);
@@ -190,7 +190,6 @@ public class GUI extends JFrame {
         positionField = createTextField(new JTextField(7));
         numberField = createTextField(new JTextField(3));
         classYearField = createTextField(new JTextField(5));
-        heightField = createTextField(new JTextField(5));
         deleteField = createTextField(new JTextField(3));
     }
 
@@ -209,8 +208,6 @@ public class GUI extends JFrame {
         inputPanel.add(createTextField(numberField));
         inputPanel.add(createLabel("Class Year:"));
         inputPanel.add(createTextField(classYearField));
-        inputPanel.add(createLabel("Height:"));
-        inputPanel.add(createTextField(heightField));
         createAndAddButton(inputPanel, "Add Player", e -> addToTableAndDatabase());
         inputPanel.add(createLabel("Delete Player#:"));
         inputPanel.add(createTextField(deleteField));
@@ -336,10 +333,9 @@ public class GUI extends JFrame {
             String position = positionField.getText();
             int number = Integer.parseInt(numberField.getText());
             int classYear = Integer.parseInt(classYearField.getText());
-            String height = heightField.getText();
 
-            rosterTableModel.addRow(new Object[]{firstName, lastName, position, number, classYear, height});
-            tableRoster.insertIntoRoster(firstName, lastName, position, number, classYear, height);
+            rosterTableModel.addRow(new Object[]{firstName, lastName, position, number, classYear});
+            tableRoster.insertIntoRoster(firstName, lastName, position, number, classYear);
 
             clearRosterInputFields();
         } catch (NumberFormatException e) {
@@ -356,7 +352,6 @@ public class GUI extends JFrame {
         positionField.setText("");
         numberField.setText("");
         classYearField.setText("");
-        heightField.setText("");
     }
 
     /**
