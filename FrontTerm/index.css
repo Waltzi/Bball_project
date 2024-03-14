@@ -1,6 +1,7 @@
 /* Global styles */
 body {
     font-family: Arial, sans-serif;
+    font-size: xx-large;
     margin: 0;
     padding: 0;
     background-color: #f0f0f0;
@@ -48,6 +49,7 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: xx-large;
 }
 
 #home button:hover {
