@@ -1,5 +1,5 @@
 // SpringBootBasketballApplication.java
-import org.springframework.boot.SpringApplication
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class SpringBootBasketballApplication {
@@ -17,21 +18,6 @@ public class SpringBootBasketballApplication {
     public static void main(String[] args) {
         SpringApplication.run(SpringBootBasketballApplication.class, args);
     }
-}
-
-// Player.java
-@Entity
-public class Player {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
-    private String firstName;
-    private String lastName;
-    // Add other fields as needed
-    
-    // Getters and setters
 }
 
 // PlayerRepository.java

@@ -8,7 +8,6 @@
  * - classYear
  * - position
  * - number
- * - height
  */
 
 
@@ -48,7 +47,6 @@ public class TableRoster extends TeamPlayer {
                 "position VARCHAR(100) NOT NULL," +
                 "number INT NOT NULL, " +
                 "classYear INT NOT NULL, " +
-                "height VARCHAR(100) NOT NULL, " +
                 "INDEX (number)," +
                 "PRIMARY KEY (ID, number))";
             stmt.executeUpdate(sql);
@@ -66,15 +64,14 @@ public class TableRoster extends TeamPlayer {
      * - position
      * - number
      * - classYear
-     * - height
+     * - 
      * @param firstName The first name of the player
      * @param lastName The last name of the player
      * @param position The position of the player
      * @param number The number of the player
      * @param classYear The class year of the player
-     * @param height The height of the player
      */
-    public void insertIntoRoster(String firstName, String lastName, String position, int number, int classYear, String height) {
+    public void insertIntoRoster(String firstName, String lastName, String position, int number, int classYear) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
@@ -85,7 +82,7 @@ public class TableRoster extends TeamPlayer {
         "project", "project");
             Statement stmt = conn.createStatement();
         ) {
-            String sql = "INSERT INTO Roster (firstName, lastName, position, number, classYear, height) VALUES ('" + firstName + "', '" + lastName + "', '" + position + "', " + number + ", " + classYear + ", '" + height + "')";
+            String sql = "INSERT INTO Roster (firstName, lastName, position, number, classYear, ) VALUES ('" + firstName + "', '" + lastName + "', '" + position + "', " + number + ", " + classYear + "')";
             String sql2 = "INSERT INTO FreeThrows (number) SELECT number FROM Roster WHERE Roster.number = " + number + ";";
             String sql3 = "INSERT INTO ThreePointers (number) SELECT number FROM Roster WHERE Roster.number = " + number + ";";
             stmt.executeUpdate(sql);

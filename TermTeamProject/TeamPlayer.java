@@ -1,6 +1,6 @@
 /**
  * TeamPlayer class is used to create TeamPlayer objects.
- * Each TeamPlayer object has a studentID, firstName, lastName, position, number, classYear, and height.
+ * Each TeamPlayer object has a studentID, firstName, lastName, position, number, classYear.
  * The class contains a default constructor, a constructor with parameters, and getter and setter methods for each field.
  * The class also contains a toString method to return the fields of the object as a string.
  */
@@ -13,7 +13,6 @@ public class TeamPlayer {
     private String position;
     private int number;
     private int classYear;
-    private String height;
 
     /**
      * Default constructor for TeamPlayer class.
@@ -26,7 +25,6 @@ public class TeamPlayer {
         this.position = "";
         this.number = 0;
         this.classYear = 0;
-        this.height = "";
     }
 
     /**
@@ -38,17 +36,15 @@ public class TeamPlayer {
      * @param position
      * @param number
      * @param classYear
-     * @param height
      */
     public TeamPlayer(int studentID, String firstName, String lastName, String position, int number, 
-    int classYear, String height) {
+    int classYear) {
         this.studentID = studentID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.position = position;
         this.number = number;
         this.classYear = classYear;
-        this.height = height;
     }
 
     /**
@@ -100,14 +96,6 @@ public class TeamPlayer {
     }
 
     /**
-     * Getter method for height field.
-     * @return height
-     */
-    public String getHeight() {
-        return height;
-    }
-
-    /**
      * Setter method for studentID field.
      * @param studentID
      */
@@ -150,14 +138,6 @@ public class TeamPlayer {
     }
 
     /**
-     * Setter method for height field.
-     * @param height
-     */
-    public void setHeight(String height) {
-        this.height = height;
-    }
-
-    /**
      * toString method to return the fields of the object as a string.
      * @return studentID, firstName, lastName, position, number, classYear, height, weight
      */
@@ -169,7 +149,6 @@ public class TeamPlayer {
                 ", " + position + 
                 ", " + number +
                 ", " + classYear +
-                ", " + height +
                 "\n";
     }
     

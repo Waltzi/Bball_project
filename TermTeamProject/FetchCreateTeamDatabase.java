@@ -82,7 +82,7 @@ public class FetchCreateTeamDatabase {
      * DB_NAME = "jdbc:mysql://localhost:3306/MoravianWomenBasketball"
      */
     public void fetchRosterData(DefaultTableModel rosterTableModel) {
-        String sql = "SELECT firstName, lastName, classYear, position, number, height FROM Roster;";
+        String sql = "SELECT firstName, lastName, classYear, position, number FROM Roster;";
 
         try (Connection connection = DriverManager.getConnection(DB_NAME, USERNAME, PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -95,11 +95,10 @@ public class FetchCreateTeamDatabase {
                 int classYear = resultSet.getInt("classYear");
                 String position = resultSet.getString("position");
                 int number = resultSet.getInt("number");
-                String height = resultSet.getString("height");
             
 
                 // Add a new row to the table model
-                rosterTableModel.addRow(new Object[]{firstName, lastName, classYear, position, number, height});
+                rosterTableModel.addRow(new Object[]{firstName, lastName, classYear, position, number});
             }
 
         }
