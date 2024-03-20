@@ -17,7 +17,8 @@ h2 {
 input[type="text"] {
     width: calc(100% - 20px);
     padding: 10px;
-    margin: 10px;
+    margin: 10px auto;
+    display: block;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box; /* Include padding and border in width calculation */
@@ -26,7 +27,8 @@ input[type="text"] {
 /* Button styles */
 button {
     padding: 10px 20px;
-    margin: 10px;
+    margin: 10px auto;
+    display: block;
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -58,6 +60,8 @@ ul li {
 /* Back button styles */
 #back_button {
     float: right;
+    margin: 10px auto;
+    display: block;
     background-color: grey; /* color for back button */
     color: #fff;
     border: none;
