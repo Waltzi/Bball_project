@@ -1,10 +1,9 @@
 package project.termproject;
 
 import javax.persistence.GeneratedValue;
+import jakarta.persistence.Entity;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import jakarta.persistence.Entity;
 
 @Entity
 public class Player {
@@ -39,10 +38,18 @@ public class Player {
         return id;
     }
 
+    /**
+     * Setter method for id field.
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * Getter method for firstName field.
+     * @return firstName
+     */
     public String getFirstName() {
         return firstName;
     }
@@ -112,20 +119,13 @@ public class Player {
     public void setClassYear(int classYear) {
         this.classYear = classYear;
     }
-=======
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
     }
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
-    
->>>>>>> 81390bbf3212164585a2ada021e195a9a5db0364
     
 }
