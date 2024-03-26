@@ -15,7 +15,8 @@ public class Player {
     private String firstName;
     private String lastName;
     private String position;
-    // Add other fields as needed
+    private int jerseyNumber;
+    
     
     // Getters and setters
     public Long getId() {
@@ -50,6 +51,13 @@ public class Player {
         this.position = position;
     }
 
-    // Add other getters and setters as needed
+    public int getJerseyNumber() {
+        return jerseyNumber;
+    }
+
+    public void setJerseyNumber(int jerseyNumber) {
+        this.jerseyNumber = jerseyNumber;
+    }
+    
     
 }

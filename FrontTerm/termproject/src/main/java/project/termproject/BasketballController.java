@@ -27,10 +27,10 @@ public class BasketballController {
         return "index";
     }
 
-    @GetMapping("/create")
+    @GetMapping("/add player")
     public String create(Model model) {
         model.addAttribute("player", new Player());
-        return "create";
+        return "added player";
     }
 
     @PostMapping("/save")
@@ -39,9 +39,9 @@ public class BasketballController {
         return "redirect:/";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/edit/{number}")
     public String edit(@PathVariable Long id, Model model) {
-        model.addAttribute("player", playerRepository.findById(id).orElse(new Player()));
+        model.addAttribute("player", playerRepository.findByNumber(jerseyNumber).orElse(new Player()));
         return "edit";
     }
 
