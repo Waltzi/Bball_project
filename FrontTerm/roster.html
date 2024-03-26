@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Women's Basketball</title>
+    <title>Women's Basketball Roster</title>
     <link rel="stylesheet" href="roster.css">   
 </head>
 <body>
     <!-- Back Button -->
     <h1>Moravian Women's Basketball Roster</h1>
-    <button id="back_button">Back</button>
+    <button id="back_button" onclick="location.href='index.html'">Back</button>
     <div class="container">
         <table>
             <thead>
@@ -22,7 +22,7 @@
                 </tr>
             </thead>
             <tbody id="roster_body">
-                <!-- Rows will be dynamically added here -->
+                <!-- Roster data will be dynamically added here -->
             </tbody>
         </table>
         <form id="player_form">
@@ -38,90 +38,66 @@
         </form>
         <button id="generate_archive_button">Generate Archive</button>
     </div>
+
     <script>
-        var button = document.getElementById("back_button");
-        button.addEventListener("click", function() {
-            window.location.href = 'index.html';
-        });
-
-        // Function to retrieve roster data from localStorage
-        function loadRoster() {
-            var roster = localStorage.getItem('roster');
-            if (roster) {
-                document.getElementById('roster_body').innerHTML = roster;
-            }
-        }
-
-        // Function to save roster data to localStorage
-        function saveRoster() {
-            var tableBody = document.getElementById('roster_body');
-            localStorage.setItem('roster', tableBody.innerHTML);
-        }
-
-        // Function to handle form submission
+        // Event listener for form submission
         document.getElementById('player_form').addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent the default form submission
-            var form = event.target;
-            var name = form.elements['name'].value;
-            var position = form.elements['position'].value;
-            var number = form.elements['number'].value;
-            var year = form.elements['year'].value;
+            var formData = new FormData(this);
+            var playerData = {
+                name: formData.get('name'),
+                position: formData.get('position'),
+                number: formData.get('number'),
+                year: formData.get('year')
+            };
 
-            // Create a new row and append it to the table body
-            var tableBody = document.getElementById('roster_body');
-            var newRow = document.createElement('tr');
-            newRow.innerHTML = `<td>${name}</td><td>${position}</td><td>${number}</td><td>${year}</td><td><button class="delete-button">Delete</button></td>`;
-            tableBody.appendChild(newRow);
-
-            // Save the roster to localStorage
-            saveRoster();
+            // Submit player data to the backend
+            fetch('/api/players', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(playerData)
+            })
+            .then(response => response.json())
+            .then(newPlayer => {
+                // Add the new player to the roster table
+                var tableBody = document.getElementById('roster_body');
+                var newRow = document.createElement('tr');
+                newRow.innerHTML = `<td>${newPlayer.name}</td><td>${newPlayer.position}</td><td>${newPlayer.number}</td><td>${newPlayer.year}</td>`;
+                tableBody.appendChild(newRow);
+            })
+            .catch(error => console.error('Error:', error));
 
             // Reset the form
-            form.reset();
+            this.reset();
+        });
+
+        // Event listener for generating archive button click
+        document.getElementById('generate_archive_button').addEventListener('click', function() {
+            // Generate archive (optional)
+        });
+
+        // Back button event listener
+        document.getElementById('back_button').addEventListener('click', function() {
+            window.location.href = 'index.html';
         });
 
         // Load roster data when the page loads
         window.addEventListener('DOMContentLoaded', function() {
-            loadRoster();
-        });
-
-        // Event listener for delete button clicks
-        document.getElementById('roster_body').addEventListener('click', function(event) {
-            if (event.target.classList.contains('delete-button')) {
-                var confirmation = confirm("Are you sure you want to delete this entry?");
-                if (confirmation) {
-                    var row = event.target.closest('tr');
-                    row.remove();
-                    saveRoster();
-                }
-            }
-        });
-
-        // Function to generate roster archive
-        function generateArchive() {
-            var table = document.getElementById('roster_body').cloneNode(true);
-            var rows = table.getElementsByTagName('tr');
-            // Remove delete buttons from the archived table
-            for (var i = 0; i < rows.length; i++) {
-                var deleteCell = rows[i].lastElementChild;
-                deleteCell.parentNode.removeChild(deleteCell);
-            }
-            var archiveContent = table.outerHTML;
-            var archiveBlob = new Blob([archiveContent], { type: 'text/html' });
-            var archiveURL = URL.createObjectURL(archiveBlob);
-            var downloadLink = document.createElement('a');
-            downloadLink.href = archiveURL;
-            downloadLink.download = 'roster_archive.html';
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
-            document.body.removeChild(downloadLink);
-        }
-
-        // Event listener for generating archive button click
-        document.getElementById('generate_archive_button').addEventListener('click', function() {
-            generateArchive();
+            fetch('/api/players')
+            .then(response => response.json())
+            .then(players => {
+                // Populate the roster table with players from the backend
+                var tableBody = document.getElementById('roster_body');
+                players.forEach(player => {
+                    var newRow = document.createElement('tr');
+                    newRow.innerHTML = `<td>${player.name}</td><td>${player.position}</td><td>${player.number}</td><td>${player.year}</td>`;
+                    tableBody.appendChild(newRow);
+                });
+            })
+            .catch(error => console.error('Error:', error));
         });
     </script>    
-    
 </body>
 </html>

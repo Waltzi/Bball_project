@@ -31,7 +31,6 @@ public class Player {
     }
     
     // Getters and setters
-
     /**
      * Getter method for id field.
      * @return id
@@ -39,11 +38,11 @@ public class Player {
     public Long getId() {
         return id;
     }
-    
-    /**
-     * Getter method for firstName field.
-     * @return firstName
-     */
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -113,5 +112,20 @@ public class Player {
     public void setClassYear(int classYear) {
         this.classYear = classYear;
     }
+=======
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    
+>>>>>>> 81390bbf3212164585a2ada021e195a9a5db0364
     
 }
