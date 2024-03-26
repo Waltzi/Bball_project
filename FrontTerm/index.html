@@ -23,6 +23,12 @@
         <div class="img">
             <img src="/Bball_project/FrontTerm/images/moravianlogo.jpeg"/> <!-- Thymeleaf URL resolution -->
         </div>
+        
+        <!-- Display players -->
+        <div th:each="player : ${players}">
+            <p th:text="${player.name}"></p>
+            <!-- Add other player details as needed -->
+        </div>
     </section>
 </body>
 </html>
