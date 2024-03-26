@@ -1,7 +1,6 @@
 package project.termproject;
 
 import javax.persistence.GeneratedValue;
-import jakarta.persistence.Entity;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
@@ -14,118 +13,41 @@ public class Player {
     private String firstName;
     private String lastName;
     private String position;
-    private int number;
-    private int classYear;
-
-    // Constructors
-    /**
-     * Default constructor for Player class.
-     */
-    public Player() {
-        this.firstName = "";
-        this.lastName = "";
-        this.position = "";
-        this.number = 0;
-        this.classYear = 0;
-    }
+    // Add other fields as needed
     
     // Getters and setters
-    /**
-     * Getter method for id field.
-     * @return id
-     */
     public Long getId() {
         return id;
     }
 
-    /**
-     * Setter method for id field.
-     * @param id
-     */
     public void setId(Long id) {
         this.id = id;
     }
 
-    /**
-     * Getter method for firstName field.
-     * @return firstName
-     */
     public String getFirstName() {
         return firstName;
-    }
-
-    /**
-     * Getter method for lastName field.
-     * @return lastName
-     */
-    public String getLastName() {
-        return lastName;
-    }
-    
-    /**
-     * Getter method for position field.
-     * @return position
-     */
-    public String getPosition() {
-        return position;
-    }
-
-    /**
-     * Getter method for number field.
-     * @return number
-     */
-    public int getNumber() {
-        return number;
-    }
-
-    /**
-     * Getter method for classYear field.
-     * @return classYear
-     */
-    public int getClassYear() {
-        return classYear;
-    }
-
-    /**
-     * Setter method for firstName and lastName fields.
-     * @param firstName
-     * @param lastName
-     */
-    public void setName(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-
-    /**
-     * Setter method for position field.
-     * @param position
-     */
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
-    /**
-     * Setter method for number field.
-     * @param number
-     */
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
-    /**
-     * Setter method for classYear field.
-     * @param classYear
-     */
-    public void setClassYear(int classYear) {
-        this.classYear = classYear;
     }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    public String getLastName() {
+        return lastName;
+    }
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    // Add other getters and setters as needed
     
 }
