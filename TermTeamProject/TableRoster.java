@@ -82,7 +82,7 @@ public class TableRoster extends TeamPlayer {
         "project", "project");
             Statement stmt = conn.createStatement();
         ) {
-            String sql = "INSERT INTO Roster (firstName, lastName, position, number, classYear, ) VALUES ('" + firstName + "', '" + lastName + "', '" + position + "', " + number + ", " + classYear + "')";
+            String sql = "INSERT INTO Roster (firstName, lastName, position, number, classYear) VALUES ('" + firstName + "', '" + lastName + "', '" + position + "', " + number + ", " + classYear + ");";
             String sql2 = "INSERT INTO FreeThrows (number) SELECT number FROM Roster WHERE Roster.number = " + number + ";";
             String sql3 = "INSERT INTO ThreePointers (number) SELECT number FROM Roster WHERE Roster.number = " + number + ";";
             stmt.executeUpdate(sql);

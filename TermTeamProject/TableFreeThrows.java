@@ -6,6 +6,7 @@
 
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 
 public class TableFreeThrows extends FreeThrows{
 
@@ -39,6 +40,7 @@ public class TableFreeThrows extends FreeThrows{
                 "freeThrowsMade INT," +
                 "freeThrowsAttempted INT," +
                 "freeThrowPercentage DECIMAL(5,2)," +
+                "date DATE," +
                 "FOREIGN KEY (number) REFERENCES Roster(number));";
             stmt.executeUpdate(sql);
             System.out.println("Table FreeThrows created successfully");
@@ -62,12 +64,17 @@ public class TableFreeThrows extends FreeThrows{
      * @param freeThrowAttempted
      * @param freeThrowPercentage
      */
-    public void insertIntoTableFreeThrowsFromTableRosters(int number, int freeThrowsMade, int freeThrowAttempted, double freeThrowPercentage) {
+    public void insertIntoTableFreeThrowsFromTableRosters(int number, int freeThrowsMade, int freeThrowAttempted, double freeThrowPercentage, String date) {
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/MoravianWomenBasketball", 
         "project", "project");
             Statement stmt = conn.createStatement();
         ) {
-            String sql = "UPDATE FreeThrows SET freeThrowsMade = " + freeThrowsMade + ", freeThrowsAttempted = " + freeThrowAttempted + ", freeThrowPercentage = " + freeThrowPercentage + " WHERE number = " + number + ";";
+            SimpleDateFormat oldDateFormat = new SimpleDateFormat("MM-dd-yyyy");
+            String date2 = oldDateFormat.format(date);
+
+            SimpleDateFormat newDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String newDateString = newDateFormat.format(date2);
+            String sql = "UPDATE FreeThrows SET freeThrowsMade = " + freeThrowsMade + ", freeThrowsAttempted = " + freeThrowAttempted + ", freeThrowPercentage = " + freeThrowPercentage + ", date = '" + newDateString + "' WHERE number = " + number + ";";
             stmt.executeUpdate(sql);
             System.out.println("Data inserted successfully");
         } catch (SQLException e) {

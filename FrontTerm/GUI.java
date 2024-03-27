@@ -8,6 +8,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 
 /**
  * The main class representing the Moravian Women's Basketball GUI.
@@ -19,7 +20,7 @@ public class GUI extends JFrame {
     // Fields for various input components
     private JTextField firstNameField, lastNameField, positionField, numberField, numberField2, numberField3,
             classYearField, freeThrowsMadeField, freeThrowsAttemptedField,
-            threePointersMadeField, threePointersAttemptedField, deleteField;
+            threePointersMadeField, threePointersAttemptedField, deleteField, dateField;
 
     // Table models for roster, free throws, and three-pointers
     private DefaultTableModel rosterTableModel, freeThrowsTableModel, threePointersTableModel;
@@ -221,7 +222,7 @@ public class GUI extends JFrame {
         JPanel freeThrowPanel = new JPanel(new BorderLayout());
         freeThrowsTableModel = new DefaultTableModel();
         JTable freeThrowTable = new JTable(freeThrowsTableModel);
-        configureTableModel(freeThrowsTableModel, "Number", "Free Throws Made", "Free Throws Attempted", "Free Throw Percentage");
+        configureTableModel(freeThrowsTableModel, "Number", "Free Throws Made", "Free Throws Attempted", "Free Throw Percentage", "Date");
         teamDatabase.fetchFreeThrowsData(freeThrowsTableModel);
 
         JScrollPane scrollPane = new JScrollPane(freeThrowTable);
@@ -242,6 +243,7 @@ public class GUI extends JFrame {
         numberField2 = createTextField(new JTextField(3));
         freeThrowsMadeField = createTextField(new JTextField(3));
         freeThrowsAttemptedField = createTextField(new JTextField(3));
+        dateField = createTextField(new JTextField(10));
 
         createAndAddButton(inputPanel, "Add Info To Table", e -> addToFreeThrowsTableAndDatabase());
         inputPanel.add(createLabel("Number:"));
@@ -250,6 +252,8 @@ public class GUI extends JFrame {
         inputPanel.add(createTextField(freeThrowsMadeField));
         inputPanel.add(createLabel("Free Throws Attempted:"));
         inputPanel.add(createTextField(freeThrowsAttemptedField));
+        inputPanel.add(createLabel("Date:"));
+        inputPanel.add(createTextField(dateField));
 
         return inputPanel;
     }
@@ -262,7 +266,7 @@ public class GUI extends JFrame {
         JPanel threePointPanel = new JPanel(new BorderLayout());
         threePointersTableModel = new DefaultTableModel();
         JTable threePointTable = new JTable(threePointersTableModel);
-        configureTableModel(threePointersTableModel, "Number", "Three Pointers Made", "Three Pointers Attempted", "Three Point Percentage");
+        configureTableModel(threePointersTableModel, "Number", "Three Pointers Made", "Three Pointers Attempted", "Three Point Percentage", "Date");
         teamDatabase.fetchThreePointersData(threePointersTableModel);
 
         JScrollPane scrollPane = new JScrollPane(threePointTable);
@@ -283,6 +287,7 @@ public class GUI extends JFrame {
         numberField3 = createTextField(new JTextField(3));
         threePointersMadeField = createTextField(new JTextField(3));
         threePointersAttemptedField = createTextField(new JTextField(3));
+        dateField = createTextField(new JTextField(10));
 
         createAndAddButton(inputPanel, "Add Info To Table", e -> addToThreePointersTableAndDatabase());
         inputPanel.add(createLabel("Number:"));
@@ -291,6 +296,8 @@ public class GUI extends JFrame {
         inputPanel.add(createTextField(threePointersMadeField));
         inputPanel.add(createLabel("Three Pointers Attempted:"));
         inputPanel.add(createTextField(threePointersAttemptedField));
+        inputPanel.add(createLabel("Date:"));
+        inputPanel.add(createTextField(dateField));
 
         return inputPanel;
     }
@@ -384,9 +391,10 @@ public class GUI extends JFrame {
             int freeThrowsMade = Integer.parseInt(freeThrowsMadeField.getText());
             int freeThrowsAttempted = Integer.parseInt(freeThrowsAttemptedField.getText());
             double freeThrowPercentage = ((double) freeThrowsMade / (double) freeThrowsAttempted) * 100;
+            String date = dateField.getText();
 
-            freeThrowsTableModel.addRow(new Object[]{number, freeThrowsMade, freeThrowsAttempted, freeThrowPercentage});
-            tableFreeThrows.insertIntoTableFreeThrowsFromTableRosters(number, freeThrowsMade, freeThrowsAttempted, freeThrowPercentage);
+            freeThrowsTableModel.addRow(new Object[]{number, freeThrowsMade, freeThrowsAttempted, freeThrowPercentage, date});
+            tableFreeThrows.insertIntoTableFreeThrowsFromTableRosters(number, freeThrowsMade, freeThrowsAttempted, freeThrowPercentage, date);
 
             clearFreeThrowsInputFields();
         } catch (NumberFormatException e) {
@@ -401,6 +409,7 @@ public class GUI extends JFrame {
         numberField2.setText("");
         freeThrowsMadeField.setText("");
         freeThrowsAttemptedField.setText("");
+        dateField.setText("");
     }
 
     /**
@@ -412,9 +421,10 @@ public class GUI extends JFrame {
             int threePointersMade = Integer.parseInt(threePointersMadeField.getText());
             int threePointersAttempted = Integer.parseInt(threePointersAttemptedField.getText());
             double threePointPercentage = ((double) threePointersMade / (double) threePointersAttempted) * 100;
+            String date = dateField.getText();
 
-            threePointersTableModel.addRow(new Object[]{number, threePointersMade, threePointersAttempted, threePointPercentage});
-            tableThreePointers.insertThreePointers(number, threePointersMade, threePointersAttempted, threePointPercentage);
+            threePointersTableModel.addRow(new Object[]{number, threePointersMade, threePointersAttempted, threePointPercentage, date});
+            tableThreePointers.insertThreePointers(number, threePointersMade, threePointersAttempted, threePointPercentage, date);
 
             clearThreePointersInputFields();
         } catch (NumberFormatException e) {
@@ -429,6 +439,7 @@ public class GUI extends JFrame {
         numberField3.setText("");
         threePointersMadeField.setText("");
         threePointersAttemptedField.setText("");
+        dateField.setText("");
     }
 
     /**

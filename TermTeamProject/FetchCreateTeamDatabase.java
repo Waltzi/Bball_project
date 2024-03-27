@@ -14,10 +14,13 @@
 
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -119,7 +122,7 @@ public class FetchCreateTeamDatabase {
      * DB_NAME = "jdbc:mysql://localhost:3306/MoravianWomenBasketball"
      */
     public void fetchFreeThrowsData(DefaultTableModel freeThrowsTableModel) {
-        String sql = "SELECT number, freeThrowsMade, freeThrowsAttempted, freeThrowPercentage FROM FreeThrows;";
+        String sql = "SELECT number, freeThrowsMade, freeThrowsAttempted, freeThrowPercentage, date FROM FreeThrows;";
 
         try (Connection connection = DriverManager.getConnection(DB_NAME, USERNAME, PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -131,9 +134,15 @@ public class FetchCreateTeamDatabase {
                 int freeThrowsMade = resultSet.getInt("freeThrowsMade");
                 int freeThrowsAttempted = resultSet.getInt("freeThrowsAttempted");
                 double freeThrowPercentage = resultSet.getDouble("freeThrowPercentage");
+                Date date = resultSet.getDate("date");
+                SimpleDateFormat oldDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String date2 = oldDateFormat.format(date);
+
+                SimpleDateFormat newDateFormat = new SimpleDateFormat("MM-dd-yyyy");
+                String newDateString = newDateFormat.format(date2);
 
                 // Add a new row to the table model
-                freeThrowsTableModel.addRow(new Object[]{number, freeThrowsMade, freeThrowsAttempted, freeThrowPercentage});
+                freeThrowsTableModel.addRow(new Object[]{number, freeThrowsMade, freeThrowsAttempted, freeThrowPercentage, newDateString});
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -152,7 +161,7 @@ public class FetchCreateTeamDatabase {
      * DB_NAME = "jdbc:mysql://localhost:3306/MoravianWomenBasketball"
      */
     public void fetchThreePointersData(DefaultTableModel threePointersTableModel) {
-        String sql = "SELECT number, threePointersMade, threePointersAttempted, threePointersPercentage FROM ThreePointers";
+        String sql = "SELECT number, threePointersMade, threePointersAttempted, threePointersPercentage, date FROM ThreePointers";
 
         try (Connection connection = DriverManager.getConnection(DB_NAME, USERNAME, PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -164,9 +173,15 @@ public class FetchCreateTeamDatabase {
                 int threePointersMade = resultSet.getInt("threePointersMade");
                 int threePointersAttempted = resultSet.getInt("threePointersAttempted");
                 double threePointersPercentage = resultSet.getDouble("threePointersPercentage");
+                Date date = resultSet.getDate("date");
+                SimpleDateFormat oldDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String date2 = oldDateFormat.format(date);
+
+                SimpleDateFormat newDateFormat = new SimpleDateFormat("MM-dd-yyyy");
+                String newDateString = newDateFormat.format(date2);
 
                 // Add a new row to the table model
-                threePointersTableModel.addRow(new Object[]{number, threePointersMade, threePointersAttempted, threePointersPercentage});
+                threePointersTableModel.addRow(new Object[]{number, threePointersMade, threePointersAttempted, threePointersPercentage, newDateString});
             }
         } catch (SQLException e) {
             e.printStackTrace();
