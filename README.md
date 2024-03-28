@@ -12,3 +12,4 @@ The TermTeamProject repo holds everything for the backend properties of the proj
 
 - Sprint 2 Goal:
   Complete our SpringBoot Web App and get it running correctly. Implement an archiving method for the roster and allow practices to be separrated by dates.
+

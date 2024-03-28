@@ -248,7 +248,7 @@ public class GUI extends JFrame {
         inputPanel.add(createTextField(freeThrowsMadeField));
         inputPanel.add(createLabel("Free Throws Attempted:"));
         inputPanel.add(createTextField(freeThrowsAttemptedField));
-        inputPanel.add(createLabel("Date:"));
+        inputPanel.add(createLabel("Date(MM-DD-YYYY):"));
         inputPanel.add(createTextField(dateField));
 
         return inputPanel;
@@ -292,7 +292,7 @@ public class GUI extends JFrame {
         inputPanel.add(createTextField(threePointersMadeField));
         inputPanel.add(createLabel("Three Pointers Attempted:"));
         inputPanel.add(createTextField(threePointersAttemptedField));
-        inputPanel.add(createLabel("Date:"));
+        inputPanel.add(createLabel("Date(MM-DD-YYYY):"));
         inputPanel.add(createTextField(dateField2));
 
         return inputPanel;
@@ -428,8 +428,8 @@ public class GUI extends JFrame {
         } catch (ArithmeticException e) {
             showErrorMessage("Cannot divide by zero. Please enter valid values.");
         } catch (ParseException e) {
-        showErrorMessage("Invalid date format. Please enter a valid date.");
-    }
+            showErrorMessage("Invalid date format. Please enter a valid date.");
+        }
     }
 
     /**
