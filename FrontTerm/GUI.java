@@ -125,6 +125,9 @@ public class GUI extends JFrame {
     private void createTabs() {
         JTabbedPane tabbedPane = new JTabbedPane();
 
+        Font font = new Font("Arial", Font.PLAIN, 20);
+        tabbedPane.setFont(font);
+
         JPanel rosterPanel = createRosterPanel();
         tabbedPane.addTab("Roster", rosterPanel);
 
@@ -144,14 +147,21 @@ public class GUI extends JFrame {
      */
     private JPanel createRosterPanel() {
         JPanel rosterPanel = new JPanel(new BorderLayout());
+
+        Font font = new Font("Arial", Font.PLAIN, 15);
+        for (Component component : rosterPanel.getComponents()) {
+        component.setFont(font);
+        }
         rosterTableModel = new DefaultTableModel();
         JTable rosterTable = new JTable(rosterTableModel);
+        
         configureTableModel(rosterTableModel, "First Name", "Last Name", "Position", "Number", "Class Year");
         teamDatabase.fetchRosterData(rosterTableModel);
         teamDatabase.fetchRosterByNotCurDate(rosterTableModel);
 
         JScrollPane scrollPane = new JScrollPane(rosterTable);
         rosterPanel.add(scrollPane, BorderLayout.CENTER);
+        rosterTable.setFont(font);
 
         JPanel inputPanel = createInputPanelRoster();
         rosterPanel.add(inputPanel, BorderLayout.SOUTH);
@@ -228,6 +238,8 @@ public class GUI extends JFrame {
 
         JScrollPane scrollPane = new JScrollPane(freeThrowTable);
         freeThrowPanel.add(scrollPane, BorderLayout.CENTER);
+        Font font = new Font("Arial", Font.PLAIN, 15);
+        freeThrowPanel.setFont(font);
 
         JPanel inputPanel = createInputPanelFreeThrows();
         freeThrowPanel.add(inputPanel, BorderLayout.SOUTH);
@@ -256,6 +268,11 @@ public class GUI extends JFrame {
         inputPanel.add(createLabel("Date(MM-DD-YYYY):"));
         inputPanel.add(createTextField(dateField));
 
+        Font font = new Font("Arial", Font.PLAIN, 20);
+        for (Component component : inputPanel.getComponents()) {
+            component.setFont(font);
+        }
+
         return inputPanel;
     }
 
@@ -273,6 +290,8 @@ public class GUI extends JFrame {
 
         JScrollPane scrollPane = new JScrollPane(threePointTable);
         threePointPanel.add(scrollPane, BorderLayout.CENTER);
+        Font font = new Font("Arial", Font.PLAIN, 15);
+        threePointPanel.setFont(font);
 
         JPanel inputPanel = createInputPanelThreePointers();
         threePointPanel.add(inputPanel, BorderLayout.SOUTH);
