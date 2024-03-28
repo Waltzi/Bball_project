@@ -70,11 +70,12 @@ public class TableFreeThrows extends FreeThrows{
         "project", "project");
             Statement stmt = conn.createStatement();
         ) {
-            String sql = "UPDATE FreeThrows SET freeThrowsMade = " + freeThrowsMade + ", freeThrowsAttempted = " + freeThrowAttempted + ", freeThrowPercentage = " + freeThrowPercentage + ", date = '" + date + "' WHERE number = " + number + ";";
-            stmt.executeUpdate(sql);
+            String sql2 = "INSERT INTO FreeThrows (number, freeThrowsMade, freeThrowsAttempted, freeThrowPercentage, date) VALUES (" + number + ", " + freeThrowsMade + ", " + freeThrowAttempted + ", " + freeThrowPercentage + ", '" + date + "');";
+            stmt.executeUpdate(sql2);
             System.out.println("Data inserted successfully");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 }

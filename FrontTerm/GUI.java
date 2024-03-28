@@ -367,10 +367,11 @@ public class GUI extends JFrame {
             int freeThrowsAttempted = Integer.parseInt(freeThrowsAttemptedField.getText());
             double freeThrowPercentage = ((double) freeThrowsMade / (double) freeThrowsAttempted) * 100;
             if (freeThrowsAttempted == 0) {
+                
                 throw new ArithmeticException();
             }
             String date = dateField.getText();
-
+            
             // Check the date format
             SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
             dateFormat.setLenient(false);
