@@ -9,7 +9,6 @@
  */
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
 
 public class TableThreePointers extends ThreePointers{
 
@@ -28,6 +27,7 @@ public class TableThreePointers extends ThreePointers{
      * - threePointersMade
      * - threePointersAttempted
      * - threePointersPercentage
+     * - date
      */
     public void createTableThreePointers() {
         try {
@@ -46,7 +46,7 @@ public class TableThreePointers extends ThreePointers{
                 "threePointersMade INT," +
                 "threePointersAttempted INT," +
                 "threePointersPercentage DECIMAL(5,2)," +
-                "date DATE," +
+                "date VARCHAR(10)," +
                 "FOREIGN KEY (number) REFERENCES Roster(number));";
             stmt.executeUpdate(sql);
             System.out.println("Table ThreePointers created successfully");
@@ -65,22 +65,19 @@ public class TableThreePointers extends ThreePointers{
      * threePointersMade
      * threePointersAttempted
      * threePointersPercentage
+     * date
      * @param number
      * @param threePointersMade
      * @param threePointersAttempted
      * @param threePointersPercentage
+     * @param date
      */
     public void insertThreePointers(int number, int threePointersMade, int threePointersAttempted, double threePointersPercentage, String date) {
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/MoravianWomenBasketball", 
         "project", "project");
             Statement stmt = conn.createStatement();
         ) {
-            SimpleDateFormat oldDateFormat = new SimpleDateFormat("MM-dd-yyyy");
-            String date2 = oldDateFormat.format(date);
-
-            SimpleDateFormat newDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            String newDateString = newDateFormat.format(date2);
-            String sql = "UPDATE ThreePointers SET threePointersMade = " + threePointersMade + ", threePointersAttempted = " + threePointersAttempted + ", threePointersPercentage = " + threePointersPercentage + ", date = '" + newDateString + "' WHERE number = " + number + ";";
+            String sql = "UPDATE ThreePointers SET threePointersMade = " + threePointersMade + ", threePointersAttempted = " + threePointersAttempted + ", threePointersPercentage = " + threePointersPercentage + ", date = '" + date + "' WHERE number = " + number + ";";
             stmt.executeUpdate(sql);
             System.out.println("Data transferred successfully");
         } catch (SQLException e) {

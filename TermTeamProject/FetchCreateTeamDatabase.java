@@ -134,15 +134,10 @@ public class FetchCreateTeamDatabase {
                 int freeThrowsMade = resultSet.getInt("freeThrowsMade");
                 int freeThrowsAttempted = resultSet.getInt("freeThrowsAttempted");
                 double freeThrowPercentage = resultSet.getDouble("freeThrowPercentage");
-                Date date = resultSet.getDate("date");
-                SimpleDateFormat oldDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                String date2 = oldDateFormat.format(date);
-
-                SimpleDateFormat newDateFormat = new SimpleDateFormat("MM-dd-yyyy");
-                String newDateString = newDateFormat.format(date2);
+                String date = resultSet.getString("date");
 
                 // Add a new row to the table model
-                freeThrowsTableModel.addRow(new Object[]{number, freeThrowsMade, freeThrowsAttempted, freeThrowPercentage, newDateString});
+                freeThrowsTableModel.addRow(new Object[]{number, freeThrowsMade, freeThrowsAttempted, freeThrowPercentage, date});
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -173,15 +168,10 @@ public class FetchCreateTeamDatabase {
                 int threePointersMade = resultSet.getInt("threePointersMade");
                 int threePointersAttempted = resultSet.getInt("threePointersAttempted");
                 double threePointersPercentage = resultSet.getDouble("threePointersPercentage");
-                Date date = resultSet.getDate("date");
-                SimpleDateFormat oldDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                String date2 = oldDateFormat.format(date);
-
-                SimpleDateFormat newDateFormat = new SimpleDateFormat("MM-dd-yyyy");
-                String newDateString = newDateFormat.format(date2);
+                String date = resultSet.getString("date");
 
                 // Add a new row to the table model
-                threePointersTableModel.addRow(new Object[]{number, threePointersMade, threePointersAttempted, threePointersPercentage, newDateString});
+                threePointersTableModel.addRow(new Object[]{number, threePointersMade, threePointersAttempted, threePointersPercentage, date});
             }
         } catch (SQLException e) {
             e.printStackTrace();

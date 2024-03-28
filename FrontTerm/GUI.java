@@ -8,7 +8,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 /**
  * The main class representing the Moravian Women's Basketball GUI.
@@ -20,7 +21,7 @@ public class GUI extends JFrame {
     // Fields for various input components
     private JTextField firstNameField, lastNameField, positionField, numberField, numberField2, numberField3,
             classYearField, freeThrowsMadeField, freeThrowsAttemptedField,
-            threePointersMadeField, threePointersAttemptedField, deleteField, dateField;
+            threePointersMadeField, threePointersAttemptedField, dateField, dateField2;
 
     // Table models for roster, free throws, and three-pointers
     private DefaultTableModel rosterTableModel, freeThrowsTableModel, threePointersTableModel;
@@ -174,7 +175,6 @@ public class GUI extends JFrame {
         createTextFieldsForRosterInput();
 
         JButton addButton = createButton("Add Player", e -> addToTableAndDatabase());
-        JButton deleteButton = createButton("Delete Player", e -> deleteFromTableRosterAndDatabase());
 
         addComponentsToRosterInputPanel(inputPanel);
 
@@ -190,7 +190,6 @@ public class GUI extends JFrame {
         positionField = createTextField(new JTextField(7));
         numberField = createTextField(new JTextField(3));
         classYearField = createTextField(new JTextField(5));
-        deleteField = createTextField(new JTextField(3));
     }
 
     /**
@@ -209,9 +208,6 @@ public class GUI extends JFrame {
         inputPanel.add(createLabel("Class Year:"));
         inputPanel.add(createTextField(classYearField));
         createAndAddButton(inputPanel, "Add Player", e -> addToTableAndDatabase());
-        inputPanel.add(createLabel("Delete Player#:"));
-        inputPanel.add(createTextField(deleteField));
-        createAndAddButton(inputPanel, "Delete Player", e -> deleteFromTableRosterAndDatabase());
     }
 
     /**
@@ -287,7 +283,7 @@ public class GUI extends JFrame {
         numberField3 = createTextField(new JTextField(3));
         threePointersMadeField = createTextField(new JTextField(3));
         threePointersAttemptedField = createTextField(new JTextField(3));
-        dateField = createTextField(new JTextField(10));
+        dateField2 = createTextField(new JTextField(10));
 
         createAndAddButton(inputPanel, "Add Info To Table", e -> addToThreePointersTableAndDatabase());
         inputPanel.add(createLabel("Number:"));
@@ -297,7 +293,7 @@ public class GUI extends JFrame {
         inputPanel.add(createLabel("Three Pointers Attempted:"));
         inputPanel.add(createTextField(threePointersAttemptedField));
         inputPanel.add(createLabel("Date:"));
-        inputPanel.add(createTextField(dateField));
+        inputPanel.add(createTextField(dateField2));
 
         return inputPanel;
     }
@@ -360,27 +356,6 @@ public class GUI extends JFrame {
         classYearField.setText("");
     }
 
-    /**
-     * Deletes a player from the roster table and the database.
-     */
-    private void deleteFromTableRosterAndDatabase() {
-        try {
-            int number = Integer.parseInt(deleteField.getText());
-            tableRoster.deleteFromTableRoster(number);
-
-            for (DefaultTableModel model : new DefaultTableModel[]{rosterTableModel, freeThrowsTableModel, threePointersTableModel}) {
-                for (int i = 0; i < model.getRowCount(); i++) {
-                    if (model.getValueAt(i, 3).equals(number)) {
-                        model.removeRow(i);
-                    }
-                }
-            }
-
-            deleteField.setText("");
-        } catch (NumberFormatException e) {
-            showErrorMessage("Invalid input format. Please enter valid values.");
-        }
-    }
 
     /**
      * Adds free throws data to the table and the database.
@@ -391,7 +366,15 @@ public class GUI extends JFrame {
             int freeThrowsMade = Integer.parseInt(freeThrowsMadeField.getText());
             int freeThrowsAttempted = Integer.parseInt(freeThrowsAttemptedField.getText());
             double freeThrowPercentage = ((double) freeThrowsMade / (double) freeThrowsAttempted) * 100;
+            if (freeThrowsAttempted == 0) {
+                throw new ArithmeticException();
+            }
             String date = dateField.getText();
+
+            // Check the date format
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
+            dateFormat.setLenient(false);
+            dateFormat.parse(date);
 
             freeThrowsTableModel.addRow(new Object[]{number, freeThrowsMade, freeThrowsAttempted, freeThrowPercentage, date});
             tableFreeThrows.insertIntoTableFreeThrowsFromTableRosters(number, freeThrowsMade, freeThrowsAttempted, freeThrowPercentage, date);
@@ -399,6 +382,10 @@ public class GUI extends JFrame {
             clearFreeThrowsInputFields();
         } catch (NumberFormatException e) {
             showErrorMessage("Invalid input format. Please enter valid values.");
+        } catch (ArithmeticException e) {
+            showErrorMessage("Cannot divide by zero. Please enter valid values.");
+        } catch (ParseException e) {
+            showErrorMessage("Invalid date format. Please enter a valid date.");
         }
     }
 
@@ -421,15 +408,27 @@ public class GUI extends JFrame {
             int threePointersMade = Integer.parseInt(threePointersMadeField.getText());
             int threePointersAttempted = Integer.parseInt(threePointersAttemptedField.getText());
             double threePointPercentage = ((double) threePointersMade / (double) threePointersAttempted) * 100;
-            String date = dateField.getText();
+            if (threePointersAttempted == 0) {
+                throw new ArithmeticException();
+            }
+            String date2 = dateField2.getText();
 
-            threePointersTableModel.addRow(new Object[]{number, threePointersMade, threePointersAttempted, threePointPercentage, date});
-            tableThreePointers.insertThreePointers(number, threePointersMade, threePointersAttempted, threePointPercentage, date);
+            // Check the date format
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
+            dateFormat.setLenient(false);
+            dateFormat.parse(date2);
+
+            threePointersTableModel.addRow(new Object[]{number, threePointersMade, threePointersAttempted, threePointPercentage, date2});
+            tableThreePointers.insertThreePointers(number, threePointersMade, threePointersAttempted, threePointPercentage, date2);
 
             clearThreePointersInputFields();
         } catch (NumberFormatException e) {
             showErrorMessage("Invalid input format. Please enter valid values.");
-        }
+        } catch (ArithmeticException e) {
+            showErrorMessage("Cannot divide by zero. Please enter valid values.");
+        } catch (ParseException e) {
+        showErrorMessage("Invalid date format. Please enter a valid date.");
+    }
     }
 
     /**
@@ -439,7 +438,7 @@ public class GUI extends JFrame {
         numberField3.setText("");
         threePointersMadeField.setText("");
         threePointersAttemptedField.setText("");
-        dateField.setText("");
+        dateField2.setText("");
     }
 
     /**
