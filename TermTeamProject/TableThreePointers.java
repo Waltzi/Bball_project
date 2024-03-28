@@ -42,12 +42,11 @@ public class TableThreePointers extends ThreePointers{
             Statement stmt = conn.createStatement();
         ) {
             String sql = "CREATE TABLE ThreePointers (" +
-                "number INT PRIMARY KEY," +
+                "number INT," +
                 "threePointersMade INT," +
                 "threePointersAttempted INT," +
                 "threePointersPercentage DECIMAL(5,2)," +
-                "date VARCHAR(10)," +
-                "FOREIGN KEY (number) REFERENCES Roster(number));";
+                "date VARCHAR(10));";
             stmt.executeUpdate(sql);
             System.out.println("Table ThreePointers created successfully");
         } catch (SQLException e) {
@@ -77,7 +76,7 @@ public class TableThreePointers extends ThreePointers{
         "project", "project");
             Statement stmt = conn.createStatement();
         ) {
-            String sql = "UPDATE ThreePointers SET threePointersMade = " + threePointersMade + ", threePointersAttempted = " + threePointersAttempted + ", threePointersPercentage = " + threePointersPercentage + ", date = '" + date + "' WHERE number = " + number + ";";
+            String sql = "INSERT INTO ThreePointers (number, threePointersMade, threePointersAttempted, threePointersPercentage, date) VALUES (" + number + ", " + threePointersMade + ", " + threePointersAttempted + ", " + threePointersPercentage + ", '" + date + "');";
             stmt.executeUpdate(sql);
             System.out.println("Data transferred successfully");
         } catch (SQLException e) {
