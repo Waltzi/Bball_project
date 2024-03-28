@@ -35,12 +35,11 @@ public class TableFreeThrows extends FreeThrows{
             Statement stmt = conn.createStatement();
         ) {
             String sql = "CREATE TABLE FreeThrows (" +
-                "number INT PRIMARY KEY," +
+                "number INT," +
                 "freeThrowsMade INT," +
                 "freeThrowsAttempted INT," +
                 "freeThrowPercentage DECIMAL(5,2)," +
-                "date VARCHAR(10)," +
-                "FOREIGN KEY (number) REFERENCES Roster(number));";
+                "date VARCHAR(10));";
             stmt.executeUpdate(sql);
             System.out.println("Table FreeThrows created successfully");
         } catch (SQLException e) {
@@ -70,7 +69,7 @@ public class TableFreeThrows extends FreeThrows{
         "project", "project");
             Statement stmt = conn.createStatement();
         ) {
-            String sql = "UPDATE FreeThrows SET freeThrowsMade = " + freeThrowsMade + ", freeThrowsAttempted = " + freeThrowAttempted + ", freeThrowPercentage = " + freeThrowPercentage + ", date = '" + date + "' WHERE number = " + number + ";";
+            String sql = "INSERT INTO FreeThrows (number, freeThrowsMade, freeThrowsAttempted, freeThrowPercentage, date) VALUES (" + number + ", " + freeThrowsMade + ", " + freeThrowAttempted + ", " + freeThrowPercentage + ", '" + date + "');";
             stmt.executeUpdate(sql);
             System.out.println("Data inserted successfully");
         } catch (SQLException e) {
