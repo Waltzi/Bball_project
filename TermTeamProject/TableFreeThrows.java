@@ -35,14 +35,47 @@ public class TableFreeThrows extends FreeThrows{
             Statement stmt = conn.createStatement();
         ) {
             String sql = "CREATE TABLE FreeThrows (" +
+                "number INT," +
+                "freeThrowsMade INT," +
+                "freeThrowsAttempted INT," +
+                "freeThrowPercentage DECIMAL(5,2)," +
+                "date VARCHAR(10)," +
+                "curDate Date NOT NULL);";
+            stmt.executeUpdate(sql);
+            System.out.println("Table FreeThrows created successfully");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
+     * This method is used to create the ArchivedFreeThrows table in the MoravianWomenBasketball database.
+     * The ArchivedFreeThrows table will be used to store the free throws made, free throws attempted, and 
+     * free throw percentage for each player.
+     */
+    public void createTableArchivedFreeThrows() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("Driver not found!!");
+        }
+
+        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/MoravianWomenBasketball", 
+        "project", "project");
+            Statement stmt = conn.createStatement();
+        ) {
+            String sql = "CREATE TABLE ArchivedFreeThrows (" +
                 "number INT PRIMARY KEY," +
                 "freeThrowsMade INT," +
                 "freeThrowsAttempted INT," +
                 "freeThrowPercentage DECIMAL(5,2)," +
                 "date VARCHAR(10)," +
-                "FOREIGN KEY (number) REFERENCES Roster(number));";
+                "curDate Date NOT NULL);";
+                
             stmt.executeUpdate(sql);
-            System.out.println("Table FreeThrows created successfully");
+            System.out.println("Table ArchivedFreeThrows created successfully");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -70,7 +103,7 @@ public class TableFreeThrows extends FreeThrows{
         "project", "project");
             Statement stmt = conn.createStatement();
         ) {
-            String sql2 = "INSERT INTO FreeThrows (number, freeThrowsMade, freeThrowsAttempted, freeThrowPercentage, date) VALUES (" + number + ", " + freeThrowsMade + ", " + freeThrowAttempted + ", " + freeThrowPercentage + ", '" + date + "');";
+            String sql2 = "INSERT INTO FreeThrows (number, freeThrowsMade, freeThrowsAttempted, freeThrowPercentage, date, curDate) VALUES (" + number + ", " + freeThrowsMade + ", " + freeThrowAttempted + ", " + freeThrowPercentage + ", '" + date + "', CURDATE());";
             stmt.executeUpdate(sql2);
             System.out.println("Data inserted successfully");
         } catch (SQLException e) {

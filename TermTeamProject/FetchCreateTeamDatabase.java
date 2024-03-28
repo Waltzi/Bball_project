@@ -22,6 +22,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 
 import javax.swing.table.DefaultTableModel;
+import java.sql.*;
 
 /**
 * This class is used to create the database for the team project.
@@ -85,7 +86,7 @@ public class FetchCreateTeamDatabase {
      * DB_NAME = "jdbc:mysql://localhost:3306/MoravianWomenBasketball"
      */
     public void fetchRosterData(DefaultTableModel rosterTableModel) {
-        String sql = "SELECT firstName, lastName, classYear, position, number FROM Roster;";
+        String sql = "SELECT firstName, lastName, position, number, classYear FROM Roster WHERE YEAR(curDate) = YEAR(CURDATE());";
 
         try (Connection connection = DriverManager.getConnection(DB_NAME, USERNAME, PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -101,7 +102,7 @@ public class FetchCreateTeamDatabase {
             
 
                 // Add a new row to the table model
-                rosterTableModel.addRow(new Object[]{firstName, lastName, classYear, position, number});
+                rosterTableModel.addRow(new Object[]{firstName, lastName, position, number, classYear});
             }
 
         }
@@ -122,7 +123,7 @@ public class FetchCreateTeamDatabase {
      * DB_NAME = "jdbc:mysql://localhost:3306/MoravianWomenBasketball"
      */
     public void fetchFreeThrowsData(DefaultTableModel freeThrowsTableModel) {
-        String sql = "SELECT number, freeThrowsMade, freeThrowsAttempted, freeThrowPercentage, date FROM FreeThrows;";
+        String sql = "SELECT number, freeThrowsMade, freeThrowsAttempted, freeThrowPercentage, date FROM FreeThrows WHERE (YEAR(curDate) = YEAR(CURDATE()) AND MONTH(curDate) BETWEEN MONTH(CURDATE()) - 4 AND MONTH(CURDATE())) OR (YEAR(curDate) = YEAR(CURDATE()) - 1 AND MONTH(curDate) BETWEEN 12 - (4 - MONTH(CURDATE())) AND 12);";
 
         try (Connection connection = DriverManager.getConnection(DB_NAME, USERNAME, PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -156,7 +157,7 @@ public class FetchCreateTeamDatabase {
      * DB_NAME = "jdbc:mysql://localhost:3306/MoravianWomenBasketball"
      */
     public void fetchThreePointersData(DefaultTableModel threePointersTableModel) {
-        String sql = "SELECT number, threePointersMade, threePointersAttempted, threePointersPercentage, date FROM ThreePointers";
+        String sql = "SELECT number, threePointersMade, threePointersAttempted, threePointersPercentage, date FROM ThreePointers WHERE (YEAR(curDate) = YEAR(CURDATE()) AND MONTH(curDate) BETWEEN MONTH(CURDATE()) - 4 AND MONTH(CURDATE())) OR (YEAR(curDate) = YEAR(CURDATE()) - 1 AND MONTH(curDate) BETWEEN 12 - (4 - MONTH(CURDATE())) AND 12);";
 
         try (Connection connection = DriverManager.getConnection(DB_NAME, USERNAME, PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -173,6 +174,110 @@ public class FetchCreateTeamDatabase {
                 // Add a new row to the table model
                 threePointersTableModel.addRow(new Object[]{number, threePointersMade, threePointersAttempted, threePointersPercentage, date});
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * This method is used to create the ArchivedPlayers table in the database.
+     * The ArchivedPlayers table will be created in the local machine.
+     * The ArchivedPlayers table will be created using MySQL.
+     * The ArchivedPlayers table will be created using the JDBC driver.
+     * The ArchivedPlayers table will be created using the following information:
+     * URL_DB = "jdbc:mysql://localhost:330
+     * USERNAME = "project"
+     * PASSWORD = "project"
+     * DB_NAME = "jdbc:mysql://localhost:3306/MoravianWomenBasketball"
+     */
+    public void fetchRosterByNotCurDate(DefaultTableModel rosterTableModel) {
+        
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/MoravianWomenBasketball", 
+        "project", "project");
+            Statement stmt = conn.createStatement();
+        ) {
+            String sql = "INSERT INTO ArchivedPlayers (firstName, lastName, position, number, classYear, curDate) SELECT firstName, lastName, position, number, classYear, curDate FROM Roster WHERE YEAR(curDate) <> YEAR(CURDATE());";
+            //String sql2 = "INSERT INTO FreeThrows (number) SELECT number FROM Roster WHERE Roster.number = " + number + ";";
+            //String sql3 = "INSERT INTO ThreePointers (number) SELECT number FROM Roster WHERE Roster.number = " + number + ";";
+            stmt.executeUpdate(sql);
+            //stmt.executeUpdate(sql2);
+            //stmt.executeUpdate(sql3);
+            System.out.println("Record inserted successfully");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
+     * This method is used to create the ArchivedFreeThrows table in the database.
+     * The ArchivedFreeThrows table will be created in the local machine.
+     * The ArchivedFreeThrows table will be created using MySQL.
+     * The ArchivedFreeThrows table will be created using the JDBC driver.
+     * The ArchivedFreeThrows table will be created using the following information:
+     * URL_DB = "jdbc:mysql://localhost:330
+     * USERNAME = "project"
+     * PASSWORD = "project"
+     * DB_NAME = "jdbc:mysql://localhost:3306/MoravianWomenBasketball"
+     */
+    public void fetchByCurDateFreeThrows(DefaultTableModel freeThrowsTableModel) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/MoravianWomenBasketball", 
+        "project", "project");
+            Statement stmt = conn.createStatement();
+        ) {
+            String sql = "INSERT INTO ArchivedFreeThrows (number, freeThrowsMade, freeThrowsAttempted, freeThrowPercentage, date, curDate) SELECT  number, freeThrowsMade, freeThrowsAttempted, freeThrowPercentage, date, curDate FROM FreeThrows WHERE (YEAR(curDate) <> YEAR(CURDATE()) AND MONTH(curDate) BETWEEN MONTH(CURDATE()) - 4 AND MONTH(CURDATE())) OR (YEAR(curDate) <> YEAR(CURDATE()) - 1 AND MONTH(curDate) BETWEEN 12 - (4 - MONTH(CURDATE())) AND 12);";
+            //String sql2 = "INSERT INTO FreeThrows (number) SELECT number FROM Roster WHERE Roster.number = " + number + ";";
+            //String sql3 = "INSERT INTO ThreePointers (number) SELECT number FROM Roster WHERE Roster.number = " + number + ";";
+            stmt.executeUpdate(sql);
+            //stmt.executeUpdate(sql2);
+            //stmt.executeUpdate(sql3);
+            System.out.println("Record inserted successfully");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * This method is used to create the ArchivedThreePointers table in the database.
+     * The ArchivedThreePointers table will be created in the local machine.
+     * The ArchivedThreePointers table will be created using MySQL.
+     * The ArchivedThreePointers table will be created using the JDBC driver.
+     * The ArchivedThreePointers table will be created using the following information:
+     * URL_DB = "jdbc:mysql://localhost:330
+     * USERNAME = "project"
+     * PASSWORD = "project"
+     * DB_NAME = "jdbc:mysql://localhost:3306/MoravianWomenBasketball"
+     */
+    public void fetchByCurDateThreePointers(DefaultTableModel threePointersTableModel) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/MoravianWomenBasketball", 
+        "project", "project");
+            Statement stmt = conn.createStatement();
+        ) {
+            String sql = "INSERT INTO ArchivedThreePointers (number, threePointersMade, threePointersAttempted, threePointersPercentage, date, curDate) SELECT  number, threePointersMade, threePointersAttempted, threePointersPercentage, date, curDate FROM ThreePointers WHERE (YEAR(curDate) <> YEAR(CURDATE()) AND MONTH(curDate) BETWEEN MONTH(CURDATE()) - 4 AND MONTH(CURDATE())) OR (YEAR(curDate) <> YEAR(CURDATE()) - 1 AND MONTH(curDate) BETWEEN 12 - (4 - MONTH(CURDATE())) AND 12);";
+            //String sql2 = "INSERT INTO FreeThrows (number) SELECT number FROM Roster WHERE Roster.number = " + number + ";";
+            //String sql3 = "INSERT INTO ThreePointers (number) SELECT number FROM Roster WHERE Roster.number = " + number + ";";
+            stmt.executeUpdate(sql);
+            //stmt.executeUpdate(sql2);
+            //stmt.executeUpdate(sql3);
+            System.out.println("Record inserted successfully");
         } catch (SQLException e) {
             e.printStackTrace();
         }

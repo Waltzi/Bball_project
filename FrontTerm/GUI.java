@@ -108,12 +108,15 @@ public class GUI extends JFrame {
 
         tableRoster = new TableRoster();
         tableRoster.createTableRoster();
+        tableRoster.createTableArchivedPlayers();
 
         tableFreeThrows = new TableFreeThrows();
         tableFreeThrows.createTableFreeThrows();
+        tableFreeThrows.createTableArchivedFreeThrows();
 
         tableThreePointers = new TableThreePointers();
         tableThreePointers.createTableThreePointers();
+        tableThreePointers.createTableArchivedThreePointers();
     }
 
     /**
@@ -145,6 +148,7 @@ public class GUI extends JFrame {
         JTable rosterTable = new JTable(rosterTableModel);
         configureTableModel(rosterTableModel, "First Name", "Last Name", "Position", "Number", "Class Year");
         teamDatabase.fetchRosterData(rosterTableModel);
+        teamDatabase.fetchRosterByNotCurDate(rosterTableModel);
 
         JScrollPane scrollPane = new JScrollPane(rosterTable);
         rosterPanel.add(scrollPane, BorderLayout.CENTER);
@@ -220,6 +224,7 @@ public class GUI extends JFrame {
         JTable freeThrowTable = new JTable(freeThrowsTableModel);
         configureTableModel(freeThrowsTableModel, "Number", "Free Throws Made", "Free Throws Attempted", "Free Throw Percentage", "Date");
         teamDatabase.fetchFreeThrowsData(freeThrowsTableModel);
+        teamDatabase.fetchByCurDateFreeThrows(freeThrowsTableModel);
 
         JScrollPane scrollPane = new JScrollPane(freeThrowTable);
         freeThrowPanel.add(scrollPane, BorderLayout.CENTER);
@@ -264,6 +269,7 @@ public class GUI extends JFrame {
         JTable threePointTable = new JTable(threePointersTableModel);
         configureTableModel(threePointersTableModel, "Number", "Three Pointers Made", "Three Pointers Attempted", "Three Point Percentage", "Date");
         teamDatabase.fetchThreePointersData(threePointersTableModel);
+        teamDatabase.fetchByCurDateThreePointers(threePointersTableModel);
 
         JScrollPane scrollPane = new JScrollPane(threePointTable);
         threePointPanel.add(scrollPane, BorderLayout.CENTER);

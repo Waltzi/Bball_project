@@ -46,9 +46,45 @@ public class TableThreePointers extends ThreePointers{
                 "threePointersMade INT," +
                 "threePointersAttempted INT," +
                 "threePointersPercentage DECIMAL(5,2)," +
-                "date VARCHAR(10));";
+                "date VARCHAR(10)," +
+                "curDate Date NOT NULL);";
             stmt.executeUpdate(sql);
             System.out.println("Table ThreePointers created successfully");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * This method is used to create the ArchivedThreePointers table in the MoravianWomenBasketball database.
+     * The ArchivedThreePointers table will have the following columns:
+     * - number
+     * - threePointersMade
+     * - threePointersAttempted
+     * - threePointersPercentage
+     * - date
+     */
+    public void createTableArchivedThreePointers() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("Driver not found!!");
+        }
+
+        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/MoravianWomenBasketball", 
+        "project", "project");
+            Statement stmt = conn.createStatement();
+        ) {
+            String sql = "CREATE TABLE ArchivedThreePointers (" +
+                "number INT," +
+                "threePointersMade INT," +
+                "threePointersAttempted INT," +
+                "threePointersPercentage DECIMAL(5,2)," +
+                "date VARCHAR(10)," +
+                "curDate Date NOT NULL);";
+            stmt.executeUpdate(sql);
+            System.out.println("Table ArchivedThreePointers created successfully");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -76,7 +112,7 @@ public class TableThreePointers extends ThreePointers{
         "project", "project");
             Statement stmt = conn.createStatement();
         ) {
-            String sql = "INSERT INTO ThreePointers (number, threePointersMade, threePointersAttempted, threePointersPercentage, date) VALUES (" + number + ", " + threePointersMade + ", " + threePointersAttempted + ", " + threePointersPercentage + ", '" + date + "');";
+            String sql = "INSERT INTO ThreePointers (number, threePointersMade, threePointersAttempted, threePointersPercentage, date, curDate) VALUES (" + number + ", " + threePointersMade + ", " + threePointersAttempted + ", " + threePointersPercentage + ", '" + date + "', CURDATE());";
             stmt.executeUpdate(sql);
             System.out.println("Data transferred successfully");
         } catch (SQLException e) {
