@@ -4,26 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Women's Basketball</title>
+    <!-- Include React and ReactDOM libraries -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <!-- Include Babel to compile JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="NavBar">
-        <h1 class="left-align">Moravian Women's Basketball</h1>
-        <ul class="right-align">
-        </ul>
-    </nav>
+    <!-- Root element for mounting React components -->
+    <div id="root"></div>
 
-    <!-- Home Section -->
-    <section id="home">
-        <h1>Moravian Women's Basketball</h1>
-        <button id="roster_button" onclick="location.href='roster.html'"> Roster</button>
-        <button id="threepoint_button" onclick="location.href='threepoint.html'"> 3-Point Shot Percentage Calculator</button>
-        <button id="free_throw_button" onclick="location.href='freethrow.html'"> Free Throw List</button>
-        <div class="img">
-            <img src="/Bball_project/FrontTerm/images/moravianlogo.jpeg"/> <!-- Thymeleaf URL resolution -->
-        </div>
+    <!-- JavaScript code for React components -->
+    <script type="text/babel">
+        // React for NavBar
+        function NavBar() {
+            return (
+                <nav className="NavBar">
+                    <h1 className="left-align">Moravian Women's Basketball</h1>
+                    <ul className="right-align">
+                        {/* Add your navigation links here */}
+                    </ul>
+                </nav>
+            );
+        }
 
-    </section>
+        // React for Home
+        function Home() {
+            return (
+                <section id="home">
+                    <h1>Moravian Women's Basketball</h1>
+                    <button onClick={() => { window.location.href = 'roster.html' }}>Roster</button>
+                    <button onClick={() => { window.location.href = 'threepoint.html' }}>3-Point Shot Percentage Calculator</button>
+                    <button onClick={() => { window.location.href = 'freethrow.html' }}>Free Throw List</button>
+                    <div className="img">
+                        <img src="/Bball_project/FrontTerm/images/moravianlogo.jpeg" alt="Moravian Logo" />
+                    </div>
+                </section>
+            );
+        }
+
+        // Render the NavBar and Home components into the root element
+        ReactDOM.render(
+            <React.Fragment>
+                <NavBar />
+                <Home />
+            </React.Fragment>,
+            document.getElementById('root')
+        );
+    </script>
 </body>
 </html>
