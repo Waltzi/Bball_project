@@ -1,53 +1,61 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="freethrow.css">
-    <title>Free Throw Tracker</title>
 </head>
 <body>
     <h2>Free Throw Tracker</h2>
-    <input type="text" id="playerName" placeholder="Enter Player Name:" th:value="${playerName}">
-    <input type="text" id="freeThrowInput" placeholder="Enter free throw result" th:value="${freeThrowResult}">
+    <input type="text" id="playerName" placeholder="Enter Player Name:">
+    <input type="text" id="freeThrowInput" placeholder="Enter free throw result">
     <button onclick="addItem()">Add</button>
-    <button id="back_button" onclick="goBack()"> Back</button>
-    
-    <ul id="itemList">
-        <li th:each="item : ${items}" th:text="${item}"></li>
-    </ul>
+    <button id="back_button"> Back</button>
+
+    <ul id="itemList"></ul>
 
     <script>
-        function goBack() {
+        var button = document.getElementById("back_button");
+        button.addEventListener("click", function() {
             window.location.href = 'index.html';
+        });
+
+        function addItem(){
+            addPlayerAndFreeThrow();
         }
-        
-        function addItem() {
+        document.getElementById("playerName").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                addItem();
+            }
+        });
+        document.getElementById("freeThrowInput").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                addItem();
+            }
+        });
+        function addPlayerAndFreeThrow() {
             var playerNameInput = document.getElementById("playerName");
             var freeThrowInput = document.getElementById("freeThrowInput");
 
-            var playerName = playerNameInput.value.trim();
-            var throwResult = freeThrowInput.value.trim();
-
-            if (playerName !== "" && throwResult !== "") {
+            <h2>Free Throw Tracker</h2>
                 var itemList = document.getElementById("itemList");
                 var listItem = document.createElement("li");
                 listItem.textContent = playerName + ": " + throwResult;
-                
-                // Add remove button
-                var removeButton = document.createElement("button");
+                itemList.appendChild(listItem);
+                playerNameInput.value = "";
+                freeThrowInput.value = "";
+            }
+            // Add remove button
+            var removeButton = document.createElement("button");
                 removeButton.textContent = "Remove";
                 removeButton.onclick = function() {
                     itemList.removeChild(listItem);
                 };
-                
+
                 listItem.appendChild(removeButton);
                 itemList.appendChild(listItem);
-                
+
                 playerNameInput.value = "";
                 freeThrowInput.value = "";
-            }
-        }
     </script>
 </body>
 </html>
