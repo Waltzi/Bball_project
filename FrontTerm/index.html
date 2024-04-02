@@ -22,9 +22,6 @@
             return (
                 <nav className="NavBar">
                     <h1 className="left-align">Moravian Women's Basketball</h1>
-                    <ul className="right-align">
-                        {/* Add your navigation links here */}
-                    </ul>
                 </nav>
             );
         }
@@ -33,13 +30,12 @@
         function Home() {
             return (
                 <section id="home">
-                    <h1>Moravian Women's Basketball</h1>
-                    <button onClick={() => { window.location.href = 'roster.html' }}>Roster</button>
-                    <button onClick={() => { window.location.href = 'threepoint.html' }}>3-Point Shot Percentage Calculator</button>
-                    <button onClick={() => { window.location.href = 'freethrow.html' }}>Free Throw List</button>
                     <div className="img">
                         <img src="/Bball_project/FrontTerm/images/moravianlogo.jpeg" alt="Moravian Logo" />
                     </div>
+                    <button onClick={() => { window.location.href = 'roster.html' }}>Roster</button>
+                    <button onClick={() => { window.location.href = 'threepoint.html' }}>3-Pointers</button>
+                    <button onClick={() => { window.location.href = 'freethrow.html' }}>Free Throws</button>
                 </section>
             );
         }
