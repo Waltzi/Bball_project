@@ -21,13 +21,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'javax.persistence:javax.persistence-api:2.2'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-<<<<<<< HEAD
 	implementation 'org.springframework.boot:spring-boot-starter-web:your_spring_boot_version'
 
-=======
-	compileOnly 'org.projectlombok:lombok:1.18.20'
-    annotationProcessor 'org.projectlombok:lombok:1.18.20'
->>>>>>> 97153e4af61fd8ced2b479e913d9329c9bccfe79
 }
 
 tasks.named('test') {
