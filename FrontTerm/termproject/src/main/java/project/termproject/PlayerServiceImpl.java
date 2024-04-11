@@ -22,4 +22,14 @@ public class PlayerServiceImpl implements PlayerService{
         return player;
     }
 
+    @Override
+    public PlayerModel editPlayer(PlayerModel player) {
+        PlayerEntity playerEntity = new PlayerEntity();
+        if (player != null) {
+            BeanUtils.copyProperties(player, playerEntity);
+        }
+        playerRepository.save(playerEntity);
+        return player;
+    }
+
 }
