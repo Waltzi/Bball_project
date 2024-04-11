@@ -3,21 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="freethrow.css">
 </head>
 <body>
     <h2>Free Throw Tracker</h2>
     <input type="text" id="playerName" placeholder="Enter Player Name:">
-    <input type="text" id="freeThrowInput" placeholder="Enter free throw result">
+    <input type="text" id="freeThrowInput" placeholder="Enter free throw result:">
     <button onclick="addItem()">Add</button>
-    <button id="back_button"> Back</button>
+    <button id="back_button" onclick="location.href='index.html'"> Back</button>
 
     <ul id="itemList"></ul>
 
     <script>
-        var button = document.getElementById("back_button");
-        button.addEventListener("click", function() {
-            window.location.href = 'index.html';
-        });
 
         function addItem(){
             addPlayerAndFreeThrow();
