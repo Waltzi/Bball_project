@@ -29,7 +29,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: red;
 }
 
 #result {
@@ -39,7 +39,7 @@ button:hover {
 
 #back_button {
     padding: 10px 20px;
-    background-color: gray; 
+    background-color: #007bff; 
     border: none;
     color: white;
     text-align: center;
