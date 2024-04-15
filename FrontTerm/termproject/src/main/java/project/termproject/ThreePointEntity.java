@@ -9,16 +9,16 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "FreeThrows")
-public class FreeThrowEntity {
+@Table(name = "ThreePointers")
+public class ThreePointEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private int jerseyNumber;
-    private int freeThrowsMade;
-    private int freeThrowsAttempted;
-    private double freeThrowPercentage;
+    private int threePointersMade;
+    private int threePointersAttempted;
+    private double threePointPercentage;
     private int practiceNumber;
     private String date;
 

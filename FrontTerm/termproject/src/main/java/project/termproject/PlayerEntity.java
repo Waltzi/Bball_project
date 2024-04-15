@@ -19,7 +19,6 @@ public class PlayerEntity {
     private String firstName;
     private String lastName;
     private String position;
-    private int jerseyNumber;
     
     
     // Getters and setters
@@ -53,14 +52,6 @@ public class PlayerEntity {
 
     public void setPosition(String position) {
         this.position = position;
-    }
-
-    public int getJerseyNumber() {
-        return jerseyNumber;
-    }
-
-    public void setJerseyNumber(int jerseyNumber) {
-        this.jerseyNumber = jerseyNumber;
     }
     
     

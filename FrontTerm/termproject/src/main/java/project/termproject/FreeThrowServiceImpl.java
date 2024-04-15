@@ -2,6 +2,8 @@ package project.termproject;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Service
 public class FreeThrowServiceImpl implements FreeThrowService{
@@ -14,6 +16,11 @@ public class FreeThrowServiceImpl implements FreeThrowService{
 
     @Override
     public FreeThrowModel addFreeThrow(FreeThrowModel freeThrow) {
+        LocalDate date = LocalDate.now();
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        String formattedDate = date.format(dateFormatter);
+        freeThrow.setDate(formattedDate);
+
         FreeThrowEntity freeThrowEntity = new FreeThrowEntity();
         if (freeThrow != null) {
             BeanUtils.copyProperties(freeThrow, freeThrowEntity);
@@ -24,11 +31,16 @@ public class FreeThrowServiceImpl implements FreeThrowService{
 
     @Override
     public FreeThrowModel editFreeThrow(FreeThrowModel freeThrow) {
-        FreeThrowEntity freeThrowEntity = new FreeThrowEntity();
-        if (freeThrow != null) {
+        LocalDate date = LocalDate.now();
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        String formattedDate = date.format(dateFormatter);
+        freeThrow.setDate(formattedDate);
+        
+        FreeThrowEntity freeThrowEntity = freeThrowRepository.findById(freeThrow.getId()).get();
+        if (freeThrowEntity != null) {
             BeanUtils.copyProperties(freeThrow, freeThrowEntity);
+            freeThrowRepository.save(freeThrowEntity);
         }
-        freeThrowRepository.save(freeThrowEntity);
         return freeThrow;
     }
     

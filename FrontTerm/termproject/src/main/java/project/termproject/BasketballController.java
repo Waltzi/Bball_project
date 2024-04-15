@@ -15,6 +15,8 @@ public class BasketballController {
     private PlayerService playerService;
     @Autowired
     private FreeThrowService freeThrowService;
+    @Autowired
+    private ThreePointService threePointService;
 
     public BasketballController(PlayerService playerService) {
         this.playerService = playerService;
@@ -41,6 +43,18 @@ public class BasketballController {
     public FreeThrowModel editFreeThrow(@RequestBody FreeThrowModel freeThrow) {
         
         return freeThrowService.editFreeThrow(freeThrow);
+    }
+
+    @PostMapping("/addThreePoint")
+    public ThreePointModel addThreePoint(@RequestBody ThreePointModel threePoint) {
+        
+        return threePointService.addThreePoint(threePoint);
+    }
+
+    @PostMapping("/editThreePoint")
+    public ThreePointModel editThreePoint(@RequestBody ThreePointModel threePoint) {
+        
+        return threePointService.editThreePoint(threePoint);
     }
 
 

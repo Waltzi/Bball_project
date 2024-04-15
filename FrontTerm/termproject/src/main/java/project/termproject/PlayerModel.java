@@ -7,6 +7,5 @@ public class PlayerModel {
     private Long id;
     private String firstName;
     private String lastName;
-    private String position;
     private int jerseyNumber;
 }
