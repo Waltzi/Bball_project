@@ -18,7 +18,7 @@ public class PlayerEntity {
     
     private String firstName;
     private String lastName;
-    private String position;
+    private int jerseyNumber;
     
     
     // Getters and setters
@@ -44,14 +44,6 @@ public class PlayerEntity {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
     }
     
     

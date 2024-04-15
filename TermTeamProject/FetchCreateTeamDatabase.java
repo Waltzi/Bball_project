@@ -4,7 +4,7 @@
  * The database will be created using MySQL.
  * The database will be created using the JDBC driver.
  * The database will be created using the following information:
- * URL_DB = "jdbc:mysql://localhost:330
+ * URL_DB = "jdbc:mysql://localhost:3306/"
  * USERNAME = "project"
  * PASSWORD = "project"
  * DB_NAME = "jdbc:mysql://localhost:3306/MoravianWomenBasketball"
