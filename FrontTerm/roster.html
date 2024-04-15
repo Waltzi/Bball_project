@@ -22,7 +22,7 @@
                 </tr>
             </thead>
             <tbody id="roster_body">
-                <!-- Roster data will be dynamically added here -->
+            
             </tbody>
         </table>
         <form id="player_form">
@@ -36,7 +36,6 @@
             <input type="text" id="year" name="year" required>
             <button type="submit">Add Player</button>
         </form>
-        <button id="generate_archive_button">Generate Archive</button>
     </div>
 
     <script>
@@ -71,11 +70,6 @@
 
             // Reset the form
             this.reset();
-        });
-
-        // Event listener for generating archive button click
-        document.getElementById('generate_archive_button').addEventListener('click', function() {
-            // Generate archive (optional)
         });
 
         // Back button event listener
