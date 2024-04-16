@@ -33,59 +33,9 @@
     </div>
 
     <script>
-        // Form submission event listener
-        document.getElementById('player_form').addEventListener('submit', function(event) {
-            event.preventDefault();
-    
-            // Create a new player object
-            var Player = {
-                firstName: this.firstName.value,
-                lastName: this.lastName.value,
-                number: this.number.value,
-            };
-    
-            // Send a POST request to the backend
-            fetch('http://localhost:8080/basketball_api/addPlayer', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(Player),
-        })
-        .then(response => response.json())
-        .then(Player => {
-            console.log(Player);
-            // Add the new player to the roster table
-            var tableBody = document.getElementById('roster_body');
-            var newRow = document.createElement('tr');
-            newRow.innerHTML = `<td>${Player.firstName}</td><td>${Player.lastName}</td><td>${Player.number}</td>`;
-            tableBody.appendChild(newRow);
-        })
-        .catch(error => console.error('Error:', error));
-
-        // Reset the form
-        this.reset();
-        });
-
         // Back button event listener
         document.getElementById('back_button').addEventListener('click', function() {
             window.location.href = 'index.html';
-        });
-
-        // Load roster data when the page loads
-        window.addEventListener('DOMContentLoaded', function() {
-            fetch('http://localhost:8080/basketball_api/getPlayers')
-            .then(response => response.json())
-            .then(players => {
-                // Populate the roster table with players from the backend
-                var tableBody = document.getElementById('roster_body');
-                players.forEach(player => {
-                    var newRow = document.createElement('tr');
-                    newRow.innerHTML = `<td>${player.name}</td><td>${player.position}</td><td>${player.number}</td><td>${player.year}</td>`;
-                    tableBody.appendChild(newRow);
-                });
-            })
-            .catch(error => console.error('Error:', error));
         });
     </script>
 </body>
