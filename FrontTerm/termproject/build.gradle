@@ -1,9 +1,9 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.2.3'
+	id 'org.springframework.boot' version '3.2.4'
 	id 'io.spring.dependency-management' version '1.1.4'
 }
-
+	
 group = 'project'
 version = '0.0.1-SNAPSHOT'
 
@@ -23,6 +23,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok:1.18.20'
 	annotationProcessor 'org.projectlombok:lombok:1.18.20'
+	implementation 'mysql:mysql-connector-java:8.0.26'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
 }
 

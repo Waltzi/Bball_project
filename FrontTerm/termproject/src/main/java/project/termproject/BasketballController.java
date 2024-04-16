@@ -1,14 +1,18 @@
 package project.termproject;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 
 @RestController
-@RequestMapping("/basketball_api/v1/")
+@RequestMapping("/basketball_api/")
 public class BasketballController {
     
     @Autowired
@@ -21,6 +25,12 @@ public class BasketballController {
     public BasketballController(PlayerService playerService) {
         this.playerService = playerService;
     }
+
+    @GetMapping("/getPlayers")
+    public List<PlayerEntity> getPlayers() {
+        return playerService.getPlayers();
+    }
+    
     @PostMapping("/addPlayer")
     public PlayerModel addPlayer(@RequestBody PlayerModel player) {
         

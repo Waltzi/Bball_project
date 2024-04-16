@@ -1,5 +1,7 @@
 package project.termproject;
 
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +32,11 @@ public class PlayerServiceImpl implements PlayerService{
             playerRepository.save(playerEntity);
         }
         return player;
+    }
+
+    @Override
+    public List<PlayerEntity> getPlayers() {
+        return playerRepository.findAll();
     }
 
 }
