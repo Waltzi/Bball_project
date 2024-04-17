@@ -1,40 +1,72 @@
-// Function to fetch data from API based on pageId
-async function fetchData(pageId) {
-  try {
-      const apiUrl = 'http://localhost:8080/basketball_api/addPlayer';
-      const response = await fetch(apiUrl);
-      const data = await response.json();
+// React NavBar component
+function NavBar() {
+  return (
+      <nav className="NavBar">
+          <h1 className="left-align">Moravian Women's Basketball</h1>
+      </nav>
+  );
+}
 
-      return data; // Return the fetched data
+// React Home component
+function Home() {
+  const handleButtonClick = (pageUrl) => {
+    window.location.href = pageUrl; // Navigate to the specfic page URL
+};
+  return (
+      <section id="home">
+          <div className="img">
+              <img src="images/moravianlogo.jpeg" alt="Moravian Logo" />
+          </div>
+          <button onClick={() => handleButtonClick('roster.html')}>Roster</button>
+          <button onClick={() => handleButtonClick('threepoint.html')}>3-Pointers</button>
+          <button onClick={() => handleButtonClick('freethrow.html')}>Free Throws</button>
+      </section>
+  );
+}
+
+// React component display fetched data
+function DataDisplay({ data }) {
+  return (
+      <div id="dataDisplay">
+          <h2>Data Display</h2>
+          <pre>{JSON.stringify(data, null, 2)}</pre>
+      </div>
+  );
+}
+
+// Function to fetch data from API
+async function fetchData(pageId) {
+  const apiUrl = `http://localhost:8080/basketball_api/${pageId}`;
+  const response = await fetch(apiUrl);
+  if (!response.ok) {
+      throw new Error(data.message || 'Failed to fetch data');
+  }
+  const data = await response.json();
+  return data;
+}
+
+// Function to handle button click events and update state
+async function handleButtonClick(pageId) {
+  try {
+      const data = await fetchData(pageId);
+      ReactDOM.render(
+          <React.Fragment>
+              <NavBar />
+              <Home />
+              <DataDisplay data={data} />
+          </React.Fragment>,
+          document.getElementById('root')
+      );
   } catch (error) {
-      console.error(`Error fetching data for ${pageId}:`, error);
-      throw error; // Rethrow the error for handling in the calling code
+      console.error(`Failed to fetch data for ${pageId}:`, error);
   }
 }
 
-// Function to handle button click events
-function handleButtonClick(pageId) {
-  fetchData(pageId)
-      .then(data => {
-          // Display the fetched data in the corresponding div based on pageId
-          const targetDiv = document.getElementById(`${pageId}Data`);
-          targetDiv.innerHTML = JSON.stringify(data); // Example: Display JSON data as string
-      })
-      .catch(error => {
-          // Handle errors if fetching data fails
-          console.error(`Failed to fetch data for ${pageId}:`, error);
-      });
-}
-
-// Event listeners for button clicks
-document.getElementById('roster').addEventListener('click', () => {
-  handleButtonClick('page1');
-});
-
-document.getElementById('threepoint').addEventListener('click', () => {
-  handleButtonClick('page2');
-});
-
-document.getElementById('freethrow').addEventListener('click', () => {
-  handleButtonClick('page3');
-});
+// Initial render
+ReactDOM.render(
+  <React.Fragment>
+      <NavBar />
+      <Home />
+  </React.Fragment>,
+  document.getElementById('root')
+);
