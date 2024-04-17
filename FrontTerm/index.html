@@ -4,50 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Women's Basketball</title>
-    <!-- Include React and ReactDOM libraries -->
-    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
-    <!-- Include Babel to compile JSX -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
     <!-- Root element for mounting React components -->
     <div id="root"></div>
 
-    <!-- JavaScript code for React components -->
-    <script type="text/babel">
-        // React for NavBar
-        function NavBar() {
-            return (
-                <nav className="NavBar">
-                    <h1 className="left-align">Moravian Women's Basketball</h1>
-                </nav>
-            );
-        }
-
-        // React for Home
-        function Home() {
-            return (
-                <section id="home">
-                    <div className="img">
-                        <img src="images/moravianlogo.jpeg" alt="Moravian Logo" />
-                    </div>
-                    <button id="roster" onClick={() => { window.location.href = 'roster.html' }}>Roster</button>
-                    <button id="threepoint" onClick={() => { window.location.href = 'threepoint.html' }}>3-Pointers</button>
-                    <button id="freethrow" onClick={() => { window.location.href = 'freethrow.html' }}>Free Throws</button>
-                </section>
-            );
-        }
-
-        // Render the NavBar and Home components into the root element
-        ReactDOM.render(
-            <React.Fragment>
-                <NavBar />
-                <Home />
-            </React.Fragment>,
-            document.getElementById('root')
-        );
-    </script>
+    <!-- Include React and ReactDOM libraries -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <!-- Include Babel to compile JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Include app.js script -->
+    <script src="app.js" type="text/babel"></script>
 </body>
 </html>
