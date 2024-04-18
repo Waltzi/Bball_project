@@ -2,6 +2,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 20px;
+    font-size: xx-large;
 }
 
 h1 {
@@ -11,12 +12,27 @@ h1 {
 label {
     display: block;
     margin-bottom: 5px;
+    font-size: xx-large;
+}
+
+input[type="text"]{
+    width: 150px;
+    padding: 5px;
+    margin-bottom: 10px;
+    justify-content: center;
 }
 
 input[type="number"] {
-    width: 100px;
+    width: 150px;
     padding: 5px;
     margin-bottom: 10px;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 button {
@@ -26,6 +42,21 @@ button {
     border: none;
     cursor: pointer;
     border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
 button:hover {
@@ -35,20 +66,6 @@ button:hover {
 #result {
     margin-top: 10px;
     font-weight: bold;
-}
-
-#back_button {
-    padding: 10px 20px;
-    background-color: #007bff; 
-    border: none;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 4px;
 }
 
 #back_button:hover {

@@ -42,7 +42,7 @@ body {
 }
 
 #home button {
-    margin-top: 10px;
+    margin: 10px 5px; /* Adjust the second value as needed */
     padding: 10px 20px;
     background-color: #007bff;
     color: #fff;
