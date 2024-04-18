@@ -16,6 +16,12 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: xx-large;
+}
+
 /* Heading styles */
 h2 {
     text-align: center;
@@ -25,7 +31,7 @@ h2 {
 
 /* Input styles */
 input[type="text"] {
-    width: calc(50% - 10px);
+    width: 150px;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
