@@ -7,7 +7,7 @@ function NavBar() {
   );
 }
 
-// React Home component
+// React Home component buttons for navigation
 function Home() {
   const handleButtonClick = (pageUrl) => {
     window.location.href = pageUrl; // Navigate to the specfic page URL
@@ -23,16 +23,17 @@ function Home() {
       </section>
   );
 }
-
-// React component display fetched data
+//function to display data
 function DataDisplay({ data }) {
   return (
-      <div id="dataDisplay">
-          <h2>Data Display</h2>
+      <section id="data">
+          <h2>Data</h2>
           <pre>{JSON.stringify(data, null, 2)}</pre>
-      </div>
+      </section>
   );
 }
+
+//this is code for fetching data from API
 
 // Function to fetch data from API at the RequestMapping
 async function fetchData() {
@@ -72,25 +73,115 @@ async function addPlayer(player) {
   }
 }
 
-// Function to delete a player from the API
-async function deletePlayer(playerId) {
+//Function to edit a player in the API
+async function editPlayer(player) {
   try {
-      const response = await fetch(`http://localhost:8080/basketball_api/deletePlayer/${playerId}`, {
-          method: 'DELETE'
+      const response = await fetch('http://localhost:8080/basketball_api/editPlayer', {
+          method: 'PUT',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(player)
       });
       if (!response.ok) {
-          throw new Error('Failed to delete player');
+          throw new Error('Failed to edit player');
       }
-      const deletedPlayer = await response.json();
-      console.log('Deleted player:', deletedPlayer);
-      return deletedPlayer;
+      const editedPlayer = await response.json();
+      console.log('Edited player:', editedPlayer);
+      return editedPlayer;
   } catch (error) {
-      console.error('Error deleting player:', error);
+      console.error('Error editing player:', error);
       throw error;
   }
 }
 
+// Funtion to add a freethrow to the API
+async function addFreeThrow(freeThrow) {
+  try {
+      const response = await fetch('http://localhost:8080/basketball_api/addFreeThrow', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },  
+          body: JSON.stringify(freeThrow)
+      });
+      if (!response.ok) {
+          throw new Error('Failed to add free throw');
+      }
+      const addedFreeThrow = await response.json();
+      console.log('Added free throw:', addedFreeThrow);
+      return addedFreeThrow;
+  } catch (error) {
+      console.error('Error adding free throw:', error);
+      throw error;
+  }
+}
 
+// Function to edit a freethrow in the API
+async function editFreeThrow(freeThrow) {
+  try {
+      const response = await fetch('http://localhost:8080/basketball_api/editFreeThrow', {
+          method: 'PUT',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(freeThrow)
+      });
+      if (!response.ok) {
+          throw new Error('Failed to edit free throw');
+      }
+      const editedFreeThrow = await response.json();
+      console.log('Edited free throw:', editedFreeThrow);
+      return editedFreeThrow;
+  } catch (error) {
+      console.error('Error editing free throw:', error);
+      throw error;
+  }
+}
+
+// Function to add a 3-pointer to the API
+async function addThreePointer(threePointer) {
+  try {
+      const response = await fetch('http://localhost:8080/basketball_api/addThreePointer', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(threePointer)
+      });
+      if (!response.ok) {
+          throw new Error('Failed to add 3-pointer');
+      }
+      const addedThreePointer = await response.json();
+      console.log('Added 3-pointer:', addedThreePointer);
+      return addedThreePointer;
+  } catch (error) {
+      console.error('Error adding 3-pointer:', error);
+      throw error;
+  }
+}
+
+// Function to edit a 3-pointer in the API
+async function editThreePointer(threePointer) {
+  try {
+      const response = await fetch('http://localhost:8080/basketball_api/editThreePointer', {
+          method: 'PUT',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(threePointer)
+      });
+      if (!response.ok) {
+          throw new Error('Failed to edit 3-pointer');
+      }
+      const editedThreePointer = await response.json();
+      console.log('Edited 3-pointer:', editedThreePointer);
+      return editedThreePointer;
+  } catch (error) {
+      console.error('Error editing 3-pointer:', error);
+      throw error;
+  }
+}
 
 // Function to handle button click events and update state
 async function handleButtonClick(pageId) {
