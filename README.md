@@ -30,6 +30,6 @@ The TermTeamProject repo holds everything for the backend properties of the proj
   Complete our SpringBoot Web App and get it running correctly. Implement an archiving method for the roster and allow practices to be separrated by dates.
 
 - Sprint 3 Goal:
-  Complete our springboot web app and get it running correctly. Ceating web app page to be displayable. Active or not active attribute for the database not a archiving system. Practice variable for the number of practices per day.
+  Complete our springboot web app and get it running correctly. Creating web app page to be displayable. Active or not active attribute for the database not a archiving system. Practice variable for the number of practices per day.
   
 
