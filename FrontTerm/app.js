@@ -34,16 +34,63 @@ function DataDisplay({ data }) {
   );
 }
 
-// Function to fetch data from API
-async function fetchData(pageId) {
-  const apiUrl = `http://localhost:8080/basketball_api/${pageId}`;
-  const response = await fetch(apiUrl);
-  if (!response.ok) {
-      throw new Error(data.message || 'Failed to fetch data');
+// Function to fetch data from API at the RequestMapping
+async function fetchData() {
+  try {
+      const response = await fetch('http://localhost:8080/basketball_api/getPlayers');
+      if (!response.ok) {
+          throw new Error('Failed to fetch players');
+      }
+      const players = await response.json();
+      console.log('Players:', players);
+      return players;
+  } catch (error) {
+      console.error('Error fetching players:', error);
+      throw error;
   }
-  const data = await response.json();
-  return data;
 }
+
+// Function to add a player to the API
+async function addPlayer(player) {
+  try {
+      const response = await fetch('http://localhost:8080/basketball_api/addPlayer', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(player)
+      });
+      if (!response.ok) {
+          throw new Error('Failed to add player');
+      }
+      const addedPlayer = await response.json();
+      console.log('Added player:', addedPlayer);
+      return addedPlayer;
+  } catch (error) {
+      console.error('Error adding player:', error);
+      throw error;
+  }
+}
+
+// Function to delete a player from the API
+async function deletePlayer(playerId) {
+  try {
+      const response = await fetch(`http://localhost:8080/basketball_api/deletePlayer/${playerId}`, {
+          method: 'DELETE'
+      });
+      if (!response.ok) {
+          throw new Error('Failed to delete player');
+      }
+      const deletedPlayer = await response.json();
+      console.log('Deleted player:', deletedPlayer);
+      return deletedPlayer;
+  } catch (error) {
+      console.error('Error deleting player:', error);
+      throw error;
+  }
+}
+
+
 
 // Function to handle button click events and update state
 async function handleButtonClick(pageId) {
