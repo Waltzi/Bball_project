@@ -26,4 +26,16 @@ public class FreeThrowEntity {
         this.date = date;
     }
     
+    public int getFreeThrowsMade() {
+        return freeThrowsMade;
+    }
+
+    public int getFreeThrowsAttempted() {
+        return freeThrowsAttempted;
+    }
+
+    public void setFreeThrowPercentage(double freeThrowPercentage) {
+        this.freeThrowPercentage = freeThrowPercentage;
+    }
+    
 }
