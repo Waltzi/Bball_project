@@ -1,5 +1,6 @@
 package project.termproject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -35,8 +36,14 @@ public class PlayerServiceImpl implements PlayerService{
     }
 
     @Override
-    public List<PlayerEntity> getPlayers() {
-        return playerRepository.findAll();
+    public List<PlayerModel> getAllPlayers() {
+        List<PlayerEntity> playerEntities = playerRepository.findAll();
+        List<PlayerModel> playerModels = new ArrayList<>();
+        for (PlayerEntity playerEntity : playerEntities) {
+            PlayerModel playerModel = new PlayerModel();
+            BeanUtils.copyProperties(playerEntity, playerModel);
+            playerModels.add(playerModel);
+        }
+        return playerModels;
     }
-
 }
