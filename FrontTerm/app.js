@@ -54,7 +54,7 @@ async function fetchData() {
 // Function to add a player to the API
 async function addPlayer(player) {
   try {
-      const response = await fetch('/localhost:8080/basketball_api/addPlayer', {
+      const response = await fetch('http://localhost:8080/basketball_api/addPlayer', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json'
