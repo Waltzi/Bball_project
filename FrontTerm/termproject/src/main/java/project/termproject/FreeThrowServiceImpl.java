@@ -21,6 +21,10 @@ public class FreeThrowServiceImpl implements FreeThrowService{
         String formattedDate = date.format(dateFormatter);
         freeThrow.setDate(formattedDate);
 
+        double freeThrowPercentage = (double) freeThrow.getFreeThrowsMade() / freeThrow.getFreeThrowsAttempted();
+        freeThrowPercentage = Double.parseDouble(String.format("%.2f", freeThrowPercentage));
+        freeThrow.setFreeThrowPercentage(freeThrowPercentage);
+
         FreeThrowEntity freeThrowEntity = new FreeThrowEntity();
         if (freeThrow != null) {
             BeanUtils.copyProperties(freeThrow, freeThrowEntity);
