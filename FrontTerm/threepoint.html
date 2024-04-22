@@ -8,20 +8,22 @@
 </head>
 <body>
     <h1>3-Point Shot Percentage Calculator</h1>
-    <label for="made">3-Pointers Made:</label>
-    <input type="number" id="made">
-    <br>
-    <label for="attempted">3-Pointers Attempted:</label>
-    <input type="number" id="attempted">
-    <br>
-    <button onclick="calculatePercentage()">Calculate Percentage</button>
-    <div id="result"></div>
-    <button id="back_button"> Back</button>
-    <script>
-        var button = document.getElementById("back_button");
-        button.addEventListener("click", function() {
-            window.location.href = 'index.html';
-        });
+    <div class="input-container">
+        <label for="playerName">Player Name:</label>
+        <input type="text" id="playerName" required>
+        <br>
+        <label for="made">3-Pointers Made:</label>
+        <input type="number" id="made" required>
+        <br>
+        <label for="attempted">3-Pointers Attempted:</label>
+        <input type="number" id="attempted" required>
+        <br>
+        <div class="button-container">
+            <button onclick="calculatePercentage()">Calculate Percentage</button>
+            <button id="back_button" onclick="location.href='index.html'"> Back</button>
+        </div>
+    </div>
+    </div>
     </script>
     <script src="app.js">
 

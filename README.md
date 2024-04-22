@@ -1,7 +1,7 @@
 # Bball_project
-Introduction to Software Engineering 
-Spring Semester 2024
-Authors: Austin Leibensperger, Saul Sanchez, Nathan Hajel, and Brandon Yang
+- Introduction to Software Engineering 
+- Spring Semester 2024
+- Authors: Austin Leibensperger, Saul Sanchez, Nathan Hajel, and Brandon Yang
 
 
 The TermTeamProject repo holds everything for the backend properties of the project.

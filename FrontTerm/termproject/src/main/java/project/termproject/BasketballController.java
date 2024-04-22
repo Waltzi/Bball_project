@@ -29,8 +29,8 @@ public class BasketballController {
     }
 
     @GetMapping("/getPlayers")
-    public List<PlayerEntity> getPlayers() {
-        return playerService.getPlayers();
+    public List<PlayerModel> getPlayers() {
+        return playerService.getAllPlayers();
     }
     
     @PostMapping("/addPlayer")
