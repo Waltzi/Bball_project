@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,7 +40,7 @@ public class BasketballController {
         return playerService.addPlayer(player);
     }
 
-    @PostMapping("/editPlayer")
+    @PutMapping("/editPlayer")
     public PlayerModel editPlayer(@RequestBody PlayerModel player) {
         
         return playerService.editPlayer(player);
@@ -51,7 +52,7 @@ public class BasketballController {
         return freeThrowService.addFreeThrow(freeThrow);
     }
 
-    @PostMapping("/editFreeThrow")
+    @PutMapping("/editFreeThrow")
     public FreeThrowModel editFreeThrow(@RequestBody FreeThrowModel freeThrow) {
         
         return freeThrowService.editFreeThrow(freeThrow);
@@ -63,7 +64,7 @@ public class BasketballController {
         return threePointService.addThreePoint(threePoint);
     }
 
-    @PostMapping("/editThreePoint")
+    @PutMapping("/editThreePoint")
     public ThreePointModel editThreePoint(@RequestBody ThreePointModel threePoint) {
         
         return threePointService.editThreePoint(threePoint);
