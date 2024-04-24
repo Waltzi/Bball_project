@@ -4,61 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Women's Basketball Roster</title>
-    <link rel="stylesheet" href="roster.css">
+    <link rel="stylesheet" href="roster.css">   
 </head>
 <body>
+    <!-- Back Button -->
     <h1>Moravian Women's Basketball Roster</h1>
-    <button onclick="goBack()">Back</button>
-    <div id="rosterTable" class="container"></div>
+    <button id="back_button" onclick="location.href='index.html'">Back</button>
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Number</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="roster_body">
+            
+            </tbody>
+        </table>
+        <form id="player_form">
+            <input type="text" id="firstName" name="firstName" required>
+            <input type="text" id="lastName" name="lastName" required>
+            <input type="number" id="number" name="number" required>
+            <button type="submit">Add Player</button>
+        </form>
+    </div>
 
     <script>
-        // Function to navigate back to index.html
-        function goBack() {
+        // Back button event listener
+        document.getElementById('back_button').addEventListener('click', function() {
             window.location.href = 'index.html';
-        }
-
-        // Function to fetch and display roster data
-        async function fetchAndDisplayRoster() {
-            const apiUrl = 'http://localhost:8080/basketball_api/getPlayers';
-
-            try {
-                const response = await fetch(apiUrl);
-                if (!response.ok) {
-                    throw new Error('Failed to fetch roster data');
-                }
-
-                const rosterData = await response.json();
-
-                // Construct HTML table to display roster data
-                const table = document.createElement('table');
-                table.innerHTML = `
-                    <thead>
-                        <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Number</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${rosterData.map(player => `
-                            <tr>
-                                <td>${player.firstName}</td>
-                                <td>${player.lastName}</td>
-                                <td>${player.number}</td>
-                            </tr>
-                        `).join('')}
-                    </tbody>
-                `;
-
-                document.getElementById('rosterTable').appendChild(table);
-            } catch (error) {
-                console.error('Error fetching roster data:', error);
-            }
-        }
-
-        // Call fetchAndDisplayRoster when the page loads
-        fetchAndDisplayRoster();
+        });
     </script>
-    <script src="app.js"></script>
+    <script src="app.js" type="text/babel"></script>
 </body>
 </html>
