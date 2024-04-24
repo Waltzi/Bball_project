@@ -67,7 +67,18 @@ function DataDisplay() {
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
-  }, []);
+  }, []); // Run once on component mount
+
+  return (
+    <section id="data">
+      <h2>Data</h2>
+      {data ? (
+        <pre>{JSON.stringify(data, null, 2)}</pre>
+      ) : (
+        <p>Loading data...</p>
+      )}
+    </section>
+  );
 }
   export default dataDisplay;
 
