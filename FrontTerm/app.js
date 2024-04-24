@@ -1,3 +1,6 @@
+import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
 // React NavBar component
 function NavBar() {
   return (
@@ -23,15 +26,50 @@ function Home() {
       </section>
   );
 }
-//function to display data
-function DataDisplay({ data }) {
-  return (
-      <section id="data">
-          <h2>Data</h2>
-          <pre>{JSON.stringify(data, null, 2)}</pre>
-      </section>
-  );
+
+//Parsing a JSON
+function parseJson(json) {
+  try {
+      return JSON.parse(json);
+  } catch (error) {
+      console.error('Error parsing JSON:', error);
+      return null;
+  }
 }
+
+//function to display data
+async function fetchData(apiUrl) {
+  try {
+    const response = await fetch(apiUrl);
+    if (!response.ok) {
+      throw new Error('Failed to fetch data');
+    }
+    const jsonData = await response.text();
+    const parsedData = parseJson(jsonData); // Parse JSON response
+
+    console.log('Parsed Data:', parsedData);
+    return parsedData;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    throw error;
+  }
+}
+
+function DataDisplay() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const apiUrl = 'http://localhost:8080/basketball_api/getPlayers';
+    fetchData(apiUrl)
+      .then((parsedData) => {
+        setData(parsedData); // Set parsed data in component state
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+}
+  export default dataDisplay;
 
 //this is code for fetching data from API
 
