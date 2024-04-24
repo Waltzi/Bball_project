@@ -30,6 +30,11 @@
             <input type="number" id="number" name="number" required>
             <button type="submit">Add Player</button>
         </form>
+        {data ? (
+            <pre>{JSON.stringify(data, null, 2)}</pre>
+          ) : (
+            <p>Loading data...</p>
+          )}
     </div>
 
     <script>
