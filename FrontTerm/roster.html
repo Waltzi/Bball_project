@@ -24,20 +24,13 @@
             
             </tbody>
         </table>
-        <form id="player_form">
+        <form id="player_form" onsubmit="handleSubmit(event)">
             <input type="text" id="firstName" name="firstName" required>
             <input type="text" id="lastName" name="lastName" required>
             <input type="number" id="number" name="number" required>
             <button type="submit">Add Player</button>
         </form>
     </div>
-
-    <script>
-        // Back button event listener
-        document.getElementById('back_button').addEventListener('click', function() {
-            window.location.href = 'index.html';
-        });
-    </script>
     <script src="app.js" type="text/babel"></script>
 </body>
 </html>
