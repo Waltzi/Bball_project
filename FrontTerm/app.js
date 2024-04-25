@@ -8,27 +8,7 @@ function parseJson(json) {
   }
 }
 
-// Function to add a player to the API
-async function addPlayer(player) {
-  try {
-      const response = await fetch('http://localhost:8080/basketball_api/addPlayer', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(player)
-      });
-      if (!response.ok) {
-          throw new Error('Failed to add player');
-      }
-      const addedPlayer = await response.json();
-      console.log('Added player:', addedPlayer);
-      return addedPlayer;
-  } catch (error) {
-      console.error('Error adding player:', error);
-      throw error;
-  }
-}
+
 
 document.getElementById('back_button').addEventListener('click', function() {
   window.location.href = 'index.html';
