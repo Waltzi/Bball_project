@@ -30,7 +30,68 @@
             <input type="number" id="number" name="number" required>
             <button type="submit">Add Player</button>
         </form>
+        <script>
+            //function to display data
+async function fetchData() {
+  try {
+    const response = await fetch('http://localhost:8080/basketball_api/getPlayers');
+    if (!response.ok) {
+      throw new Error('Failed to fetch data');
+    }
+    const jsonData = await response.text();
+    const parsedData = parseJson(jsonData); // Parse JSON response
+
+    console.log('Parsed Data:', parsedData);
+    return parsedData;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    throw error;
+  }
+}
+
+function DataDisplay() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const apiUrl = 'http://localhost:8080/basketball_api/getPlayers';
+    fetchData(apiUrl)
+      .then((parsedData) => {
+        setData(parsedData); // Set parsed data in component state
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []); // Run once on component mount
+}
+  
+  // Function to handle form submission
+async function handleSubmit(event) {
+  event.preventDefault(); // Prevent default form submission
+
+  const firstName = document.getElementById('firstName').value;
+  const lastName = document.getElementById('lastName').value;
+  const number = document.getElementById('number').value;
+
+  const player = {
+      firstName: firstName,
+      lastName: lastName,
+      number: number
+  };
+
+  try {
+      const addedPlayer = await addPlayer(player); // Call addPlayer function with player data
+      console.log('Player added:', addedPlayer);
+
+      // Optionally, update the UI or display a success message
+      alert('Player added successfully!');
+  } catch (error) {
+      console.error('Error adding player:', error);
+      // Handle error (e.g., display error message)
+      alert('Failed to add player. Please try again.');
+  }
+}
+        </script>
     </div>
-    <script src="app.js" type="text/babel"></script>
+    <script src="app.js"></script>
 </body>
 </html>
