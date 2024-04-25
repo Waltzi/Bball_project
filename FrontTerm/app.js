@@ -100,6 +100,33 @@ async function fetchData() {
   }
 }
 
+// Function to handle form submission
+async function handleSubmit(event) {
+  event.preventDefault(); // Prevent default form submission
+
+  const firstName = document.getElementById('firstName').value;
+  const lastName = document.getElementById('lastName').value;
+  const number = document.getElementById('number').value;
+
+  const player = {
+      firstName: firstName,
+      lastName: lastName,
+      number: number
+  };
+
+  try {
+      const addedPlayer = await addPlayer(player); // Call addPlayer function with player data
+      console.log('Player added:', addedPlayer);
+
+      // Optionally, update the UI or display a success message
+      alert('Player added successfully!');
+  } catch (error) {
+      console.error('Error adding player:', error);
+      // Handle error (e.g., display error message)
+      alert('Failed to add player. Please try again.');
+  }
+}
+
 // Function to add a player to the API
 async function addPlayer(player) {
   try {
@@ -121,6 +148,10 @@ async function addPlayer(player) {
       throw error;
   }
 }
+
+document.getElementById('back_button').addEventListener('click', function() {
+  window.location.href = 'index.html';
+});
 
 //Function to edit a player in the API
 async function editPlayer(player) {
