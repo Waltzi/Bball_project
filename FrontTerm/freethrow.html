@@ -8,70 +8,118 @@
 <body>
     <h2>Free Throw Tracker</h2>
     <div class="input-container">
-        <label for="playerName">Player Name:</label>
-        <input type="text" id="playerName" required>
-        <br>
-        <label for="freeThrowMadeInput">Free Throws Made:</label>
-        <input type="text" id="freeThrowMadeInput" required>
-        <br>
-        <label for="freeThrowAttemptInput">Free Throws Attempted:</label>
-        <input type="text" id="freeThrowAttemptInput" required>
-        <div class="button-container">
-            <button onclick="addItem()">Add</button>
-            <button id="back_button" onclick="location.href='index.html'"> Back</button>
         </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Player Number</th>
+                    <th>Free Throws Made</th>
+                    <th>Free Throws Attempted</th>
+                </tr>
+            </thead>
+            <tbody id="freeThrowTableBody">
+            </tbody>
+        </table>
+        <form id="player_form" onsubmit="handleSubmit(event)">
+            <input type="text" id="playerNumber" name="playerNumber" required>
+            <input type="number" id="freeThrowMade" name="freeThrowMade" required>
+            <input type="number" id="freeThrowAttempt" name="freeThrowAttempt" required>
+            <button type="submit" onclick="addItem()">Add Free Throw</button>
+        </form>
+        <div class="button-container">
+            <button id="back_button" onclick="location.href='index.html'"> Back</button>
     </div>
 
     <ul id="itemList"></ul>
 
     <script>
+        // Function to add a free throw to the list
+function addItem() {
+    const playerNumber = document.getElementById('playerNymber').value;
+    const freeThrowMade = document.getElementById('freeThrowMadeInput').value;
+    const freeThrowAttempt = document.getElementById('freeThrowAttemptInput').value;
+    const item = {
+        playerNumber: playerNumber,
+        freeThrowMade: freeThrowMade,
+        freeThrowAttempt: freeThrowAttempt
+    };
+    addFreeThrow(item);
+}
 
-        function addItem(){
-            addPlayerAndFreeThrow();
+// Function to display free throws
+function displayItems() {
+    const itemList = document.getElementById('itemList');
+    itemList.innerHTML = '';
+    freeThrows.forEach(item => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${item.playerName} made ${item.freeThrowMade} out of ${item.freeThrowAttempt} free throws`;
+        itemList.appendChild(listItem);
+    });
+}
+
+// Function to fetch free throws from the API
+async function fetchFreeThrows() {
+    try {
+        const response = await fetch('http://localhost:8080/basketball_api/getFreeThrows');
+        if (!response.ok) {
+            throw new Error('Failed to fetch free throws');
         }
-        document.getElementById("playerName").addEventListener("keypress", function(event) {
-            if (event.key === "Enter") {
-                addItem();
-            }
-        });
-        document.getElementById("freeThrowMadeInput").addEventListener("keypress", function(event) {
-            if (event.key === "Enter") {
-                addItem();
-            }
-        });
-        document.getElementById("freeThrowAttemptInput").addEventListener("keypress", function(event) {
-            if (event.key === "Enter") {
-                addItem();
-            }
-        });
-        function addPlayerAndFreeThrow() {
-            var playerNameInput = document.getElementById("playerName");
-            var freeThrowMadeInput = document.getElementById("freeThrowMadeInput");
-            var freeThrowAttemptInput = document.getElementById("freeThrowAttemptInput");
-            
+        freeThrows = await response.json();
+        console.log('Free throws:', freeThrows);
+        displayItems();
+    } catch (error) {
+        console.error('Error fetching free throws:', error);
+    }
+}
 
-            <h2>Free Throw Tracker</h2>
-                var itemList = document.getElementById("itemList");
-                var listItem = document.createElement("li");
-                listItem.textContent = playerName + ": " + throwResult;
-                itemList.appendChild(listItem);
-                playerNameInput.value = "";
-                freeThrowMadeInput.value = "";
-                freeThrowAttemptInput.value = "";
-            }
-            // Add remove button
-            var removeButton = document.createElement("button");
-                removeButton.textContent = "Remove";
-                removeButton.onclick = function() {
-                    itemList.removeChild(listItem);
-                };
+        // Funtion to add a freethrow to the API
+async function addFreeThrow(freeThrow) {
+  try {
+      const response = await fetch('http://localhost:8080/basketball_api/addFreeThrow', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },  
+          body: JSON.stringify(freeThrow)
+      });
+      if (!response.ok) {
+          throw new Error('Failed to add free throw');
+      }
+      const addedFreeThrow = await response.json();
+      console.log('Added free throw:', addedFreeThrow);
+      return addedFreeThrow;
+  } catch (error) {
+      console.error('Error adding free throw:', error);
+      throw error;
+  }
+}
 
-                listItem.appendChild(removeButton);
-                itemList.appendChild(listItem);
+// Function to edit a freethrow in the API
+async function editFreeThrow(freeThrow) {
+  try {
+      const response = await fetch('http://localhost:8080/basketball_api/editFreeThrow', {
+          method: 'PUT',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(freeThrow)
+      });
+      if (!response.ok) {
+          throw new Error('Failed to edit free throw');
+      }
+      const editedFreeThrow = await response.json();
+      console.log('Edited free throw:', editedFreeThrow);
+      return editedFreeThrow;
+  } catch (error) {
+      console.error('Error editing free throw:', error);
+      throw error;
+  }
+}
+    async function handleSubmit(event){
 
-                playerNameInput.value = "";
-                freeThrowMadeInput.value = "";
-                freeThrowAttemptInput.value = "";
+    }
+
     </script>
+    <script src="app.js"></script>
 </body>
 </html>
