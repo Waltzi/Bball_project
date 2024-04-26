@@ -25,15 +25,16 @@
         <div class="button-container">
             <form id="player_form" onsubmit="handleSubmit(event)">
                 <div class="input-group">
-                <label for="jerseyNumber">Player #:</label>
-                <input type="number" id="jerseyNumber" name="jerseyNumber" required>
+                <label for="playerNumber">Player #:</label>
+                <input type="number" id="playerNumber" name="playerNumber" required>
                 <label for="freeThrowsMade">Free Throws Made:</label>
                 <div class="input-group">
-                <input type="number" id="freeThrowsMade" name="freeThrowsMade" required>
-                <label for="freeThrowsAttempted">Free Throws Attempted:</label>
+                    <label for="freeThrowsMade">Free Throws Made:</label>
+                    <input type="number" id="freeThrowsMade" name="freeThrowsMade" required>
+                </div>
                 <div class="input-group">
                 <input type="number" id="freeThrowsAttempted" name="freeThrowsAttempted" required>
-                <button type="submit">Add Free Throw</button>
+                <button type="submit" onclick="addItem()">Add Free Throw</button>
                 <button id="back_button" onclick="location.href='index.html'">Back</button>
             </form>
         </div>

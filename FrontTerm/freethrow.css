@@ -16,7 +16,8 @@ body {
 }
 
 .container {
-    max-width: 800px;
+
+    max-width: 1000px;
     margin: 0 auto;
     background-color: #fff;
     padding: 20px;
@@ -27,7 +28,7 @@ body {
 /* Grouped input styles */
 .input-group{
     display: flex;
-    justify-content: space-between;
+    align-items: center;
     margin-bottom: 20px;
 }
 
@@ -37,7 +38,7 @@ body {
 }
 
 .input-group input {
-    width: 50px;
+    width: 5px;
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 2px;
