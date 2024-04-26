@@ -10,7 +10,7 @@ body {
     font-family: Arial, sans-serif;
     padding: 20px;
     font-size: xx-large;
-    background-image: url('https://media.istockphoto.com/id/528769369/photo/player-practicing-a-free-throw.jpg?s=612x612&w=0&k=20&c=n6j03JFvhE264cl2KLRkM8HEs_JiLdX6rywek4cgcw0=');
+    background: url('https://media.istockphoto.com/id/528769369/photo/player-practicing-a-free-throw.jpg?s=612x612&w=0&k=20&c=n6j03JFvhE264cl2KLRkM8HEs_JiLdX6rywek4cgcw0=');
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -24,10 +24,16 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Grouped label and h2 styles */
 label, h2 {
     display: block;
     margin-bottom: 20px;
     font-size: xx-large;
+}
+
+h2 {
+    text-align: center;
+    color: white;
 }
 
 table {
@@ -36,37 +42,31 @@ table {
     margin-bottom: 20px;
 }
 
-table th,
-table td {
-    padding: 10px; /* Increased padding */
+table th, table td {
+    padding: 10px;
     text-align: left;
     border-bottom: 1px solid #ddd;
     font-size: 20px;
 }
 
 table th {
-    background-color: var(--primary-color); /* Different color for headers */
-    border: none; /* Remove border from headers */
+    background-color: var(--primary-color);
+    border: none;
     color: white;
 }
 
 table tr:nth-child(even) {
-    background-color: var(--even-row-color); /* Lighter color for even rows */
+    background-color: var(--even-row-color);
 }
 
 table tr:hover {
-    background-color: #ddd; /* Hover effect */
-}
-
-h2 {
-    text-align: center;
-    color: white;
+    background-color: #ddd;
 }
 
 input[type="text"], input[type="number"] {
-    width: 100px; /* Increased width */
-    padding: 10px; /* Adjusted padding */
-    margin-right: 30px; /* Increased space between input boxes */
+    width: 100px;
+    padding: 10px;
+    margin-right: 30px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 20px;
@@ -79,11 +79,9 @@ input[type="text"], input[type="number"] {
     justify-content: center;
 }
 
-
+/* Grouped button styles */
 button, li button {
     padding: 10px 20px;
-    background-color: var(--primary-color);
-    color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -91,7 +89,12 @@ button, li button {
     margin-right: 155px;
 }
 
-button:hover, li button:hover {
+button {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+button:hover {
     background-color: var(--hover-color);
 }
 
@@ -120,4 +123,3 @@ li {
     display: flex;
     justify-content: space-between;
 }
-
