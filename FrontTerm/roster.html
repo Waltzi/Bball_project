@@ -17,7 +17,7 @@
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Number</th>
-                    <th>Action</th>
+                    <th>Active</th>
                 </tr>
             </thead>
             <tbody id="roster_body">
@@ -25,10 +25,21 @@
         </table>
 
         <form id="player_form" onsubmit="handleSubmit(event)">
+          <div class="input-container">
+            <label for="firstName">First Name:</label>
             <input type="text" id="firstName" name="firstName" required>
+          </div>
+          <div class="input-container">
+            <label for="lastName">Last Name:</label>
             <input type="text" id="lastName" name="lastName" required>
+          </div>
+          <div class="input-container">
+            <label for="jerseyNumber">Number:</label>
             <input type="number" id="jerseyNumber" name="jerseyNumber" required>
+          </div>
+          <div class="input-container">
             <button type="submit">Add Player</button>
+          </div>
         </form>
         <script>
             //function to display data
