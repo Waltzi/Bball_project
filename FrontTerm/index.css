@@ -1,66 +1,72 @@
-/* Global styles */
+:root {
+    --primary-color: #007bff;
+    --hover-color: #0056b3;
+}
+
 body {
     font-family: Arial, sans-serif;
-    font-size: xx-large;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
+    background-image: url('https://moraviansports.com/sports/wbkb/2023-24/WBB23-24Team.jpg?max_width=900');
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
-/* Navigation bar styles */
-.NavBar {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
+.NavBar, #home, .button-group {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
 }
 
-.NavBar h1 {
-    margin: 0;
+.NavBar, button {
+    background-color: var(--primary-color);
+    color: white;
 }
 
-.NavBar ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+.NavBar, .img img {
+    padding: 2px 0;
 }
 
-.NavBar ul li {
-    display: inline-block;
-    margin-right: 10px;
+.NavBar, #home {
+    flex-direction: column;
 }
 
-/* Home section styles */
+.NavBar {
+    font-size: 2em;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
 #home {
-    text-align: center;
-    padding: 20px;
-}
-
-#home h1 {
-    margin-top: 20px;
-}
-
-#home button {
-    margin: 10px 5px; /* Adjust the second value as needed */
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: xx-large;
-}
-
-#home button:hover {
-    background-color: #0056b3;
-}
-
-/* Image styles */
-.img {
-    margin-top: 20px;
+    justify-content: center;
+    height: 500px;
+    padding: 30px;
 }
 
 .img img {
-    max-width: 100%;
+    max-width: 50%; /* Adjust this value to make the image smaller or larger */
+    height: auto;
+    display: block;
+    margin: auto;
+}
+
+.button-group {
+    justify-content: space-around;
+    width: 100%;
+}
+
+button {
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 20px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    padding: 20px 40px;
+}
+
+button:hover {
+    background-color: var(--hover-color);
 }

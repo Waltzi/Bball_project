@@ -5,45 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moravian Women's Basketball</title>
     <link rel="stylesheet" href="index.css">
-</head>
-<body>
-    <!-- Include React and ReactDOM libraries -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
-    <!-- Include Babel to compile JSX -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <link rel="stylesheet" href="index.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <!-- Root element for mounting React components -->
     <div id="root"></div>
-
-    <!-- JavaScript code for React components -->
     <script type="text/babel">
-        // React for NavBar
         function NavBar() {
             return (
-                <nav className="NavBar">
-                    <h1 className="left-align">Moravian University Women's Basketball</h1>
-                </nav>
+                <div class="NavBar">
+                    <h1>Moravian University Women's Basketball</h1>
+                    <div class="button-group">
+                        <button id="roster" onClick={() => { window.location.href = 'roster.html' }}>Roster</button>
+                        <button id="threepoint" onClick={() => { window.location.href = 'threepoint.html' }}>3-Pointers</button>
+                        <button id="freethrow" onClick={() => { window.location.href = 'freethrow.html' }}>Free Throws</button>
+                    </div>
+                </div>
             );
         }
 
-        // React for Home
         function Home() {
             return (
                 <section id="home">
-                    <div className="img">
-                        <img src="images/moravianlogo.jpeg" alt="Moravian Logo" />
-                    </div>
-                    <button id="roster" onClick={() => { window.location.href = 'roster.html' }}>Roster</button>
-                    <button id="threepoint" onClick={() => { window.location.href = 'threepoint.html' }}>3-Pointers</button>
-                    <button id="freethrow" onClick={() => { window.location.href = 'freethrow.html' }}>Free Throws</button>
                 </section>
             );
         }
 
-        // Render the NavBar and Home components into the root element
         ReactDOM.render(
             <React.Fragment>
                 <NavBar />

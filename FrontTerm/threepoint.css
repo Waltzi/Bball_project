@@ -1,3 +1,9 @@
+:root {
+    --primary-color: #007bff;
+    --hover-color: red;
+    --back-hover-color: #c82333;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -15,17 +21,11 @@ label {
     font-size: xx-large;
 }
 
-input[type="text"]{
+input[type="text"], input[type="number"] {
     width: 150px;
     padding: 5px;
     margin-bottom: 10px;
     justify-content: center;
-}
-
-input[type="number"] {
-    width: 150px;
-    padding: 5px;
-    margin-bottom: 10px;
 }
 
 .input-container {
@@ -37,14 +37,13 @@ input[type="number"] {
 
 button {
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: var(--primary-color);
     color: #fff;
     border: none;
     cursor: pointer;
     border-radius: 4px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
     font-size: 16px;
     margin: 4px 2px;
     display: flex;
@@ -60,7 +59,7 @@ button {
 }
 
 button:hover {
-    background-color: red;
+    background-color: var(--hover-color);
 }
 
 #result {
@@ -69,5 +68,5 @@ button:hover {
 }
 
 #back_button:hover {
-    background-color: #c82333; /* Darker Red */
+    background-color: var(--back-hover-color);
 }

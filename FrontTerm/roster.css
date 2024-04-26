@@ -1,8 +1,48 @@
+/* Existing styles */
+
+:root {
+    --primary-color: #007bff;
+    --hover-color: #0056b3;
+    --delete-color: #dc3545;
+    --delete-hover-color: #c82333;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
+    background: #f0f0f0;
+}
+
+.NavBar {
+    background-color: #007bff;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 2em;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.NavBar button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.NavBar button:hover {
+    background-color: #003d7a;
 }
 
 .container {
@@ -32,7 +72,7 @@ table td {
 }
 
 table th {
-    background-color: #f2f2f2;
+    background-color: #007bff;
 }
 
 form {
@@ -53,27 +93,75 @@ input[type="number"] {
     border-radius: 4px;
 }
 
-button {
+button, .delete-button {
     padding: 10px 20px;
-    background-color: #007bff;
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+}
+
+button {
+    background-color: var(--primary-color);
+}
+
+button:hover {
+    background-color: var(--hover-color);
+}
+
+.delete-button {
+    background-color: var(--delete-color);
+}
+
+.delete-button:hover {
+    background-color: var(--delete-hover-color);
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #4c5eaf;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #007bff;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    margin: 20px 0;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.4s;
 }
 
 button:hover {
     background-color: #0056b3;
-}
-
-.delete-button {
-    background-color: #dc3545;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.delete-button:hover {
-    background-color: #c82333;
 }

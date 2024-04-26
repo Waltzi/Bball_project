@@ -1,4 +1,10 @@
-/* Body styles */
+:root {
+    --primary-color: #007bff;
+    --hover-color: red;
+    --remove-color: #dc3545;
+    --remove-hover-color: #c82333;
+}
+
 body {
     font-family: Arial, sans-serif;
     padding: 20px;
@@ -6,7 +12,6 @@ body {
     font-size: xx-large;
 }
 
-/* Container styles */
 .container {
     max-width: 600px;
     margin: 0 auto;
@@ -16,20 +21,17 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-label {
+label, h2 {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     font-size: xx-large;
 }
 
-/* Heading styles */
 h2 {
     text-align: center;
-    margin-bottom: 20px;
     color: #333;
 }
 
-/* Input styles */
 input[type="text"] {
     width: 150px;
     padding: 10px;
@@ -46,10 +48,9 @@ input[type="text"] {
     justify-content: center;
 }
 
-/* Button styles */
-button {
+button, li button {
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: var(--primary-color);
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -57,11 +58,18 @@ button {
     font-size: 16px;
 }
 
-button:hover {
-    background-color: red;
+button:hover, li button:hover {
+    background-color: var(--hover-color);
 }
 
-/* List styles */
+li button {
+    background-color: var(--remove-color);
+}
+
+li button:hover {
+    background-color: var(--remove-hover-color);
+}
+
 ul {
     list-style-type: none;
     padding: 0;
@@ -73,18 +81,4 @@ li {
     display: flex;
     align-items: center;
     justify-content: space-between;
-}
-
-/* Remove button styles */
-li button {
-    background-color: #dc3545;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-li button:hover {
-    background-color: #c82333;
 }
