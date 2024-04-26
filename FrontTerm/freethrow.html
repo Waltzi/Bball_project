@@ -7,8 +7,7 @@
 </head>
 <body>
     <h2>Free Throw Tracker</h2>
-    <div class="input-container">
-        </div>
+    <div class="container">
         <table>
             <thead>
                 <tr>
@@ -20,14 +19,15 @@
             <tbody id="freeThrowTableBody">
             </tbody>
         </table>
-        <form id="player_form" onsubmit="handleSubmit(event)">
-            <input type="number" id="playerNumber" name="playerNumber" required>
-            <input type="number" id="freeThrowMade" name="freeThrowMade" required>
-            <input type="number" id="freeThrowAttempt" name="freeThrowAttempt" required>
-            <button type="submit" onclick="addItem()">Add Free Throw</button>
-        </form>
         <div class="button-container">
-            <button id="back_button" onclick="location.href='index.html'"> Back</button>
+            <form id="player_form" onsubmit="handleSubmit(event)">
+                <input type="number" id="playerNumber" name="playerNumber" required>
+                <input type="number" id="freeThrowMade" name="freeThrowMade" required>
+                <input type="number" id="freeThrowAttempt" name="freeThrowAttempt" required>
+                <button type="submit" onclick="addItem()">Add Free Throw</button>
+                <button id="back_button" onclick="location.href='index.html'">Back</button>
+            </form>
+        </div>
     </div>
 
     <ul id="itemList"></ul>
