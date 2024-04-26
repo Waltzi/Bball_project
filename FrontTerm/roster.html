@@ -130,6 +130,28 @@ async function addPlayer(player) {
        throw error;
    }
 }
+
+//Function to edit a player in the API
+async function editPlayer(player) {
+  try {
+      const response = await fetch('http://localhost:8080/basketball_api/editPlayer', {
+          method: 'PUT',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(player)
+      });
+      if (!response.ok) {
+          throw new Error('Failed to edit player');
+      }
+      const editedPlayer = await response.json();
+      console.log('Edited player:', editedPlayer);
+      return editedPlayer;
+  } catch (error) {
+      console.error('Error editing player:', error);
+      throw error;
+  }
+}
   
   // Function to handle form submission
 async function handleSubmit(event) {
