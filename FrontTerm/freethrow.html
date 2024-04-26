@@ -24,8 +24,11 @@
         </table>
         <div class="button-container">
             <form id="player_form" onsubmit="handleSubmit(event)">
+                <label for="playerNumber">Player #:</label>
                 <input type="number" id="playerNumber" name="playerNumber" required>
+                <label for="freeThrowsMade">Free Throws Made:</label>
                 <input type="number" id="freeThrowsMade" name="freeThrowsMade" required>
+                <label for="freeThrowsAttempted">Free Throws Attempted:</label>
                 <input type="number" id="freeThrowsAttempted" name="freeThrowsAttempted" required>
                 <button type="submit" onclick="addItem()">Add Free Throw</button>
                 <button id="back_button" onclick="location.href='index.html'">Back</button>
@@ -65,7 +68,7 @@ function displayItems() {
         freeThrowPercentageCell.textContent = freeThrow.freeThrowPercentage;
         row.appendChild(freeThrowPercentageCell);
         const practiceNumberCell = document.createElement('td');
-        practiceNumberCell.textContent = freeThrow.practiceNumber;
+        practiceNumberCell.textContent = freeThrow.practiceNum;
         row.appendChild(practiceNumberCell);
         const dateCell = document.createElement('td');
         dateCell.textContent = freeThrow.date;
