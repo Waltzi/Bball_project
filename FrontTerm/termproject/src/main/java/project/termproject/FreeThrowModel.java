@@ -9,7 +9,7 @@ public class FreeThrowModel {
     private int freeThrowsMade;
     private int freeThrowsAttempted;
     private double freeThrowPercentage;
-    private int practiceNumber;
+    private int practiceNum;
     private String date;
     
 }

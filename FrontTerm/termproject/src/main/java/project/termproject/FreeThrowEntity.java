@@ -1,5 +1,6 @@
 package project.termproject;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -36,6 +37,22 @@ public class FreeThrowEntity {
 
     public void setFreeThrowPercentage(double freeThrowPercentage) {
         this.freeThrowPercentage = freeThrowPercentage;
+    }
+
+    public String getDate() {
+        return this.date;
+    }
+
+    public int getPracticeNum() {
+        return this.practiceNum;
+    }
+
+    public void setPracticeNum(int practiceNum) {
+        this.practiceNum = practiceNum;
+    }
+
+    public int getJerseyNumber() {
+        return this.jerseyNumber;
     }
     
 }
