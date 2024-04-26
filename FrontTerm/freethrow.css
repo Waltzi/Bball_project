@@ -3,17 +3,20 @@
     --hover-color: red;
     --remove-color: #dc3545;
     --remove-hover-color: #c82333;
+    --even-row-color: #f8f8f8;
 }
 
 body {
     font-family: Arial, sans-serif;
     padding: 20px;
-    background-color: #f8f8f8;
     font-size: xx-large;
+    background-image: url('https://media.istockphoto.com/id/528769369/photo/player-practicing-a-free-throw.jpg?s=612x612&w=0&k=20&c=n6j03JFvhE264cl2KLRkM8HEs_JiLdX6rywek4cgcw0=');
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .container {
-    max-width: 600px;
+    max-width: 550px;
     margin: 0 auto;
     background-color: #fff;
     padding: 20px;
@@ -27,18 +30,46 @@ label, h2 {
     font-size: xx-large;
 }
 
-h2 {
-    text-align: center;
-    color: #333;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
 }
 
-input[type="text"] {
-    width: 150px;
-    padding: 10px;
-    margin-bottom: 10px;
+table th,
+table td {
+    padding: 10px; /* Increased padding */
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 20px;
+}
+
+table th {
+    background-color: var(--primary-color); /* Different color for headers */
+    border: none; /* Remove border from headers */
+    color: white;
+}
+
+table tr:nth-child(even) {
+    background-color: var(--even-row-color); /* Lighter color for even rows */
+}
+
+table tr:hover {
+    background-color: #ddd; /* Hover effect */
+}
+
+h2 {
+    text-align: center;
+    color: white;
+}
+
+input[type="text"], input[type="number"] {
+    width: 100px; /* Increased width */
+    padding: 10px; /* Adjusted padding */
+    margin-right: 30px; /* Increased space between input boxes */
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 16px;
+    font-size: 20px;
 }
 
 .input-container {
@@ -48,6 +79,7 @@ input[type="text"] {
     justify-content: center;
 }
 
+
 button, li button {
     padding: 10px 20px;
     background-color: var(--primary-color);
@@ -56,6 +88,7 @@ button, li button {
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+    margin-right: 155px;
 }
 
 button:hover, li button:hover {
@@ -82,3 +115,9 @@ li {
     align-items: center;
     justify-content: space-between;
 }
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
