@@ -46,4 +46,15 @@ public class PlayerServiceImpl implements PlayerService{
         }
         return playerModels;
     }
+
+    @Override
+    public PlayerModel getLatestPlayer() {
+        List<PlayerEntity> playerEntities = playerRepository.findAll();
+        PlayerModel playerModel = new PlayerModel();
+        if (playerEntities.size() > 0) {
+            PlayerEntity playerEntity = playerEntities.get(playerEntities.size() - 1);
+            BeanUtils.copyProperties(playerEntity, playerModel);
+        }
+        return playerModel;
+    }
 }

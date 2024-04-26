@@ -1,4 +1,5 @@
 //Parsing a JSON
+
 function parseJson(json) {
   try {
       return JSON.parse(json);

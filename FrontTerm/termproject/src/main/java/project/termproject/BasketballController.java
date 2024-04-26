@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 
-
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 @RestController
 @RequestMapping("/basketball_api/")
 public class BasketballController {
@@ -32,6 +34,11 @@ public class BasketballController {
     @GetMapping("/getPlayers")
     public List<PlayerModel> getPlayers() {
         return playerService.getAllPlayers();
+    }
+
+    @GetMapping("/getLatestPlayer")
+    public PlayerModel getLatestPlayer() {
+        return playerService.getLatestPlayer();
     }
     
     @PostMapping("/addPlayer")

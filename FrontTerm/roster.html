@@ -27,63 +27,124 @@
         <form id="player_form" onsubmit="handleSubmit(event)">
             <input type="text" id="firstName" name="firstName" required>
             <input type="text" id="lastName" name="lastName" required>
-            <input type="number" id="number" name="number" required>
+            <input type="number" id="jerseyNumber" name="jerseyNumber" required>
             <button type="submit">Add Player</button>
         </form>
         <script>
             //function to display data
 async function fetchData() {
-  try {
+    try {
     const response = await fetch('http://localhost:8080/basketball_api/getPlayers');
     if (!response.ok) {
       throw new Error('Failed to fetch data');
     }
-    const jsonData = await response.text();
-    const parsedData = parseJson(jsonData); // Parse JSON response
+    const players = await response.json(); // Parse JSON response
 
-    console.log('Parsed Data:', parsedData);
-    return parsedData;
+    // Get the table body
+    const tableBody = document.getElementById('roster_body');
+
+    // For each player, add a row to the table
+    players.forEach(player => {
+      const row = document.createElement('tr');
+
+      const firstNameCell = document.createElement('td');
+      firstNameCell.textContent = player.firstName;
+      row.appendChild(firstNameCell);
+
+      const lastNameCell = document.createElement('td');
+      lastNameCell.textContent = player.lastName;
+      row.appendChild(lastNameCell);
+
+      const numberCell = document.createElement('td');
+      numberCell.textContent = player.jerseyNumber;
+      row.appendChild(numberCell);
+
+      tableBody.appendChild(row);
+    });
   } catch (error) {
     console.error('Error fetching data:', error);
-    throw error;
   }
 }
 
-function DataDisplay() {
-  const [data, setData] = useState(null);
+window.onload = fetchData;
 
-  useEffect(() => {
-    const apiUrl = 'http://localhost:8080/basketball_api/getPlayers';
-    fetchData(apiUrl)
-      .then((parsedData) => {
-        setData(parsedData); // Set parsed data in component state
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-  }, []); // Run once on component mount
+
+async function fetchLatestPlayer() {
+  try {
+    const response = await fetch('http://localhost:8080/basketball_api/getLatestPlayer');
+    if (!response.ok) {
+      throw new Error('Failed to fetch latest player');
+    }
+    const latestPlayer = await response.json();
+
+    // Get the table body
+    const tableBody = document.getElementById('roster_body');
+
+    // Create a new row for the latest player
+    const row = document.createElement('tr');
+
+    const firstNameCell = document.createElement('td');
+    firstNameCell.textContent = latestPlayer.firstName;
+    row.appendChild(firstNameCell);
+
+    const lastNameCell = document.createElement('td');
+    lastNameCell.textContent = latestPlayer.lastName;
+    row.appendChild(lastNameCell);
+
+    const numberCell = document.createElement('td');
+    numberCell.textContent = latestPlayer.jerseyNumber;
+    row.appendChild(numberCell);
+
+    // Insert the row at the end of the table
+    tableBody.appendChild(row);
+  } catch (error) {
+    console.error('Error fetching latest player:', error);
+  }
 }
+
+
+
 
 // Function to add a player to the API
 async function addPlayer(player) {
-  try {
-      const response = await fetch('http://localhost:8080/basketball_api/addPlayer', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(player)
-      });
-      if (!response.ok) {
-          throw new Error('Failed to add player');
-      }
-      const addedPlayer = await response.json();
-      console.log('Added player:', addedPlayer);
-      return addedPlayer;
-  } catch (error) {
-      console.error('Error adding player:', error);
-      throw error;
-  }
+   try {
+       const response = await fetch('http://localhost:8080/basketball_api/addPlayer', {
+           method: 'POST',
+           headers: {
+               'Content-Type': 'application/json'
+           },
+           body: JSON.stringify(player)
+       });
+       if (!response.ok) {
+           throw new Error('Failed to add player');
+       }
+       const addedPlayer = await response.json();
+       console.log('Added player:', addedPlayer);
+       document.getElementById('firstName').value = '';
+       document.getElementById('lastName').value = '';
+       document.getElementById('jerseyNumber').value = '';
+       fetchLatestPlayer();
+       return addedPlayer;
+   } catch (error) {
+       console.error('Error adding player:', error);
+       throw error;
+   }
+    // try {
+    //     const response = await fetch('http://localhost:8080/basketball_api/addPlayer', {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify(player)
+    //     });
+    //     if (!response.ok) {
+    //         throw new Error('Failed to add player');
+    //     }
+    //     // After the player is added, fetch the list of players again
+    //     fetchLatestPlayer();
+    // } catch (error) {
+    //     console.error('Error adding player:', error);
+    // }
 }
   
   // Function to handle form submission
@@ -93,13 +154,13 @@ async function handleSubmit(event) {
   const id = null; // ID will be generated by the API
   const first_name = document.getElementById('firstName').value;
   const last_name = document.getElementById('lastName').value;
-  const jersey_number = document.getElementById('number').value;
+  const jersey_number = document.getElementById('jerseyNumber').value;
 
   const player = {
       id: null, // ID will be generated by the API
       firstName: first_name,
       lastName: last_name,
-      number: jersey_number
+      jerseyNumber: jersey_number
   };
 
   try {
