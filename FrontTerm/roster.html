@@ -129,22 +129,6 @@ async function addPlayer(player) {
        console.error('Error adding player:', error);
        throw error;
    }
-    // try {
-    //     const response = await fetch('http://localhost:8080/basketball_api/addPlayer', {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify(player)
-    //     });
-    //     if (!response.ok) {
-    //         throw new Error('Failed to add player');
-    //     }
-    //     // After the player is added, fetch the list of players again
-    //     fetchLatestPlayer();
-    // } catch (error) {
-    //     console.error('Error adding player:', error);
-    // }
 }
   
   // Function to handle form submission
