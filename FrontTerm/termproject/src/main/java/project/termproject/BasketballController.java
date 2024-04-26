@@ -65,6 +65,16 @@ public class BasketballController {
         return freeThrowService.editFreeThrow(freeThrow);
     }
 
+    @GetMapping("/getFreeThrows")
+    public List<FreeThrowModel> getFreeThrows() {
+        return freeThrowService.getAllFreeThrows();
+    }
+
+    @GetMapping("/getLatestFreeThrow")
+    public FreeThrowModel getLatestFreeThrow() {
+        return freeThrowService.getLatestFreeThrow();
+    }
+
     @PostMapping("/addThreePoint")
     public ThreePointModel addThreePoint(@RequestBody ThreePointModel threePoint) {
         

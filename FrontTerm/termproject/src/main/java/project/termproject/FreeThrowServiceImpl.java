@@ -4,6 +4,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class FreeThrowServiceImpl implements FreeThrowService{
@@ -46,6 +48,29 @@ public class FreeThrowServiceImpl implements FreeThrowService{
             freeThrowRepository.save(freeThrowEntity);
         }
         return freeThrow;
+    }
+
+    @Override
+    public List<FreeThrowModel> getAllFreeThrows() {
+        List<FreeThrowEntity> freeThrowEntities = freeThrowRepository.findAll();
+        List<FreeThrowModel> freeThrowModels = new ArrayList<>();
+        for (FreeThrowEntity freeThrowEntity : freeThrowEntities) {
+            FreeThrowModel freeThrowModel = new FreeThrowModel();
+            BeanUtils.copyProperties(freeThrowEntity, freeThrowModel);
+            freeThrowModels.add(freeThrowModel);
+        }
+        return freeThrowModels;
+    }
+
+    @Override
+    public FreeThrowModel getLatestFreeThrow() {
+        List<FreeThrowEntity> freeThrowEntities = freeThrowRepository.findAll();
+        FreeThrowModel freeThrowModel = new FreeThrowModel();
+        if (freeThrowEntities.size() > 0) {
+            FreeThrowEntity freeThrowEntity = freeThrowEntities.get(freeThrowEntities.size() - 1);
+            BeanUtils.copyProperties(freeThrowEntity, freeThrowModel);
+        }
+        return freeThrowModel;
     }
     
 }

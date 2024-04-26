@@ -19,7 +19,7 @@ public class FreeThrowEntity {
     private int freeThrowsMade;
     private int freeThrowsAttempted;
     private double freeThrowPercentage;
-    private int practiceNumber;
+    private int practiceNum;
     private String date;
 
     public void setDate(String date) {
