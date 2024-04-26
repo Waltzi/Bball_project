@@ -25,15 +25,15 @@
         <div class="button-container">
             <form id="player_form" onsubmit="handleSubmit(event)">
                 <div class="input-group">
-                <label for="playerNumber">Player #:</label>
-                <input type="number" id="playerNumber" name="playerNumber" required>
+                <label for="jerseyNumber">Player #:</label>
+                <input type="number" id="jerseyNumber" name="jerseyNumber" required>
                 <label for="freeThrowsMade">Free Throws Made:</label>
                 <div class="input-group">
                 <input type="number" id="freeThrowsMade" name="freeThrowsMade" required>
                 <label for="freeThrowsAttempted">Free Throws Attempted:</label>
                 <div class="input-group">
                 <input type="number" id="freeThrowsAttempted" name="freeThrowsAttempted" required>
-                <button type="submit" onclick="addItem()">Add Free Throw</button>
+                <button type="submit">Add Free Throw</button>
                 <button id="back_button" onclick="location.href='index.html'">Back</button>
             </form>
         </div>
@@ -41,26 +41,16 @@
 
     <script>
         // Function to add a free throw to the list
-function addItem() {
-    const playerNumber = document.getElementById('playerNumber').value;
-    const freeThrowMade = document.getElementById('freeThrowsMade').value;
-    const freeThrowAttempt = document.getElementById('freeThrowsAttempted').value;
-    const item = {
-        jerseyNumber: playerNumber,
-        freeThrowsMade: freeThrowMade,
-        freeThrowsAttempted: freeThrowAttempt
-    };
-    addFreeThrow(item);
-}
+
 
 // Function to display free throws
 function displayItems() {
     const freeThrowTable = document.getElementById('freeThrowTableBody');
     freeThrows.forEach(freeThrow => {
         const row = document.createElement('tr');
-        const playerNumberCell = document.createElement('td');
-        playerNumberCell.textContent = freeThrow.jerseyNumber;
-        row.appendChild(playerNumberCell);
+        const jerseyNumberCell = document.createElement('td');
+        jerseyNumberCell.textContent = freeThrow.jerseyNumber;
+        row.appendChild(jerseyNumberCell);
         const freeThrowsMadeCell = document.createElement('td');
         freeThrowsMadeCell.textContent = freeThrow.freeThrowsMade;
         row.appendChild(freeThrowsMadeCell);
@@ -100,24 +90,27 @@ async function fetchFreeThrows() {
 
         // Funtion to add a freethrow to the API
 async function addFreeThrow(freeThrow) {
-  try {
-      const response = await fetch('http://localhost:8080/basketball_api/addFreeThrow', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json'
-          },  
-          body: JSON.stringify(freeThrow)
-      });
-      if (!response.ok) {
-          throw new Error('Failed to add free throw');
-      }
-      const addedFreeThrow = await response.json();
-      console.log('Added free throw:', addedFreeThrow);
-      return addedFreeThrow;
-  } catch (error) {
-      console.error('Error adding free throw:', error);
-      throw error;
-  }
+try {
+    const response = await fetch('http://localhost:8080/basketball_api/addFreeThrow', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },  
+        body: JSON.stringify(freeThrow)
+    });
+    if (!response.ok) {
+        throw new Error('Failed to add free throw');
+    }
+    const addedFreeThrow = await response.json();
+    console.log('Added free throw:', addedFreeThrow);
+    document.getElementById('jerseyNumber').value = '';
+    document.getElementById('freeThrowsMade').value = '';
+    document.getElementById('freeThrowsAttempted').value = '';
+    return addedFreeThrow;
+} catch (error) {
+    console.error('Error adding free throw:', error);
+    throw error;
+}
 }
 
 // Function to edit a freethrow in the API
@@ -142,7 +135,30 @@ async function editFreeThrow(freeThrow) {
   }
 }
     async function handleSubmit(event){
+        event.preventDefault(); // Prevent default form submission
 
+        const id = null;
+        const jersey_Number = document.getElementById('jerseyNumber').value;
+        const free_Throws_Made = document.getElementById('freeThrowsMade').value;
+        const free_Throws_Attempted = document.getElementById('freeThrowsAttempted').value;
+        const item = {
+            id: null,
+            jerseyNumber: jersey_Number,
+            freeThrowsMade: free_Throws_Made,
+            freeThrowsAttempted: free_Throws_Attempted
+        };
+        
+        try {
+            const addedFreeThrow = await addFreeThrow(item); // Call addFreeThrow function with freeThrow data
+            console.log('Free throw added:', addedFreeThrow);
+
+            // Optionally, update the UI or display a success message
+            alert('Free throw added successfully!');
+        } catch (error) {
+            console.error('Error adding free throw:', error);
+            // Handle error (e.g., display error message)
+            alert('Failed to add free throw. Please try again.');
+        }
     }
 
     </script>
