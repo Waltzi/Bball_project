@@ -11,6 +11,14 @@
     <h1>Moravian Women's Basketball Roster</h1>
     <button id="back_button" onclick="location.href='index.html'">Back</button>
     <div class="container">
+      <div class="input-container">
+        <label for="filter">Filter:</label>
+        <select id="filter">
+            <option value="all">All</option>
+            <option value="active" selected>Active</option>
+            <option value="inactive">Inactive</option>
+        </select>
+      </div>
         <table>
             <thead>
                 <tr>
@@ -42,7 +50,8 @@
           </div>
         </form>
         <script>
-            //function to display data
+            
+//function to display data
 async function fetchData() {
     try {
     const response = await fetch('http://localhost:8080/basketball_api/getPlayers');
@@ -70,16 +79,25 @@ async function fetchData() {
       numberCell.textContent = player.jerseyNumber;
       row.appendChild(numberCell);
 
+      // Create a new cell for the checkbox
+      const activeCell = document.createElement('td');
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.checked = player.active; // Assume 'active' is a property of the player object
+      activeCell.appendChild(checkbox);
+      row.appendChild(activeCell);
+
       tableBody.appendChild(row);
     });
+
+    // Filter the players based on the selected filter\
+    filterPlayers();
   } catch (error) {
     console.error('Error fetching data:', error);
   }
 }
 
-window.onload = fetchData;
-
-
+// Fetch the latest player and add it to the table
 async function fetchLatestPlayer() {
   try {
     const response = await fetch('http://localhost:8080/basketball_api/getLatestPlayer');
@@ -106,15 +124,45 @@ async function fetchLatestPlayer() {
     numberCell.textContent = latestPlayer.jerseyNumber;
     row.appendChild(numberCell);
 
+    // Create a new cell for the checkbox
+    const activeCell = document.createElement('td');
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.checked = true; // The latest player is always active
+    activeCell.appendChild(checkbox);
+    row.appendChild(activeCell);
+
     // Insert the row at the end of the table
     tableBody.appendChild(row);
+
+    filterPlayers();
   } catch (error) {
     console.error('Error fetching latest player:', error);
   }
 }
 
+// Function to filter the players based on the selected filter
+function filterPlayers() {
+    // Get the selected filter
+    const filter = document.getElementById('filter').value;
 
+    // Get the table rows
+    const rows = document.getElementById('roster_body').rows;
 
+    // For each row, hide it if it doesn't match the filter
+    for (let i = 0; i < rows.length; i++) {
+        const checkbox = rows[i].cells[3].firstChild;
+        if ((filter === 'active' && !checkbox.checked) || (filter === 'inactive' && checkbox.checked)) {
+            rows[i].style.display = 'none';
+        } else {
+            rows[i].style.display = '';
+        }
+    }
+}
+
+document.getElementById('filter').addEventListener('change', filterPlayers);
+
+window.onload = fetchData;
 
 // Function to add a player to the API
 async function addPlayer(player) {
