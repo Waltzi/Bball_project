@@ -1,12 +1,13 @@
 :root {
     --primary-color: #007bff;
     --hover-color: red;
-    --back-hover-color: #c82333;
+    --remove-color: #dc3545;
+    --remove-hover-color: #c82333;
+    --even-row-color: #f8f8f8;
 }
 
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
     padding: 20px;
     font-size: xx-large;
     background: url("https://assets.simpleviewinc.com/simpleview/image/upload/c_limit,q_75,w_1200/v1/crm/discoverlehighvalley/JohnstonHall2013_F3BB062D-5056-A36A-0781EF046EC1DD96-f3bb05a15056a36_f3bb06ac-5056-a36a-073f26235bc68c4f.jpg");
@@ -28,10 +29,16 @@ h1 {
     color: white;
 }
 
-label {
+/* Grouped label and h2 styles */
+label, h2 {
     display: block;
     margin-bottom: 5px;
-    font-size: large;
+    font-size: xx-large;
+}
+
+h2 {
+    text-align: center;
+    color: white;
 }
 
 table {
@@ -62,12 +69,10 @@ table tr:hover {
 }
 
 input[type="text"], input[type="number"] {
-    width: 100px;
-    padding: 10px;
-    margin-left: 0px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 15px;
+    width: 150px;
+    padding: 5px;
+    margin-bottom: 10px;
+    justify-content: center;
 }
 
 .input-container {
@@ -77,23 +82,23 @@ input[type="text"], input[type="number"] {
     justify-content: flex-start;
 }
 
-button {
+/* Grouped button styles */
+button, li button {
     padding: 10px 20px;
-    background-color: var(--primary-color);
-    color: #fff;
     border: none;
-    cursor: pointer;
     border-radius: 4px;
-    text-align: center;
-    text-decoration: none;
+    cursor: pointer;
     font-size: 16px;
     margin: 4px 2px;
-    display: inline-block; /* Changed from flex to inline-block */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .button-container {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     width: 100%;
 }
 
@@ -105,7 +110,10 @@ button:hover {
     background-color: var(--back-hover-color);
 }
 
-#result {
-    margin-top: 10px;
-    font-weight: bold;
+li button {
+    background-color: var(--remove-color);
+}
+
+#back_button:hover {
+    background-color: var(--back-hover-color);
 }

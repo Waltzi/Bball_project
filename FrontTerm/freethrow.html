@@ -88,10 +88,9 @@ async function fetchFreeThrows() {
     } catch (error) {
         console.error('Error fetching free throws:', error);
     }
-
 }
 
-        // Funtion to add a freethrow to the API
+// Funtion to add a freethrow to the API
 async function addFreeThrow(freeThrow) {
 try {
     const response = await fetch('http://localhost:8080/basketball_api/addFreeThrow', {
@@ -137,6 +136,7 @@ async function editFreeThrow(freeThrow) {
       throw error;
   }
 }
+
     async function handleSubmit(event){
         event.preventDefault(); // Prevent default form submission
 
