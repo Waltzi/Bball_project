@@ -8,16 +8,38 @@
 </head>
 <body>
     <h1>3-Point Shot Percentage Calculator</h1>
-    <div class="input-container">
-        <label for="playerName">Player Name:</label>
-        <input type="text" id="playerName" required>
-        <label for="made">3-Pointers Made:</label>
-        <input type="number" id="made" required>
-        <label for="attempted">3-Pointers Attempted:</label>
-        <input type="number" id="attempted" required>
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Player Name</th>
+                    <th>3-Pointers Made</th>
+                    <th>3-Pointers Attempted</th>
+                    <th>3-Pointers Percentage</th>
+                </tr>
+            </thead>
+            <tbody id="threePointerTableBody">
+            </tbody>
+        </table>
         <div class="button-container">
-            <button onclick="calculatePercentage()">Calculate Percentage</button>
-            <button id="back_button" onclick="location.href='index.html'"> Back</button>
+            <form id="player_form" onsubmit="handleSubmit(event)">
+                <div class="input-group">
+                    <label for="playerName">Player Name:</label>
+                    <input type="text" id="player name" required>
+                </div>
+                <div class="input-group">
+                    <label for="made">3-Pointers Made:</label>
+                    <input type="number" id="made" required>
+                </div>
+                <div class="input-group">
+                    <label for="attempted">3-Pointers Attempted:</label>
+                    <input type="number" id="attempted" required>
+                </div>
+                <div class="button-container">
+                    <button onclick="calculatePercentage()">Calculate Percentage</button>
+                    <button id="back_button" onclick="location.href='index.html'"> Back</button>
+                </div>
+            </form>
         </div>
     </div>
     <script>

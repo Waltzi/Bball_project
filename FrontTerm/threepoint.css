@@ -9,30 +9,72 @@ body {
     margin: 0;
     padding: 20px;
     font-size: xx-large;
+    background: url("https://assets.simpleviewinc.com/simpleview/image/upload/c_limit,q_75,w_1200/v1/crm/discoverlehighvalley/JohnstonHall2013_F3BB062D-5056-A36A-0781EF046EC1DD96-f3bb05a15056a36_f3bb06ac-5056-a36a-073f26235bc68c4f.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 0; /* Corrected from 'px' to '0' */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
     text-align: center;
+    color: white;
 }
 
 label {
     display: block;
     margin-bottom: 5px;
-    font-size: xx-large;
+    font-size: large;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 20px;
+}
+
+table th {
+    background-color: var(--primary-color);
+    border: none;
+    color: white;
+}
+
+table tr:nth-child(even) {
+    background-color: var(--even-row-color);
+}
+
+table tr:hover {
+    background-color: #ddd;
 }
 
 input[type="text"], input[type="number"] {
-    width: 150px;
-    padding: 5px;
-    margin-bottom: 10px;
-    justify-content: center;
+    width: 100px;
+    padding: 10px;
+    margin-left: 0px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 15px;
 }
 
 .input-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 button {
@@ -46,15 +88,12 @@ button {
     text-decoration: none;
     font-size: 16px;
     margin: 4px 2px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    display: inline-block; /* Changed from flex to inline-block */
 }
 
 .button-container {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     width: 100%;
 }
 
@@ -62,11 +101,11 @@ button:hover {
     background-color: var(--hover-color);
 }
 
+#back_button:hover {
+    background-color: var(--back-hover-color);
+}
+
 #result {
     margin-top: 10px;
     font-weight: bold;
-}
-
-#back_button:hover {
-    background-color: var(--back-hover-color);
 }
