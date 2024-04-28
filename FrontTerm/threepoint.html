@@ -8,6 +8,14 @@
 <body>
     <h2>Three-Pointer Tracker</h2>
     <div class="container">
+    <label for="filterDate">Sort:</label>
+    <select id="filterDate">
+        <option value="">Select...</option>
+        <option value="desc">Most Recent</option>
+        <option value="asc">Oldest</option>
+    </select>
+    <label for="filterPlayerNumber">Filter by Player Number:</label>
+    <input type="number" id="filterPlayerNumber">
         <table>
             <thead>
                 <tr>
@@ -47,6 +55,7 @@
 // Function to display three-pointers
 function displayItems() {
     const threePointerTable = document.getElementById('threePointerTableBody');
+    threePointerTable.innerHTML = '';
     threePointers.forEach(threePointer => {
         const row = document.createElement('tr');
         const jerseyNumberCell = document.createElement('td');
@@ -59,7 +68,7 @@ function displayItems() {
         threePointersAttemptedCell.textContent = threePointer.threePointersAttempted;
         row.appendChild(threePointersAttemptedCell);
         const threePointerPercentageCell = document.createElement('td');
-        threePointerPercentageCell.textContent = threePointer.threePointerPercentage;
+        threePointerPercentageCell.textContent = threePointer.threePointPercentage;
         row.appendChild(threePointerPercentageCell);
         const practiceNumberCell = document.createElement('td');
         practiceNumberCell.textContent = threePointer.practiceNum;
@@ -73,22 +82,74 @@ function displayItems() {
 
 window.onload = fetchThreePointers();
 
+document.getElementById('filterDate').addEventListener('change', () => {
+    const filterDate = document.getElementById('filterDate').value;
+    fetchThreePointers(filterDate);
+});
+
+document.getElementById('filterPlayerNumber').addEventListener('input', () => {
+    const filterPlayerNumber = document.getElementById('filterPlayerNumber').value;
+    const filterDate = document.getElementById('filterDate').value;
+    fetchThreePointers(filterDate, filterPlayerNumber);
+});
+
 // function to fetch all three pointers from the API and display them in the table
-async function fetchThreePointers() {
+async function fetchThreePointers(filterDate = '', filterPlayerNumber = '') {
   try {
       const response = await fetch('http://localhost:8080/basketball_api/getThreePoints');
       if (!response.ok) {
           throw new Error('Failed to fetch 3-pointers');
       }
-      const threePointers = await response.json();
+      threePointers = await response.json();
       console.log('Fetched 3-pointers:', threePointers);
+      if (filterDate === 'desc') {
+          threePointers.sort((a, b) => new Date(b.date) - new Date(a.date));
+      } else if (filterDate === 'asc') {
+          threePointers.sort((a, b) => new Date(a.date) - new Date(b.date));
+      }
+      if (filterPlayerNumber) {
+          threePointers = threePointers.filter(threePointer => threePointer.jerseyNumber === Number(filterPlayerNumber));
+      }
       displayItems();
   } catch (error) {
       console.error('Error fetching 3-pointers:', error);
   }
 }
 
-window.onload = fetchThreePointers();
+// Function to get the latest three pointer from the API and it to the table
+async function fetchLatestThreePointer() {
+  try {
+      const response = await fetch('http://localhost:8080/basketball_api/getLatestThreePointer');
+      if (!response.ok) {
+          throw new Error('Failed to fetch latest 3-pointer');
+      }
+      const latestThreePointer = await response.json();
+      console.log('Latest 3-pointer:', latestThreePointer);
+      const threePointerTable = document.getElementById('threePointerTableBody');
+      const row = document.createElement('tr');
+      const jerseyNumberCell = document.createElement('td');
+      jerseyNumberCell.textContent = latestThreePointer.jerseyNumber;
+      row.appendChild(jerseyNumberCell);
+      const threePointersMadeCell = document.createElement('td');
+      threePointersMadeCell.textContent = latestThreePointer.threePointersMade;
+      row.appendChild(threePointersMadeCell);
+      const threePointersAttemptedCell = document.createElement('td');
+      threePointersAttemptedCell.textContent = latestThreePointer.threePointersAttempted;
+      row.appendChild(threePointersAttemptedCell);
+      const threePointerPercentageCell = document.createElement('td');
+      threePointerPercentageCell.textContent = latestThreePointer.threePointPercentage;
+      row.appendChild(threePointerPercentageCell);
+      const practiceNumberCell = document.createElement('td');
+      practiceNumberCell.textContent = latestThreePointer.practiceNum;
+      row.appendChild(practiceNumberCell);
+      const dateCell = document.createElement('td');
+      dateCell.textContent = latestThreePointer.date;
+      row.appendChild(dateCell);
+      threePointerTable.appendChild(row);
+  } catch (error) {
+      console.error('Error fetching latest 3-pointer:', error);
+  }
+}
 
 // Function to add a 3-pointer to the API
 async function addThreePointer(threePointer) {
@@ -106,9 +167,10 @@ async function addThreePointer(threePointer) {
       const addedThreePointer = await response.json();
       console.log('Added 3-pointer:', addedThreePointer);
       //clear the input fields
-      document.getElementById('playerName').value = '';
+      document.getElementById('jerseyNumber').value = '';
       document.getElementById('threePointersMade').value = '';
       document.getElementById('threePointersAttempted').value = '';
+      fetchLatestThreePointer();
       return addedThreePointer;
   } catch (error) {
       console.error('Error adding 3-pointer:', error);

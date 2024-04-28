@@ -8,6 +8,14 @@
 <body>
     <h2>Free Throw Tracker</h2>
     <div class="container">
+    <label for="filterDate">Sort:</label>
+    <select id="filterDate">
+        <option value="">Select...</option>
+        <option value="desc">Most Recent</option>
+        <option value="asc">Oldest</option>
+    </select>
+    <label for="filterPlayerNumber">Filter by Player Number:</label>
+    <input type="number" id="filterPlayerNumber">
         <table>
             <thead>
                 <tr>
@@ -43,12 +51,11 @@
     </div>
 
     <script>
-        // Function to add a free throw to the list
-
 
 // Function to display free throws
 function displayItems() {
     const freeThrowTable = document.getElementById('freeThrowTableBody');
+    freeThrowTable.innerHTML = '';
     freeThrows.forEach(freeThrow => {
         const row = document.createElement('tr');
         const jerseyNumberCell = document.createElement('td');
@@ -75,8 +82,19 @@ function displayItems() {
 
 window.onload = fetchFreeThrows();
 
+document.getElementById('filterDate').addEventListener('change', () => {
+    const filterDate = document.getElementById('filterDate').value;
+    fetchFreeThrows(filterDate);
+});
+
+document.getElementById('filterPlayerNumber').addEventListener('input', () => {
+    const filterPlayerNumber = document.getElementById('filterPlayerNumber').value;
+    const filterDate = document.getElementById('filterDate').value;
+    fetchFreeThrows(filterDate, filterPlayerNumber);
+});
+
 // Function to fetch free throws from the API
-async function fetchFreeThrows() {
+async function fetchFreeThrows(filterDate = '', filterPlayerNumber = '') {
     try {
         const response = await fetch('http://localhost:8080/basketball_api/getFreeThrows');
         if (!response.ok) {
@@ -84,9 +102,52 @@ async function fetchFreeThrows() {
         }
         freeThrows = await response.json();
         console.log('Free throws:', freeThrows);
+        if (filterDate === 'desc') {
+            freeThrows.sort((a, b) => new Date(b.date) - new Date(a.date));
+        } else if (filterDate === 'asc') {
+            freeThrows.sort((a, b) => new Date(a.date) - new Date(b.date));
+        }
+        if (filterPlayerNumber) {
+            freeThrows = freeThrows.filter(freeThrow => freeThrow.jerseyNumber === Number(filterPlayerNumber));
+        }
         displayItems();
     } catch (error) {
         console.error('Error fetching free throws:', error);
+    }
+}
+
+// Function to get the latest free throw from the API and it to the table
+async function fetchLatestFreeThrow() {
+    try {
+        const response = await fetch('http://localhost:8080/basketball_api/getLatestFreeThrow');
+        if (!response.ok) {
+            throw new Error('Failed to fetch latest free throw');
+        }
+        const latestFreeThrow = await response.json();
+        console.log('Latest free throw:', latestFreeThrow);
+        const freeThrowTable = document.getElementById('freeThrowTableBody');
+        const row = document.createElement('tr');
+        const jerseyNumberCell = document.createElement('td');
+        jerseyNumberCell.textContent = latestFreeThrow.jerseyNumber;
+        row.appendChild(jerseyNumberCell);
+        const freeThrowsMadeCell = document.createElement('td');
+        freeThrowsMadeCell.textContent = latestFreeThrow.freeThrowsMade;
+        row.appendChild(freeThrowsMadeCell);
+        const freeThrowsAttemptedCell = document.createElement('td');
+        freeThrowsAttemptedCell.textContent = latestFreeThrow.freeThrowsAttempted;
+        row.appendChild(freeThrowsAttemptedCell);
+        const freeThrowPercentageCell = document.createElement('td');
+        freeThrowPercentageCell.textContent = latestFreeThrow.freeThrowPercentage;
+        row.appendChild(freeThrowPercentageCell);
+        const practiceNumberCell = document.createElement('td');
+        practiceNumberCell.textContent = latestFreeThrow.practiceNum;
+        row.appendChild(practiceNumberCell);
+        const dateCell = document.createElement('td');
+        dateCell.textContent = latestFreeThrow.date;
+        row.appendChild(dateCell);
+        freeThrowTable.appendChild(row);
+    } catch (error) {
+        console.error('Error fetching latest free throw:', error);
     }
 }
 
@@ -108,6 +169,7 @@ try {
     document.getElementById('jerseyNumber').value = '';
     document.getElementById('freeThrowsMade').value = '';
     document.getElementById('freeThrowsAttempted').value = '';
+    fetchLatestFreeThrow();
     return addedFreeThrow;
 } catch (error) {
     console.error('Error adding free throw:', error);
