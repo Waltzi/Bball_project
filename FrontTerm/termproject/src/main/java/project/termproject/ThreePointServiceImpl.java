@@ -23,6 +23,13 @@ public class ThreePointServiceImpl implements ThreePointService{
         String formattedDate = date.format(dateFormatter);
         threePoint.setDate(formattedDate);
 
+        // double freeThrowPercentage = (double) freeThrow.getFreeThrowsMade() / freeThrow.getFreeThrowsAttempted();
+        // freeThrowPercentage = Double.parseDouble(String.format("%.2f", freeThrowPercentage));
+        // freeThrow.setFreeThrowPercentage(freeThrowPercentage);
+        double threePointPercentage = (double) threePoint.getThreePointersMade() / threePoint.getThreePointersAttempted();
+        threePointPercentage = Double.parseDouble(String.format("%.2f", threePointPercentage));
+        threePoint.setThreePointPercentage(threePointPercentage);
+        
         ThreePointEntity threePointEntity = new ThreePointEntity();
         List<ThreePointEntity> threePointEntities = threePointRepository.findAll();
 
