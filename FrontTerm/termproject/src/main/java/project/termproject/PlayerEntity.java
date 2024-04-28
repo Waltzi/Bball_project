@@ -19,6 +19,7 @@ public class PlayerEntity {
     private String firstName;
     private String lastName;
     private int jerseyNumber;
+    private Boolean active = true;
     
     
     // Getters and setters
@@ -44,6 +45,14 @@ public class PlayerEntity {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public Boolean getActive() {
+        return active;
     }
     
     

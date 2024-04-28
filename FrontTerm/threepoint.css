@@ -1,6 +1,7 @@
 :root {
     --primary-color: #007bff;
     --hover-color: red;
+    --back-hover-color: #c82333;
     --remove-color: #dc3545;
     --remove-hover-color: #c82333;
     --even-row-color: #f8f8f8;
@@ -10,50 +11,38 @@ body {
     font-family: Arial, sans-serif;
     padding: 20px;
     font-size: xx-large;
+    background: url("https://assets.simpleviewinc.com/simpleview/image/upload/c_limit,q_75,w_1200/v1/crm/discoverlehighvalley/JohnstonHall2013_F3BB062D-5056-A36A-0781EF046EC1DD96-f3bb05a15056a36_f3bb06ac-5056-a36a-073f26235bc68c4f.jpg");
     background-size: cover;
     background-repeat: no-repeat;
 }
 
 .container {
-
     max-width: 1000px;
     margin: 0 auto;
     background-color: #fff;
     padding: 20px;
-    border-radius: px;
+    border-radius: 0; /* Corrected from 'px' to '0' */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Grouped input styles */
-.input-group{
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.input-group label {
-    margin-right: 20px;
-    font-size: 20px;
-}
-
-.input-group input {
-    width: 5px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 2px;
-    font-size: 10px;
+h1 {
+    text-align: center;
+    color: white;
 }
 
 /* Grouped label and h2 styles */
-label, h2 {
+label {
     display: block;
-    margin-bottom: 20px;
-    font-size: xx-large;
+    margin-bottom: 5px;
+    font-size: large;
 }
 
 h2 {
     text-align: center;
     color: white;
+    display: block;
+    margin-bottom: 5px;
+    font-size: xx-large;
 }
 
 table {
@@ -84,37 +73,45 @@ table tr:hover {
 }
 
 input[type="text"], input[type="number"] {
-    width: 100px;
-    padding: 10px;
-    margin-right: 30px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 20px;
+    width: 150px;
+    padding: 5px;
+    margin-bottom: 10px;
+    justify-content: center;
 }
 
 .input-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 /* Grouped button styles */
 button, li button {
     padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-right: 155px;
-}
-
-button {
     background-color: var(--primary-color);
     color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    display: inline-block; /* Changed from flex to inline-block */
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
 }
 
 button:hover {
+    background-color: var(--hover-color);
+}
+
+#back_button:hover {
     background-color: var(--hover-color);
 }
 
@@ -122,24 +119,6 @@ li button {
     background-color: var(--remove-color);
 }
 
-li button:hover {
-    background-color: var(--remove-hover-color);
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.button-container {
-    display: flex;
-    justify-content: space-between;
+#back_button:hover {
+    background-color: var(--back-hover-color);
 }

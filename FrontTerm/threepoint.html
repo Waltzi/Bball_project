@@ -116,6 +116,8 @@ async function fetchThreePointers(filterDate = '', filterPlayerNumber = '') {
   }
 }
 
+window.onload = fetchThreePointers();
+
 // Function to get the latest three pointer from the API and it to the table
 async function fetchLatestThreePointer() {
   try {

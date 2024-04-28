@@ -8,4 +8,5 @@ public class PlayerModel {
     private String firstName;
     private String lastName;
     private int jerseyNumber;
+    private Boolean active = true;
 }

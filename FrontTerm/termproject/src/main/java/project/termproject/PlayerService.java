@@ -7,4 +7,6 @@ public interface PlayerService {
     PlayerModel editPlayer(PlayerModel player);
     List<PlayerModel> getAllPlayers();
     PlayerModel getLatestPlayer();
+    void updateActiveStatus(Long id, Boolean activeStatus);
+    
 }
