@@ -84,7 +84,8 @@ async function fetchData() {
       const activeCell = document.createElement('td');
       const checkbox = document.createElement('input');
       checkbox.type = 'checkbox';
-      checkbox.checked = player.active; // Assume 'active' is a property of the player object
+      checkbox.checked = player.active;
+      checkbox.addEventListener('change', () => updatePlayerActiveStatus(player.id, checkbox.checked)); // Assume 'active' is a property of the player object
       activeCell.appendChild(checkbox);
       row.appendChild(activeCell);
 
@@ -130,13 +131,9 @@ async function fetchLatestPlayer() {
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.checked = latestPlayer.active;
+    checkbox.addEventListener('change', () => updatePlayerActiveStatus(latestPlayer.id, checkbox.checked));
     activeCell.appendChild(checkbox);
     row.appendChild(activeCell);
-
-    // Add event listener to the checkbox
-    checkbox.addEventListener('change', () => {
-        updatePlayerActiveStatus(latestPlayer.id, checkbox);
-    });
 
     tableBody.appendChild(row);
 
@@ -146,23 +143,24 @@ async function fetchLatestPlayer() {
   }
 }
 
-// Function to update player active status
-function updatePlayerActiveStatus(playerId, checkbox) {
-  fetch(`http://localhost:8080/basketball_api//${playerId}/active`, {
-      method: 'PUT',
-      headers: {
-          'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ active: checkbox.checked }),
-  })
-  .then(response => {
-      if (!response.ok) {
-          throw new Error('Network response was not ok');
-      }
-  })
-  .catch(error => {
-      console.error('Error:', error);
-  });
+// Function to update a player's active status in the database
+async function updatePlayerActiveStatus(playerId, checkbox) {
+    try {
+        const response = await fetch(`http://localhost:8080/basketball_api/${playerId}/active`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(checkbox),
+        });
+        if (!response.ok) {
+            throw new Error('Failed to update player status');
+        }
+
+        filterPlayers();
+    } catch (error) {
+        console.error('Error updating player status:', error);
+    }
 }
 
 // Function to filter the players based on the selected filter
