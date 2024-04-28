@@ -12,6 +12,9 @@ body {
     margin: 0;
     padding: 0;
     background: #f0f0f0;
+    background: url("https://s3.amazonaws.com/mobilecause-avatar-production/shared_img/shared_imgs/291008/large/Webp.net-resizeimage_%284%29.jpg?1570137057");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .NavBar {
