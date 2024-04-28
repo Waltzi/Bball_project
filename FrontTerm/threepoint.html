@@ -84,7 +84,8 @@ window.onload = fetchThreePointers();
 
 document.getElementById('filterDate').addEventListener('change', () => {
     const filterDate = document.getElementById('filterDate').value;
-    fetchThreePointers(filterDate);
+    const filterPlayerNumber = document.getElementById('filterPlayerNumber').value;
+    fetchThreePointers(filterDate, filterPlayerNumber);
 });
 
 document.getElementById('filterPlayerNumber').addEventListener('input', () => {

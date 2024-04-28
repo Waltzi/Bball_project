@@ -84,7 +84,8 @@ window.onload = fetchFreeThrows();
 
 document.getElementById('filterDate').addEventListener('change', () => {
     const filterDate = document.getElementById('filterDate').value;
-    fetchFreeThrows(filterDate);
+    const filterPlayerNumber = document.getElementById('filterPlayerNumber').value;
+    fetchFreeThrows(filterDate, filterPlayerNumber);
 });
 
 document.getElementById('filterPlayerNumber').addEventListener('input', () => {
