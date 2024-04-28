@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 
@@ -95,6 +96,11 @@ public class BasketballController {
     @GetMapping("/getLatestThreePointer")
     public ThreePointModel getLatestThreePointer() {
         return threePointService.getLatestThreePointer();
+    }
+
+    @PutMapping("/{id}/active")
+    public void updateActiveStatus(@PathVariable Long id, @RequestBody Boolean activeStatus) {
+        playerService.updateActiveStatus(id, activeStatus);
     }
 
 

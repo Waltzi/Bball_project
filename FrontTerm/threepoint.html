@@ -59,7 +59,7 @@ function displayItems() {
         threePointersAttemptedCell.textContent = threePointer.threePointersAttempted;
         row.appendChild(threePointersAttemptedCell);
         const threePointerPercentageCell = document.createElement('td');
-        threePointerPercentageCell.textContent = threePointer.threePointerPercentage;
+        threePointerPercentageCell.textContent = threePointer.threePointPercentage;
         row.appendChild(threePointerPercentageCell);
         const practiceNumberCell = document.createElement('td');
         practiceNumberCell.textContent = threePointer.practiceNum;
@@ -80,7 +80,7 @@ async function fetchThreePointers() {
       if (!response.ok) {
           throw new Error('Failed to fetch 3-pointers');
       }
-      const threePointers = await response.json();
+      threePointers = await response.json();
       console.log('Fetched 3-pointers:', threePointers);
       displayItems();
   } catch (error) {
@@ -88,7 +88,7 @@ async function fetchThreePointers() {
   }
 }
 
-window.onload = fetchThreePointers();
+
 
 // Function to add a 3-pointer to the API
 async function addThreePointer(threePointer) {
@@ -106,7 +106,7 @@ async function addThreePointer(threePointer) {
       const addedThreePointer = await response.json();
       console.log('Added 3-pointer:', addedThreePointer);
       //clear the input fields
-      document.getElementById('playerName').value = '';
+      document.getElementById('jerseyNumber').value = '';
       document.getElementById('threePointersMade').value = '';
       document.getElementById('threePointersAttempted').value = '';
       return addedThreePointer;

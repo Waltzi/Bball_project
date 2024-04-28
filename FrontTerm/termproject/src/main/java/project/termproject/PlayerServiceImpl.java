@@ -2,6 +2,7 @@ package project.termproject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -57,4 +58,18 @@ public class PlayerServiceImpl implements PlayerService{
         }
         return playerModel;
     }
+
+    @Override
+    public void updateActiveStatus(Long id, Boolean activeStatus) {
+        Optional<PlayerEntity> playerEntityOptional = playerRepository.findById(id);
+        if (playerEntityOptional.isPresent()) {
+            PlayerEntity playerEntity = playerEntityOptional.get();
+            playerEntity.setActive(activeStatus);
+            playerRepository.save(playerEntity);
+        } else {
+            throw new RuntimeException("Player not found with id " + id);
+        }
+    }
+
+    
 }
