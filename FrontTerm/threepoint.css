@@ -1,6 +1,7 @@
 :root {
     --primary-color: #007bff;
     --hover-color: red;
+    --back-hover-color: #c82333;
     --remove-color: #dc3545;
     --remove-hover-color: #c82333;
     --even-row-color: #f8f8f8;
@@ -111,7 +112,7 @@ button:hover {
 }
 
 #back_button:hover {
-    background-color: var(--back-hover-color);
+    background-color: var(--hover-color);
 }
 
 li button {
