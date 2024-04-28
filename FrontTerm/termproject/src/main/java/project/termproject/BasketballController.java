@@ -87,6 +87,16 @@ public class BasketballController {
         return threePointService.editThreePoint(threePoint);
     }
 
+    @GetMapping("/getThreePoints")
+    public List<ThreePointModel> getThreePoints() {
+        return threePointService.getAllThreePoints();
+    }
+
+    @GetMapping("/getLatestThreePointer")
+    public ThreePointModel getLatestThreePointer() {
+        return threePointService.getLatestThreePointer();
+    }
+
 
     
    

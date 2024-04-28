@@ -4,28 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="threepoint.css">
-    <title>3-Point Shot Percentage Calculator</title>
 </head>
 <body>
-    <h1>3-Point Shot Percentage Calculator</h1>
-    <div class="input-container">
-        <label for="playerName">Player Name:</label>
-        <input type="text" id="playerName" required>
-        <label for="made">3-Pointers Made:</label>
-        <input type="number" id="made" required>
-        <label for="attempted">3-Pointers Attempted:</label>
-        <input type="number" id="attempted" required>
+    <h2>Three-Pointer Tracker</h2>
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Player Number</th>
+                    <th>Three-Pointers Made</th>
+                    <th>Three-Pointers Attempted</th>
+                    <th>Three-Pointer Percentage</th>
+                    <th>Practice Number</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody id="threePointerTableBody">
+            </tbody>
+        </table>
         <div class="button-container">
-            <button onclick="calculatePercentage()">Calculate Percentage</button>
-            <button id="back_button" onclick="location.href='index.html'"> Back</button>
+            <form id="player_form" onsubmit="handleSubmit(event)">
+                <div class="input-group">
+                    <label for="playerNumber">Player #:</label>
+                    <input type="number" id="jerseyNumber" name="jerseyNumber" required>
+                </div>
+                <div class="input-group">
+                    <label for="threePointersMade">Three-Pointers Made:</label>
+                    <input type="number" id="threePointersMade" name="threePointersMade" required>
+                </div>
+                <div class="input-group">
+                    <label for="threePointersAttempted">Three-Pointers Attempted:</label>
+                    <input type="number" id="threePointersAttempted" name="threePointersAttempted" required>
+                </div>
+                <button type="submit">Add 3-Pointer</button>
+                <button id="back_button" onclick="location.href='index.html'">Back</button>
+            </form>
         </div>
     </div>
-    <script>
+</body>
+<script>
+
+// Function to display three-pointers
+function displayItems() {
+    const threePointerTable = document.getElementById('threePointerTableBody');
+    threePointers.forEach(threePointer => {
+        const row = document.createElement('tr');
+        const jerseyNumberCell = document.createElement('td');
+        jerseyNumberCell.textContent = threePointer.jerseyNumber;
+        row.appendChild(jerseyNumberCell);
+        const threePointersMadeCell = document.createElement('td');
+        threePointersMadeCell.textContent = threePointer.threePointersMade;
+        row.appendChild(threePointersMadeCell);
+        const threePointersAttemptedCell = document.createElement('td');
+        threePointersAttemptedCell.textContent = threePointer.threePointersAttempted;
+        row.appendChild(threePointersAttemptedCell);
+        const threePointerPercentageCell = document.createElement('td');
+        threePointerPercentageCell.textContent = threePointer.threePointerPercentage;
+        row.appendChild(threePointerPercentageCell);
+        const practiceNumberCell = document.createElement('td');
+        practiceNumberCell.textContent = threePointer.practiceNum;
+        row.appendChild(practiceNumberCell);
+        const dateCell = document.createElement('td');
+        dateCell.textContent = threePointer.date;
+        row.appendChild(dateCell);
+        threePointerTable.appendChild(row);
+    });
+}
+
+window.onload = fetchThreePointers();
+
+// function to fetch all three pointers from the API and display them in the table
+async function fetchThreePointers() {
+  try {
+      const response = await fetch('http://localhost:8080/basketball_api/getThreePoints');
+      if (!response.ok) {
+          throw new Error('Failed to fetch 3-pointers');
+      }
+      const threePointers = await response.json();
+      console.log('Fetched 3-pointers:', threePointers);
+      displayItems();
+  } catch (error) {
+      console.error('Error fetching 3-pointers:', error);
+  }
+}
+
+window.onload = fetchThreePointers();
 
 // Function to add a 3-pointer to the API
 async function addThreePointer(threePointer) {
   try {
-      const response = await fetch('http://localhost:8080/basketball_api/addThreePointer', {
+      const response = await fetch('http://localhost:8080/basketball_api/addThreePoint', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json'
@@ -37,6 +105,10 @@ async function addThreePointer(threePointer) {
       }
       const addedThreePointer = await response.json();
       console.log('Added 3-pointer:', addedThreePointer);
+      //clear the input fields
+      document.getElementById('playerName').value = '';
+      document.getElementById('threePointersMade').value = '';
+      document.getElementById('threePointersAttempted').value = '';
       return addedThreePointer;
   } catch (error) {
       console.error('Error adding 3-pointer:', error);
@@ -47,7 +119,7 @@ async function addThreePointer(threePointer) {
 // Function to edit a 3-pointer in the API
 async function editThreePointer(threePointer) {
   try {
-      const response = await fetch('http://localhost:8080/basketball_api/editThreePointer', {
+      const response = await fetch('http://localhost:8080/basketball_api/editThreePoint', {
           method: 'PUT',
           headers: {
               'Content-Type': 'application/json'
@@ -65,6 +137,33 @@ async function editThreePointer(threePointer) {
       throw error;
   }
 }
+
+    async function handleSubmit(event){
+        event.preventDefault(); // Prevent default form submission
+
+        const id = null;
+        const jersey_Number = document.getElementById('jerseyNumber').value;
+        const three_Pointers_Made = document.getElementById('threePointersMade').value;
+        const three_Pointers_Attempted = document.getElementById('threePointersAttempted').value;
+        const item = {
+            id: null,
+            jerseyNumber: jersey_Number,
+            threePointersMade: three_Pointers_Made,
+            threePointersAttempted: three_Pointers_Attempted
+        };
+        
+        try {
+            const addedThreePointer = await addThreePointer(item);
+            console.log('Added 3-pointer:', addedThreePointer);
+
+            // Optionally, update the UI or display a success message
+            alert('Three Pointer added successfully!');
+        } catch (error) {
+            console.error('Error adding three pointer:', error);
+            // Handle error (e.g., display error message)
+            alert('Failed to add three pointer. Please try again.');
+        }
+    }
     </script>
 </body>
 </html>

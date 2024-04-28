@@ -19,11 +19,39 @@ public class ThreePointEntity {
     private int threePointersMade;
     private int threePointersAttempted;
     private double threePointPercentage;
-    private int practiceNumber;
+    private int practiceNum;
     private String date;
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public int getThreePointersMade() {
+        return threePointersMade;
+    }
+
+    public int getThreePointersAttempted() {
+        return threePointersAttempted;
+    }
+
+    public void setThreePointPercentage(double threePointPercentage) {
+        this.threePointPercentage = threePointPercentage;
+    }
+
+    public String getDate() {
+        return this.date;
+    }
+
+    public int getPracticeNum() {
+        return this.practiceNum;
+    }
+
+    public void setPracticeNum(int practiceNum) {
+        this.practiceNum = practiceNum;
+    }
+
+    public int getJerseyNumber() {
+        return this.jerseyNumber;
     }
     
 }

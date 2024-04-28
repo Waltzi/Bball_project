@@ -9,7 +9,7 @@ public class ThreePointModel {
     private int threePointersMade;
     private int threePointersAttempted;
     private double threePointPercentage;
-    private int practiceNumber;
+    private int practiceNum;
     private String date;
     
 }
