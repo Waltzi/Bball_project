@@ -44,7 +44,7 @@ The TermTeamProject repo holds everything for the backend properties of the proj
           - Then you can exit using EXIT; This will allow you to exit the root account. 
     - 4.  Running the basketball web app:
           - Then start the web app by opening the Bball_project folder in the terminal. 
-          - Then use the npm install --global http-server command to use live server. 
+          - Then use the "npm install --global http-server" command to use live server. 
           - Finally, run the shell script with "sh StartApp.sh".
 
 
