@@ -31,5 +31,8 @@ The TermTeamProject repo holds everything for the backend properties of the proj
 
 - Sprint 3 Goal:
   Complete our springboot web app and get it running correctly. Creating web app page to be displayable. Active or not active attribute for the database not a archiving system. Practice variable for the number of practices per day.
+
+- Sprint 4 Goal:
+  Freshen up the website by adding more visually appealing aspects. Make the program dowloadable and able to run on any device. Connect Springboot to our front end.
   
 
