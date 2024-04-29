@@ -9,37 +9,43 @@ The TermTeamProject repo holds everything for the backend properties of the proj
 
 - Instructions to Run Web App:
     - 1. Install mysql onto your machine. 
-          Download MySQL Installer:
-          Visit the MySQL Community Downloads page: MySQL Community Downloads.
-          Scroll down to find the macOS section.
-          Download the macOS disk image (DMG) file for the version of MySQL you want to install.
-          Install MySQL:
-          Once the DMG file is downloaded, locate it in your Downloads folder or wherever you saved it.
-          Double-click the DMG file to mount it.
-          Double-click the MySQL installer package file (.pkg) inside the mounted DMG file.
-          Follow the on-screen instructions in the installer.
-          You may be prompted to enter your password to allow the installer to make changes.
-          Configure MySQL:
-          After the installation completes, you may need to configure MySQL.
-          Follow the instructions provided by the installer.
-          You'll likely be asked to set a root password for MySQL. Make sure to choose a strong password and remember it.
-          Start MySQL Server:
-          Once MySQL is installed and configured, you can start the MySQL server.
-          You can do this by opening "System Preferences" on your Mac, then selecting "MySQL" (you might need to scroll down to find it).
-          Click the "Start MySQL Server" button.
-          Verify Installation:
-          Open a terminal window.
-          You can verify that MySQL is installed and running by typing the following command: mysql --version
+          - Download MySQL Installer:
+          - Visit the MySQL Community Downloads page: MySQL Community Downloads.
+          - Scroll down to find the macOS section.
+          - Download the macOS disk image (DMG) file for the version of MySQL you want to install.
+          - Install MySQL:
+          - Once the DMG file is downloaded, locate it in your Downloads folder or wherever you saved it.
+          - Double-click the DMG file to mount it.
+          - Double-click the MySQL installer package file (.pkg) inside the mounted DMG file.
+          - Follow the on-screen instructions in the installer.
+          - You may be prompted to enter your password to allow the installer to make changes.
+          - Configure MySQL:
+          - After the installation completes, you may need to configure MySQL.
+          - Follow the instructions provided by the installer.
+          - You'll likely be asked to set a root password for MySQL. Make sure to choose a strong password and remember it.
+          - Start MySQL Server:
+          - Once MySQL is installed and configured, you can start the MySQL server.
+          - You can do this by opening "System Preferences" on your Mac, then selecting "MySQL" (you might need to scroll down to find it).
+          - Click the "Start MySQL Server" button.
+          - Verify Installation:
+          - Open a terminal window.
+          - You can verify that MySQL is installed and running by typing the following command: mysql --version
     - 2. Installing required extensions: 
-          The first extension to download on vscode will be the live server extension. The other extensions will be the Spring Boot Dashboard and Spring Boot Extension Pack. Also make sure to have java extension pack installed. Next installation is gradle for java and Gradle Language Support.
+          - The first extension to download on vscode will be the live server extension. 
+          - The other extensions will be the Spring Boot Dashboard and Spring Boot Extension Pack. 
+          - Also make sure to have java extension pack installed.
+          - Next installation is gradle for java and Gradle Language Support.
     - 3.  Log into root user for mysql:
-          Log into mysql root user with: mysql -u root -p.
-          enter your password in next. 
-          Then use the command CREATE USER 'project'@'localhost' IDENTIFIED BY 'project';
-          Next run the command to grant privileges to all databases: GRANT ALL PRIVILEGES ON *.* TO 'project'@'localhost';
-          Run this command to make the privileges take effect: FLUSH PRIVILEGES;
-          Then you can exit using EXIT; This will allow you to exit the root account. 
-    - 4.  Then start the web app by opening the Bball_project folder in the terminal. Then use the npm install --global http-server command to use live server. Finally, run the shell script with "sh StartApp.sh".
+          - Log into mysql root user with: mysql -u root -p.
+          - enter your password in next. 
+          - Then use the command CREATE USER 'project'@'localhost' IDENTIFIED BY 'project';
+          - Next run the command to grant privileges to all databases: GRANT ALL PRIVILEGES ON *.* TO 'project'@'localhost';
+          - Run this command to make the privileges take effect: FLUSH PRIVILEGES;
+          - Then you can exit using EXIT; This will allow you to exit the root account. 
+    - 4.  Running the basketball web app:
+          - Then start the web app by opening the Bball_project folder in the terminal. 
+          - Then use the npm install --global http-server command to use live server. 
+          - Finally, run the shell script with "sh StartApp.sh".
 
 
   - Problems Brandon had while trying to run web app(Possible fixes For Schaper)
